@@ -2,9 +2,10 @@
 date: 2026-05-15
 tags: [database, nosql]
 status: active
+area: nosql
 ---
 
-# Graph Databases
+# Graph databases
 
 ## Definizione formale
 
@@ -28,8 +29,7 @@ In un grafo **l'unica cosa che conta è la relazione**. La query stessa è un **
 - **Grafo sparso** — pochi archi rispetto ai nodi.
 - **Grafo denso** — molti archi.
 - **Grafo completo** — ogni nodo connesso a tutti gli altri.
-
-Se c'è un **ciclo**, non è possibile massimizzare (problema di ottimizzazione).
+- **Aciclico (DAG)** vs **ciclico** — un grafo orientato senza cicli (DAG) ammette un ordinamento dei nodi e algoritmi efficienti (scheduling, gestione di dipendenze); con un **ciclo** un percorso può ripetersi all'infinito, e problemi come il cammino *più lungo* diventano mal posti.
 
 ## Perché un graph database
 
@@ -58,9 +58,10 @@ Se c'è un **ciclo**, non è possibile massimizzare (problema di ottimizzazione)
 
 ## Riferimenti teorici
 
+- La **teoria dei grafi** nasce con Euler (1736, i sette ponti di Königsberg): una delle aree più longeve della matematica discreta.
 - *Graph Theory* — Frank Harary (la bibbia dei grafi).
-- **Algoritmo di Dijkstra** — mappe, routing; c'è un algoritmo considerato "perduto" (70 anni di teoria).
+- **Algoritmo di Dijkstra** (1959) — cammino minimo: mappe, routing.
 
 ## Vedi anche
 
-[[Neo4j]] · [[(non solo) Relazioni]]
+[[Neo4j]] · [[NoSQL]]

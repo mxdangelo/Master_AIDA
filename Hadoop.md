@@ -2,6 +2,7 @@
 date: 2026-06-20
 tags: [big-data]
 status: active
+area: big data
 ---
 
 # Hadoop

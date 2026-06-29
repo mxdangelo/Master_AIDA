@@ -1,3 +1,7 @@
+---
+tags: [meta]
+---
+
 # Master AIDA — Appunti
 
 Appunti di studio del **Master in AI & Digital Analytics** (Università di Milano-Bicocca) — modulo *Big Data Processing & Data Engineering*.
@@ -25,4 +29,4 @@ Come sono costruiti (cattura → l'AI smista e formatta): vedi [`METODO`](METODO
 
 ---
 
-*Versione condivisa e depersonalizzata degli appunti, aggiornata man mano che avanza il corso. Una versione in inglese è in lavorazione.*
+*Appunti aggiornati man mano che avanza il corso. Una versione in inglese è in lavorazione.*

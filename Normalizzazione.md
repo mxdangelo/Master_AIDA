@@ -2,11 +2,12 @@
 date: 2026-06-26
 tags: [database]
 status: active
+area: relazionali
 ---
 
 # Normalizzazione
 
-Lo strumento di **verifica** della qualità di uno schema [[Relazioni|relazionale]] — l'output della [[Modello ER#Progettazione logica: ristrutturazione dello schema|progettazione logica]]. Le forme normali sono proprietà delle tabelle: rispettarle è una certificazione di qualità; violarle apre la porta ad anomalie e ridondanze. La normalizzazione è il processo che trasforma tabelle non conformi in tabelle conformi **senza perdita di informazione**. È definita in termini di **dipendenze funzionali**.
+Lo strumento di **verifica** della qualità di uno schema [[Database relazionali|relazionale]] — l'output della [[Modello ER#Progettazione logica: ristrutturazione dello schema|progettazione logica]]. Le forme normali sono proprietà delle tabelle: rispettarle è una certificazione di qualità; violarle apre la porta ad anomalie e ridondanze. La normalizzazione è il processo che trasforma tabelle non conformi in tabelle conformi **senza perdita di informazione**. È definita in termini di **dipendenze funzionali**.
 
 ## Il problema: la ridondanza
 
@@ -74,7 +75,7 @@ Normalizzare = sostituire una tabella con più tabelle equivalenti (nessuna perd
 
 ## Quando NON normalizzare
 
-La normalizzazione è importante per i DB **transazionali** ([[Relazioni|OLTP]]), dove limita l'impatto delle modifiche. Nei DB **analitici** ([[Relazioni|OLAP]], [[BI Architecture]]) è poco rilevante o controproducente:
+La normalizzazione è importante per i DB **transazionali** ([[Database relazionali|OLTP]]), dove limita l'impatto delle modifiche. Nei DB **analitici** ([[Database relazionali|OLAP]], [[BI Architecture]]) è poco rilevante o controproducente:
 
 - gli analisti lavorano in **sola lettura**; gli update sono rari (per lo più *append* di nuovi dati storici), le delete rarissime → le anomalie non mordono;
 - la **ridondanza aggiunge valore**: velocizza le operazioni analitiche;
@@ -90,4 +91,4 @@ Perché allora un analista deve conoscerla? Perché i DB analitici **provengono*
 
 ## Vedi anche
 
-[[Relazioni]] · [[Modello ER]] · [[SQL]]
+[[Database relazionali]] · [[Modello ER]] · [[SQL]]

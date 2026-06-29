@@ -2,6 +2,7 @@
 date: 2026-06-06
 tags: [analytics]
 status: active
+area: analytics
 ---
 
 # BI Architecture
@@ -22,7 +23,7 @@ Perché vediamo proliferare così tanti tool? Perché **i tool cambiano, l'appro
 - **Data mart** — porzione del data warehouse rilevante per uno scopo o un reparto specifico.
 - **ETL** — *Extract, Transform, Load*.
 - **OLTP** — *Online Transaction Processing*: i sistemi operazionali, transazioni correnti.
-- **OLAP** — *Online Analytical Processing*: analisi in tempi accettabili. → i due scenari a confronto: [[Relazioni#OLTP vs OLAP — i due scenari]].
+- **OLAP** — *Online Analytical Processing*: analisi in tempi accettabili. → i due scenari a confronto: [[Database relazionali#OLTP vs OLAP — i due scenari]].
 
 ## Il processo BI — il dato in 4 fasi
 
@@ -87,7 +88,7 @@ Lo stack classico *warehouse-centrico* (sorgenti → ETL → data warehouse → 
 - **AI-ready data** — un dato è "pronto per l'AI" solo *rispetto a un caso d'uso*: deve essere **rappresentativo** (copre pattern reali, edge case, eccezioni), **qualificato** (semanticamente ricco e validato) e **governato** (policy, sensibilità e *lineage* viaggiano col dato). Non si rende pronto "in generale" o in anticipo. *(Gartner: ~60% dei progetti AI senza dati AI-ready verrà abbandonato entro il 2026.)*
 - **MCP** (Model Context Protocol) — standard aperto (Anthropic, nov 2024), "USB-C per l'AI": un solo protocollo bidirezionale al posto di N×M integrazioni custom tra app AI e dati/strumenti aziendali. Un MCP server espone tre primitive: **Tools** (azioni invocabili), **Resources** (dati/contesto leggibili), **Prompts** (template riusabili). Per la BI: gli agenti interrogano direttamente warehouse e semantic layer e rispondono in linguaggio naturale.
 
-→ Infrastruttura dati di questo mondo (vector store, RAG, lakehouse): [[(non solo) Relazioni]], [[Cloud computing]].
+→ Infrastruttura dati di questo mondo (vector store, RAG, lakehouse): [[NoSQL]], [[Cloud computing]].
 
 ## Riferimenti
 
@@ -98,4 +99,4 @@ Lo stack classico *warehouse-centrico* (sorgenti → ETL → data warehouse → 
 
 ## Vedi anche
 
-[[Dati]] · [[ETL]] · [[(non solo) Relazioni]] · [[Cloud computing]]
+[[Dati]] · [[ETL]] · [[NoSQL]] · [[Cloud computing]]

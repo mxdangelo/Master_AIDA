@@ -2,6 +2,7 @@
 date: 2026-05-26
 tags: [data-engineering]
 status: active
+area: data engineering
 ---
 
 # Data Ingestion — Web Scraping

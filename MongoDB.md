@@ -2,11 +2,12 @@
 date: 2026-05-11
 tags: [database, nosql]
 status: active
+area: nosql
 ---
 
 # MongoDB
 
-Il [[(non solo) Relazioni|database documentale]] più usato. Progetto nato nel 2007, prima versione *production-ready* nel 2010. Multi-OS, cloud (AWS/Azure/GCP + **MongoDB Atlas**), driver per Java/Python/Scala/JS/C#, API REST. Memorizza documenti in una **gerarchia ad albero**; documenti simili stanno nella stessa collezione; **scale-out** su cluster. Rende al meglio quando l'interazione avviene con lo **stesso aggregato** ([[Aggregate Oriented Model]]).
+Il [[NoSQL|database documentale]] più usato. Progetto nato nel 2007, prima versione *production-ready* nel 2010. Multi-OS, cloud (AWS/Azure/GCP + **MongoDB Atlas**), driver per Java/Python/Scala/JS/C#, API REST. Memorizza documenti in una **gerarchia ad albero**; documenti simili stanno nella stessa collezione; **scale-out** su cluster. Rende al meglio quando l'interazione avviene con lo **stesso aggregato** ([[Aggregate Oriented Model]]).
 
 ## Terminologia: RDB ↔ Document
 
@@ -45,7 +46,7 @@ Tieni i documenti separati e li colleghi via ID (come una foreign key). Conviene
 
 ## CAP theorem
 
-Un sistema distribuito garantisce solo **due** su tre tra Consistency, Availability e Partition tolerance — teoria completa in [[(non solo) Relazioni#CAP theorem (Brewer)]].
+Un sistema distribuito garantisce solo **due** su tre tra Consistency, Availability e Partition tolerance — teoria completa in [[NoSQL#CAP theorem (Brewer)]].
 
 *Analogia del professore: "Esame il giorno dopo — o lo studiamo male (consistency), o ci dai un pezzo (availability), o ne studiamo un pezzo (partition)."*
 
@@ -135,4 +136,4 @@ col.create_index("author")
 
 ## Vedi anche
 
-[[(non solo) Relazioni]] · [[Aggregate Oriented Model]] · [[Neo4j]]
+[[NoSQL]] · [[Aggregate Oriented Model]] · [[Neo4j]]

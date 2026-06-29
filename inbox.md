@@ -1,5 +1,5 @@
 ---
-tags: [inbox]
+tags: [meta]
 ---
 
 # Inbox

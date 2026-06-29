@@ -2,6 +2,7 @@
 date: 2026-05-16
 tags: [database, nosql]
 status: active
+area: nosql
 ---
 
 # Neo4j
@@ -151,11 +152,11 @@ RETURN gds.util.asNode(nodeId).name AS person, score ORDER BY score DESC
 "Quali gruppi di nodi sono densamente connessi internamente e poco col resto?" Massimizza la **modularità Q ∈ [-0.5, 1]** (Q≈0 = casuale; Q>0.5 = struttura netta). Greedy: ogni nodo si sposta nella community che aumenta di più Q, poi si aggrega e si ripete. Uso: segmentazione clienti, *fraud rings*, team in un org chart.
 
 ### Embeddings
-Trasformano ogni nodo in un **vettore denso** che cattura il contesto nel grafo (es. **FastRP**, Node2Vec), input per ML a valle: link prediction, classificazione. Il vettore può alimentare un [[(non solo) Relazioni|vector index]] per nearest-neighbour ("persone simili a Charlie" dalla sola struttura del grafo).
+Trasformano ogni nodo in un **vettore denso** che cattura il contesto nel grafo (es. **FastRP**, Node2Vec), input per ML a valle: link prediction, classificazione. Il vettore può alimentare un [[NoSQL|vector index]] per nearest-neighbour ("persone simili a Charlie" dalla sola struttura del grafo).
 
 > [!tip]
 > Il valore concreto: in **una query** ottieni ciò che "guardare l'organigramma" richiederebbe a mano — il team centrale, i silos, le risorse inutilizzate, senza un solo JOIN.
 
 ## Vedi anche
 
-- [[Graph databases]] — la teoria; [[Modello ER]] — relazioni ed entità; [[(non solo) Relazioni]] — il posto del grafo tra i NoSQL.
+- [[Graph databases]] — la teoria; [[Modello ER]] — relazioni ed entità; [[NoSQL]] — il posto del grafo tra i NoSQL.

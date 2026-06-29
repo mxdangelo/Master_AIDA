@@ -1,6 +1,6 @@
 ---
 date: 2026-06-13
-tags: [prontuario]
+tags: [meta]
 status: active
 ---
 
@@ -14,13 +14,13 @@ Quick-reference operativo: **se devi fare X, cosa usi e dove approfondisci.** No
 
 | Se l'esigenza è… | Usa | Esempi | Approfondisci |
 |---|---|---|---|
-| transazioni, struttura fissa, integrità | **Relazionale** (SQL) | PostgreSQL, MySQL | [[Relazioni]] |
-| accesso a chiave, cache, sessioni | **Key-Value** | Redis, DynamoDB | [[(non solo) Relazioni]] |
-| documenti a schema flessibile | **Documentale** | MongoDB | [[MONGO DB]] |
-| analitica, aggregazioni su colonne | **Columnar** | Cassandra | [[(non solo) Relazioni]] |
+| transazioni, struttura fissa, integrità | **Relazionale** (SQL) | PostgreSQL, MySQL | [[Database relazionali]] |
+| accesso a chiave, cache, sessioni | **Key-Value** | Redis, DynamoDB | [[NoSQL]] |
+| documenti a schema flessibile | **Documentale** | MongoDB | [[MongoDB]] |
+| analitica, aggregazioni su colonne | **Columnar** | Cassandra | [[NoSQL]] |
 | relazioni fitte, traversal | **Grafo** | Neo4j | [[Neo4j]] |
-| metriche nel tempo, IoT | **Time-series** | InfluxDB | [[(non solo) Relazioni]] |
-| similarità, RAG, AI | **Vector** | Pinecone, Chroma | [[(non solo) Relazioni]] |
+| metriche nel tempo, IoT | **Time-series** | InfluxDB | [[NoSQL]] |
+| similarità, RAG, AI | **Vector** | Pinecone, Chroma | [[NoSQL]] |
 
 > [!tip] Regola d'oro
 > Scalabilità NoSQL = **scale-out** (più nodi), non scale-up. **ACID** (consistenza forte, relazionali) vs **eventual consistency** (NoSQL, performance e scala).
@@ -28,7 +28,7 @@ Quick-reference operativo: **se devi fare X, cosa usi e dove approfondisci.** No
 ### Embedding o referencing? (MongoDB)
 
 > [!question] La domanda chiave
-> *"How often do I read these data together?"* — **spesso insieme** → embedding · **aggiornato a parte / many-to-many / cresce senza limite (>16 MB)** → referencing. → [[MONGO DB]]
+> *"How often do I read these data together?"* — **spesso insieme** → embedding · **aggiornato a parte / many-to-many / cresce senza limite (>16 MB)** → referencing. → [[MongoDB]]
 
 ### ETL o ELT?
 
@@ -88,7 +88,7 @@ MATCH (p) OPTIONAL MATCH (p)-[:WORKS_FOR]->(c) RETURN p, c           // ≈ LEFT
 ```
 
 ### Python — pandas · PySpark · PyMongo · scraping
-Snippet completi: [[Python|pandas]] · [[Spark#In pratica (PySpark)|PySpark]] · [[MONGO DB#In pratica (PyMongo)|PyMongo]] · [[Data Ingestion#In pratica (requests + BeautifulSoup)|scraping]].
+Snippet completi: [[Python|pandas]] · [[Spark#In pratica (PySpark)|PySpark]] · [[MongoDB#In pratica (PyMongo)|PyMongo]] · [[Data Ingestion#In pratica (requests + BeautifulSoup)|scraping]].
 ```python
 df = pd.read_csv("f.csv").groupby("k")["v"].sum()             # pandas (in-memory → RAM)
 df.where(F.col("v") > 100).groupBy("k").agg(F.sum("v"))       # PySpark (lazy → show/count/collect)
@@ -120,6 +120,8 @@ glob.glob('**/*.csv', recursive=True)                         # tanti file insie
 
 ## 🎯 Principi (da tenere in tasca)
 
+*Versione canonica e citabile: [[Principi]].*
+
 > [!quote] I tre che valgono sempre
 > *Garbage in, garbage out* — l'analisi vale quanto i dati. · *All models are wrong, but some are useful.* · Il dato giusto all'**attante** giusto, nella forma giusta per l'interlocutore (KPI).
 
@@ -130,11 +132,13 @@ glob.glob('**/*.csv', recursive=True)                         # tanti file insie
 
 ## 🗺️ Mappa delle note (per area)
 
+*In Obsidian (1.9+) c'è anche la [[Dashboard]]: la stessa mappa, auto-generata e filtrabile.*
+
 - **Fondamentali** — [[Dati]] · [[Logica booleana]]
-- **Relazionali** — [[Relazioni]] · [[Modello ER]] · [[Normalizzazione]] · [[SQL]]
-- **NoSQL** — [[(non solo) Relazioni]] · [[Aggregate Oriented Model]] · [[MONGO DB]] · [[Graph databases]] · [[Neo4j]]
+- **Relazionali** — [[Database relazionali]] · [[Modello ER]] · [[Normalizzazione]] · [[SQL]]
+- **NoSQL** — [[NoSQL]] · [[Aggregate Oriented Model]] · [[MongoDB]] · [[Graph databases]] · [[Neo4j]]
 - **Big data** — [[Hadoop]] · [[Spark]]
 - **Data engineering** — [[Data Ingestion]] · [[ETL]] · [[Data Quality]]
-- **Analytics** — [[BI Architecture]] · [[Machine Learning]] · [[Regressione lineare]]
+- **Analytics** — [[BI Architecture]] · [[Machine Learning]]
 - **Cloud** — [[Cloud computing]]
 - **Strumenti** — [[Python]]

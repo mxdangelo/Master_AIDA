@@ -2,6 +2,7 @@
 date: 2026-06-13
 tags: [data-engineering]
 status: active
+area: data engineering
 ---
 
 # ETL — Extract, Transform, Load
@@ -22,7 +23,7 @@ ERP, CRM, altre fonti
 ## Le tre fasi
 
 ### Extract
-Estrarre dai sistemi sorgente: ERP, CRM, [[Relazioni|OLTP]], file, API, scraping. Modalità:
+Estrarre dai sistemi sorgente: ERP, CRM, [[Database relazionali|OLTP]], file, API, scraping. Modalità:
 - **Full extract** — si prende tutto ogni volta.
 - **Incremental extract** — solo ciò che è cambiato dall'ultima volta.
 
@@ -96,7 +97,7 @@ Il **lakehouse** integra i due: aggiunge uno **strato di tabelle transazionali**
 
 ## Strumenti
 
-- **KNIME** — ETL *visuale* a paradigma grafico: i **nodi** fanno operazioni (accesso DB/file/S3/Kafka/REST, preprocessing, blending join/concat, aggregazione, feature creation, persino data mining e ML) e si concatenano in **workflow**, ognuno consuma l'output del precedente. È lo strumento del lab (es. CSV → dedup → *Table to JSON* → *MongoDB Connector* → scrittura su [[MONGO DB|MongoDB Atlas]]).
+- **KNIME** — ETL *visuale* a paradigma grafico: i **nodi** fanno operazioni (accesso DB/file/S3/Kafka/REST, preprocessing, blending join/concat, aggregazione, feature creation, persino data mining e ML) e si concatenano in **workflow**, ognuno consuma l'output del precedente. È lo strumento del lab (es. CSV → dedup → *Table to JSON* → *MongoDB Connector* → scrittura su [[MongoDB|MongoDB Atlas]]).
 - **Snowflake** — cloud, ottimo per la *presentation*.
 - **Databricks** — buono per tutto (è la piattaforma lakehouse).
 - **Orchestrazione** — Apache Airflow (DAG, scheduling, retry).
@@ -108,7 +109,7 @@ Il **lakehouse** integra i due: aggiunge uno **strato di tabelle transazionali**
 
 ## Idempotenza
 
-Un buon processo ETL deve essere **idempotente**: rilanciarlo sugli stessi dati produce lo stesso risultato, senza duplicare o corrompere. È il punto di Beta80 alla presentazione — *"astrarre un dato vuol dire fare un lavoro di idempotenza"* (vedi Aziende). Pratico: chiavi e upsert, non append ciechi.
+Un buon processo ETL deve essere **idempotente**: rilanciarlo sugli stessi dati produce lo stesso risultato, senza duplicare o corrompere. Pratico: chiavi e upsert, non append ciechi.
 
 ## Da tenere in tasca
 

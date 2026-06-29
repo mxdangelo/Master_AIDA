@@ -2,6 +2,7 @@
 date: 2026-06-26
 tags: [fondamentali]
 status: active
+area: fondamentali
 ---
 
 # Logica booleana
@@ -64,4 +65,4 @@ Negando un'espressione si **scambia** AND con OR. Errore frequentissimo: lasciar
 
 ## Vedi anche
 
-[[SQL]] · [[Relazioni]]
+[[SQL]] · [[Database relazionali]]

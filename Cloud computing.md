@@ -2,9 +2,10 @@
 date: 2026-06-26
 tags: [cloud]
 status: active
+area: cloud
 ---
 
-# Cloud Computing
+# Cloud computing
 
 La tecnologia nasce sempre da un **bisogno di business**: il cloud è la risposta alla domanda crescente di potenza di calcolo, dati e reattività.
 
