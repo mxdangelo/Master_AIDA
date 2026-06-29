@@ -14,6 +14,15 @@ Note in Markdown pensate per **[Obsidian](https://obsidian.md)**: wiki-link `[[.
 
 Fondamentali · Relazionali/SQL · NoSQL · Big data · Data engineering · Analytics & ML · Cloud.
 
+## Per chi li usa
+
+Sono i **miei** appunti, aggiornati ~ogni settimana mentre va avanti il corso. Per riceverli aggiornati: **`git pull`** (se hai clonato) o riscarica lo ZIP.
+
+> [!tip] Vuoi annotare la tua copia?
+> Tieni le tue note in **file separati** (una tua cartella/nota), senza modificare questi file: così i miei aggiornamenti settimanali arrivano **senza conflitti** e le tue cose restano intatte. Un `git pull` non sovrascrive mai in silenzio — ma tenendo le note separate il problema non si pone.
+
+Come sono costruiti (cattura → l'AI smista e formatta): vedi [`METODO`](METODO.md).
+
 ---
 
 *Versione condivisa e depersonalizzata degli appunti, aggiornata man mano che avanza il corso. Una versione in inglese è in lavorazione.*
