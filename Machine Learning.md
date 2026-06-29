@@ -2,6 +2,7 @@
 date: 2026-06-27
 tags: [analytics]
 status: active
+area: analytics
 ---
 
 # Machine Learning (con Spark)
@@ -11,7 +12,7 @@ Branca dell'AI: algoritmi che **imparano dai dati** per sintetizzare conoscenza.
 > [!info] ML, AI, algoritmo, modello
 > - **Machine learning** — la macchina **impara dai dati** (dagli *esempi*), non da regole scritte a mano. Un sistema a regole ("se X allora Y") è **AI ma non ML**.
 > - **Algoritmo** — una serie di istruzioni.
-> - **Modello** — una rappresentazione *imperfetta* della realtà (→ [[Relazioni#Da tenere in tasca|il dato è un modello]]; *all models are wrong, but some are useful*).
+> - **Modello** — una rappresentazione *imperfetta* della realtà (→ [[Database relazionali#Da tenere in tasca|il dato è un modello]]; *all models are wrong, but some are useful*).
 
 ## Il flusso
 
@@ -34,7 +35,15 @@ flowchart LR
 | Conosci la classe a priori? | **sì** | **no** |
 | Domanda | a quale classe appartiene una nuova osservazione? | quali pattern nascosti ci sono? |
 | Problemi | **classificazione** (classe discreta), **regressione** (valore continuo) | **clustering**, topic modeling, riduzione dimensionale |
-| Esempio | prezzo di una casa ([[Regressione lineare|regressione]]); occupazione dal titolo (classificazione) | raggruppare le case in lusso/economiche (K-means) |
+| Esempio | prezzo di una casa ([[#Regressione lineare|regressione]]); occupazione dal titolo (classificazione) | raggruppare le case in lusso/economiche (K-means) |
+
+## Regressione lineare
+
+Il modello supervisionato per predire un **valore continuo**: descrive la relazione tra una variabile dipendente `y` e una o più indipendenti `x` con una **retta** (`y = β₀ + β₁x`) o, con più predittori, un **iperpiano** (regressione *multipla*).
+
+- **Stima** — i coefficienti `β` si trovano col metodo dei **minimi quadrati**: minimizzano la somma dei quadrati dei **residui** (scarti tra valore osservato e predetto).
+- **Valutazione** — **R²**, la quota di varianza spiegata dal modello (∈ [0,1], più alto è meglio); l'analisi dei **residui** verifica le assunzioni (linearità, varianza costante).
+- In MLlib: famiglia *Regression* (`LinearRegression`); l'esempio canonico è il **prezzo di una casa** dalle sue feature.
 
 ## MLlib — la libreria
 
@@ -66,7 +75,7 @@ flowchart LR
 - **StopWords removal** — toglie le parole vuote (the, di, e…); MLlib ha liste per lingua.
 - **n-grammi** — sequenze di n token consecutivi (bigrammi = coppie): catturano "software engineer" come unità.
 - **TF-IDF** — peso per parola, alto se **frequente nel documento ma rara nella collezione** (= termine raro e informativo). `HashingTF` (Transformer) conta → `IDF` (Estimator) pesa.
-- **Word2Vec** — parola → vettore denso; parole simili = vicine nello spazio (`vec[queen] − vec[king] ≈ vec[woman] − vec[man]`). Reti neurali, non supervisionato. → i [[(non solo) Relazioni|vector database]].
+- **Word2Vec** — parola → vettore denso; parole simili = vicine nello spazio (`vec[queen] − vec[king] ≈ vec[woman] − vec[man]`). Reti neurali, non supervisionato. → i [[NoSQL|vector database]].
 
 ## Valutazione (classificazione)
 
@@ -110,4 +119,4 @@ f1 = MulticlassClassificationEvaluator(labelCol="label", metricName="f1").evalua
 
 ## Vedi anche
 
-[[Spark]] · [[Regressione lineare]] · [[Data Quality]] · [[Cloud computing]]
+[[Spark]] · [[Data Quality]] · [[Cloud computing]]

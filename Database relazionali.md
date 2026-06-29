@@ -2,11 +2,12 @@
 date: 2026-05-11
 tags: [database, sql]
 status: active
+area: relazionali
 ---
 
-# Database Relazionali
+# Database relazionali
 
-Hub dei database relazionali. La progettazione vive in [[Modello ER]] e [[Normalizzazione]]; il linguaggio in [[SQL]] e [[Logica booleana]]. Le alternative nel mondo [[(non solo) Relazioni|NoSQL]].
+Hub dei database relazionali. La progettazione vive in [[Modello ER]] e [[Normalizzazione]]; il linguaggio in [[SQL]] e [[Logica booleana]]. Le alternative nel mondo [[NoSQL]].
 
 ## Cos'è un database
 
@@ -119,8 +120,8 @@ N tabelle → N-1 JOIN
 - Il modello relazionale è di **Edgar F. Codd (1970)**: dati in tabelle (*relazioni*) di righe e colonne, ogni riga con una chiave univoca. Tecnologia matura, ancora il punto di riferimento.
 - Separare i dati su più tabelle "sembra innaturale ma ha dei vantaggi": meno ridondanza, meno errori.
 - La componente *dati* di un sistema informativo è la più stabile nel tempo: molti DB in uso hanno decenni e poche modifiche.
-- **NoSQL = Not Only SQL**: nato da chi conosceva benissimo il relazionale, per gestire diversamente alcune sue criticità → [[(non solo) Relazioni]].
+- **NoSQL = Not Only SQL**: nato da chi conosceva benissimo il relazionale, per gestire diversamente alcune sue criticità → [[NoSQL]].
 
 ## Vedi anche
 
-[[Modello ER]] · [[Normalizzazione]] · [[SQL]] · [[(non solo) Relazioni]]
+[[Modello ER]] · [[Normalizzazione]] · [[SQL]] · [[NoSQL]]

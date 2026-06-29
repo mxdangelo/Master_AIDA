@@ -2,13 +2,14 @@
 date: 2026-05-11
 tags: [database, nosql]
 status: active
+area: nosql
 ---
 
-# Aggregate-Oriented Model
+# Aggregate Oriented Model
 
 ## Principio
 
-Nel modello [[Relazioni|relazionale]] ogni cosa è normalizzata (niente tuple annidate, niente ridondanza, schema fisso). Il problema: quando si lavora con dati distribuiti, i **JOIN diventano costosi**, e i dati moderni arrivano da log/web/SW in formati diversi, da ragionare come *liste di elementi*.
+Nel modello [[Database relazionali|relazionale]] ogni cosa è normalizzata (niente tuple annidate, niente ridondanza, schema fisso). Il problema: quando si lavora con dati distribuiti, i **JOIN diventano costosi**, e i dati moderni arrivano da log/web/SW in formati diversi, da ragionare come *liste di elementi*.
 
 L'AO model risponde con l'**aggregato**: una collezione di dati che si legge e si modifica **come un'unità**. Si aggregano (annidano) i dati che si usano insieme, anche a costo di ridondanza controllata.
 
@@ -50,7 +51,7 @@ Esempio (e-commerce, *NoSQL Distilled*): l'ordine **embedda** ciò che legge sem
 ```
 
 > [!tip] Dove tracci il confine
-> La decisione chiave è **cosa sta dentro un aggregato e cosa è un aggregato a sé**: lo stesso dominio (Customer, Order, Product, Address) si può raggruppare in modi diversi. Regola: **dentro** ciò che si legge e scrive insieme; **fuori** (riferito per ID) ciò che vive di vita propria o è condiviso (il Customer). È la stessa scelta *embedding vs referencing* di [[MONGO DB]].
+> La decisione chiave è **cosa sta dentro un aggregato e cosa è un aggregato a sé**: lo stesso dominio (Customer, Order, Product, Address) si può raggruppare in modi diversi. Regola: **dentro** ciò che si legge e scrive insieme; **fuori** (riferito per ID) ciò che vive di vita propria o è condiviso (il Customer). È la stessa scelta *embedding vs referencing* di [[MongoDB]].
 
 ## La famiglia aggregate-oriented
 
@@ -58,10 +59,10 @@ Esempio (e-commerce, *NoSQL Distilled*): l'ordine **embedda** ciò che legge sem
 |---|---|---|
 | **Key-Value** | hash table: due colonne `ID → VALUE`; il valore è un *blob* opaco (testo, JSON, XML, qualsiasi cosa). Operazioni: `get`/`put`/`delete` per chiave | Redis, DynamoDB, Riak KV |
 | **Column-Family** | aggregato a due livelli: una chiave + un *row aggregate* (gruppo di colonne) | Bigtable, HBase, Cassandra |
-| **Documentale** | aggregato come documento JSON/BSON, con struttura visibile e interrogabile | [[MONGO DB|MongoDB]] |
+| **Documentale** | aggregato come documento JSON/BSON, con struttura visibile e interrogabile | [[MongoDB]] |
 
 > [!important]
-> **Aggregate-oriented vs aggregate-ignorant.** Gli AO lavorano meglio quando *la maggior parte dell'interazione avviene con lo stesso aggregato*. I database **aggregate-ignorant** (come [[Relazioni|SQL]]) sono migliori quando le interazioni usano i dati organizzati in **tante formazioni diverse**. La scelta dipende da *come leggi i dati*, non da una preferenza astratta.
+> **Aggregate-oriented vs aggregate-ignorant.** Gli AO lavorano meglio quando *la maggior parte dell'interazione avviene con lo stesso aggregato*. I database **aggregate-ignorant** (come [[Database relazionali|SQL]]) sono migliori quando le interazioni usano i dati organizzati in **tante formazioni diverse**. La scelta dipende da *come leggi i dati*, non da una preferenza astratta.
 
 ## Casi d'uso adatti
 
@@ -77,8 +78,8 @@ Esempio (e-commerce, *NoSQL Distilled*): l'ordine **embedda** ciò che legge sem
 - **Transazioni complesse cross-documento** — gli AO non sono fatti per operazioni atomiche su più aggregati (alcuni, come RavenDB, fanno eccezione).
 - **Aggregato dalla struttura variabile** — se il design dell'aggregato cambia di continuo, dovresti salvarlo al livello di granularità più basso, e allora l'AO perde senso.
 
-→ Confronto con gli altri tipi NoSQL: [[(non solo) Relazioni]].
+→ Confronto con gli altri tipi NoSQL: [[NoSQL]].
 
 ## Vedi anche
 
-[[(non solo) Relazioni]] · [[MONGO DB]] · [[Relazioni]]
+[[NoSQL]] · [[MongoDB]] · [[Database relazionali]]

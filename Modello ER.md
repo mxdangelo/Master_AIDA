@@ -2,11 +2,12 @@
 date: 2026-06-26
 tags: [database]
 status: active
+area: relazionali
 ---
 
 # Modello ER — Entità-Relazione
 
-La progettazione concettuale di un [[Relazioni|database relazionale]]. L'output è uno **schema ER**: una descrizione *formale e indipendente dalla tecnologia*, che fotografa i concetti (non i dettagli implementativi) e dà una visione d'insieme dei dati.
+La progettazione concettuale di un [[Database relazionali|database relazionale]]. L'output è uno **schema ER**: una descrizione *formale e indipendente dalla tecnologia*, che fotografa i concetti (non i dettagli implementativi) e dà una visione d'insieme dei dati.
 
 ## Dove sta nel ciclo di vita
 
@@ -104,4 +105,4 @@ L'output è lo schema relazionale: insieme di tabelle, con i vincoli di integrit
 
 ## Vedi anche
 
-[[Relazioni]] · [[Normalizzazione]] · [[SQL]]
+[[Database relazionali]] · [[Normalizzazione]] · [[SQL]]

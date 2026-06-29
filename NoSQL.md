@@ -2,6 +2,7 @@
 date: 2026-05-11
 tags: [database, nosql]
 status: active
+area: nosql
 ---
 
 # NoSQL — Tipi di database
@@ -10,7 +11,7 @@ status: active
 
 ## Cosa cambia rispetto al relazionale
 
-| | **SQL** ([[Relazioni|relazionale]]) | **NoSQL** |
+| | **SQL** ([[Database relazionali|relazionale]]) | **NoSQL** |
 |---|---|---|
 | Struttura | tabelle, schema fisso | schema-free; key-value, documenti, grafi, colonne |
 | Scalabilità | verticale (hardware più potente) | **orizzontale** (più server nel pool) |
@@ -36,14 +37,14 @@ Coppie chiave→valore, come un dizionario Python: accesso in **tempo costante**
 Esempi: **Redis**, DynamoDB.
 
 ### Documentale
-Memorizza dati semi-strutturati come **documenti** (JSON, BSON, XML). Schema-free, ogni documento può differire dagli altri nella stessa collezione. A differenza del key-value, il DB **vede dentro** il documento → query sui campi, indici su qualsiasi attributo, retrieval parziale. → vedi [[MONGO DB]] e [[Aggregate Oriented Model]].
+Memorizza dati semi-strutturati come **documenti** (JSON, BSON, XML). Schema-free, ogni documento può differire dagli altri nella stessa collezione. A differenza del key-value, il DB **vede dentro** il documento → query sui campi, indici su qualsiasi attributo, retrieval parziale. → vedi [[MongoDB]] e [[Aggregate Oriented Model]].
 Esempi: **MongoDB**.
 
 > [!info]
 > **Documentale vs Key-Value:** entrambi gestiscono aggregati, ma il key-value tratta il valore come opaco (accesso *solo* per chiave), il documentale ne espone la struttura (query *su campi* interni).
 
 ### Columnar
-Orientato alle **colonne** anziché alle righe: ogni colonna sta in blocchi fisici propri. Vantaggi per l'analitica ([[Relazioni|OLAP]], data warehousing): legge solo le colonne che servono (I/O efficiente), **compressione** ottima (stesso tipo di dato per blocco), aggregazioni rapide (`SUM`, `COUNT`, `AVG` su blocchi contigui). È il motivo per cui lo storage analitico è colonnare ([[BI Architecture]]).
+Orientato alle **colonne** anziché alle righe: ogni colonna sta in blocchi fisici propri. Vantaggi per l'analitica ([[Database relazionali|OLAP]], data warehousing): legge solo le colonne che servono (I/O efficiente), **compressione** ottima (stesso tipo di dato per blocco), aggregazioni rapide (`SUM`, `COUNT`, `AVG` su blocchi contigui). È il motivo per cui lo storage analitico è colonnare ([[BI Architecture]]).
 Esempi: **Apache Cassandra**.
 
 ### Grafo
@@ -60,7 +61,7 @@ Esempi: **Pinecone**, **Chroma**.
 
 ## ACID — le garanzie transazionali
 
-Quattro proprietà che rendono affidabile una transazione (forti nei [[Relazioni|relazionali]], spesso allentate nei NoSQL):
+Quattro proprietà che rendono affidabile una transazione (forti nei [[Database relazionali|relazionali]], spesso allentate nei NoSQL):
 
 - **Atomicity** — la transazione è un blocco unico: o tutta o niente (se fallisce a metà, *rollback*). Es. bonifico: o addebito *e* accredito, o nessuno dei due.
 - **Consistency** — porta il DB da uno stato valido a un altro valido, rispettando tutti i vincoli (chiavi, FK).
@@ -82,7 +83,7 @@ flowchart TD
     SCELTA -->|AP| A["Availability<br/>rispondo col dato disponibile"]
 ```
 
-Poiché le partizioni di rete sono una realtà, **P è di fatto obbligata**: la scelta vera è tra **CP** (banca: meglio non rispondere che dare un saldo sbagliato) e **AP** (rispondo sempre, accettando dati momentaneamente non allineati). Il "CA" puro esiste solo in assenza di distribuzione. → applicato a MongoDB in [[MONGO DB]].
+Poiché le partizioni di rete sono una realtà, **P è di fatto obbligata**: la scelta vera è tra **CP** (banca: meglio non rispondere che dare un saldo sbagliato) e **AP** (rispondo sempre, accettando dati momentaneamente non allineati). Il "CA" puro esiste solo in assenza di distribuzione. → applicato a MongoDB in [[MongoDB]].
 
 ## Polyglot persistence
 
@@ -96,4 +97,4 @@ Un'applicazione usa **più database insieme**, ciascuno dove è forte: relaziona
 
 ## Vedi anche
 
-[[Relazioni]] · [[MONGO DB]] · [[Neo4j]] · [[Graph databases]] · [[Aggregate Oriented Model]]
+[[Database relazionali]] · [[MongoDB]] · [[Neo4j]] · [[Graph databases]] · [[Aggregate Oriented Model]]

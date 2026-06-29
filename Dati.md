@@ -2,6 +2,7 @@
 date: 2026-05-11
 tags: [fondamentali]
 status: active
+area: fondamentali
 ---
 
 # Dati — Fondamentali
@@ -37,7 +38,7 @@ Le caratteristiche che definiscono — e rendono difficili — i big data:
 
 | Tipo | Struttura | Esempio |
 |---|---|---|
-| **Strutturati** | schema rigido, tabelle righe/colonne ([[Relazioni|RDBMS]]) | anagrafica clienti di una banca |
+| **Strutturati** | schema rigido, tabelle righe/colonne ([[Database relazionali|RDBMS]]) | anagrafica clienti di una banca |
 | **Semi-strutturati** | non tabellari ma con tag/marker e metadati | JSON, XML; clickstream / web log |
 | **Non strutturati** | nessun formato predefinito | testo, immagini, video, recensioni, post |
 
@@ -59,7 +60,7 @@ Il bivio architetturale di fronte al Volume:
 |---|---|---|
 | Come | macchina più potente (disco, RAM, CPU) | tanti computer *standard*, dato e calcolo distribuiti |
 | Limite | tetto fisico e costo dell'hardware | gestione della distribuzione |
-| Mondo | [[Relazioni|SQL]] tradizionale | [[Hadoop]], [[Spark]], [[(non solo) Relazioni|NoSQL]] |
+| Mondo | [[Database relazionali|SQL]] tradizionale | [[Hadoop]], [[Spark]], [[NoSQL]] |
 
 Lo scale-out è il principio dei big data: distribuire su *commodity hardware* invece di comprare un mainframe. Vedi [[Cloud computing]] per l'evoluzione mainframe → client/server → cloud.
 
@@ -90,8 +91,8 @@ Risponde all'esigenza della BI in tempo reale (vedi [[BI Architecture#Real-time 
 ## Da tenere in tasca
 
 - *Garbage in, garbage out*: un'analisi vale quanto i dati che la nutrono.
-- **Polyglot persistence** — un'applicazione usa più database insieme, ciascuno per ciò in cui è forte (relazionale per le transazioni, documentale per schema flessibile, grafo per le relazioni, time-series per gli eventi). → [[(non solo) Relazioni]].
+- **Polyglot persistence** — un'applicazione usa più database insieme, ciascuno per ciò in cui è forte (relazionale per le transazioni, documentale per schema flessibile, grafo per le relazioni, time-series per gli eventi). → [[NoSQL]].
 
 ## Vedi anche
 
-[[BI Architecture]] · [[ETL]] · [[(non solo) Relazioni]] · [[Hadoop]] · [[Spark]]
+[[BI Architecture]] · [[ETL]] · [[NoSQL]] · [[Hadoop]] · [[Spark]]

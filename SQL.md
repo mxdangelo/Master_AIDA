@@ -2,11 +2,12 @@
 date: 2026-06-26
 tags: [database, sql]
 status: active
+area: relazionali
 ---
 
 # SQL — Structured Query Language
 
-Il linguaggio dei [[Relazioni|database relazionali]], traduzione operativa dell'[[Relazioni#Algebra relazionale|algebra relazionale]]. Si divide in due famiglie:
+Il linguaggio dei [[Database relazionali|database relazionali]], traduzione operativa dell'[[Database relazionali#Algebra relazionale|algebra relazionale]]. Si divide in due famiglie:
 
 - **DML** (Data Manipulation Language) — manipola i *dati*: `SELECT`, `INSERT`, `UPDATE`, `DELETE`.
 - **DDL** (Data Definition Language) — definisce lo *schema*: `CREATE`, `DROP`, `ALTER`.
@@ -44,7 +45,7 @@ SELECT * FROM tab ORDER BY eta ASC, cognome DESC;
 
 ## JOIN
 
-Un join è [[Relazioni#Algebra relazionale|prodotto cartesiano + selezione]]. La condizione nella `WHERE` ha due anime: le condizioni di **collegamento** (join) e quelle di **selezione** vera e propria.
+Un join è [[Database relazionali#Algebra relazionale|prodotto cartesiano + selezione]]. La condizione nella `WHERE` ha due anime: le condizioni di **collegamento** (join) e quelle di **selezione** vera e propria.
 
 **Sintassi implicita** (tabelle nella `FROM`, collegamento nella `WHERE`):
 ```sql
@@ -170,6 +171,7 @@ DELETE FROM Persone WHERE eta > 140;
 
 ## Oggetti del DB (lato server)
 
+- **View (vista)** — tabella *virtuale* definita da una query (`CREATE VIEW v AS SELECT …`): non memorizza dati, la query si riesegue a ogni accesso. Usi: **astrazione** (nascondi join e complessità dietro un nome), **sicurezza** (esponi solo certe colonne/righe a un utente), riuso di logica. La **materialized view** invece *salva* il risultato (più veloce in lettura, ma va aggiornata) — la materializzazione di cui sopra.
 - **Index** — struttura dati che velocizza l'accesso (come l'indice di un vocabolario), aggiornata in automatico. **Pro:** velocizza JOIN e query su grandi DB. **Contro:** rallenta gli `INSERT`, occupa spazio. Si crea a livello di attributo (spesso su PK e FK). La **progettazione fisica** del DB consiste quasi tutta nello scegliere gli indici, analizzando le query più frequenti.
 - **Stored procedure** — insieme di comandi SQL salvato sul server e richiamabile (`CALL`). Funge da **API** riusabile tra applicazioni/linguaggi; gira server-side, quindi una disconnessione non interrompe il calcolo. Ortogonale alle transazioni (può usarle o no).
 - **Vincoli di integrità (constraint)** — regole che il DBMS fa rispettare. Trade-off: più regole = più qualità, ma rigidità eccessiva *peggiora* la qualità (`NULL`, dati finti inseriti per aggirare il vincolo).
@@ -186,4 +188,4 @@ DELETE FROM Persone WHERE eta > 140;
 
 ## Vedi anche
 
-[[Relazioni]] · [[Modello ER]] · [[Logica booleana]]
+[[Database relazionali]] · [[Modello ER]] · [[Logica booleana]]
