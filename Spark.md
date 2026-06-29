@@ -82,7 +82,7 @@ Astrazioni di livello più alto, costruite sul motore **Spark SQL** (ottimizzato
 
 ## Databricks
 
-Piattaforma analitica **collaborativa basata su Apache Spark**, che rimuove la complessità di creare e gestire un cluster Spark (installazioni e setting con un click). Include tutti i moduli (SparkSQL, Streaming, ML, GraphX), notebook stile Jupyter (Python/Scala/SQL nello stesso notebook, sessione `spark` già globale), integrazione con GitHub e con AWS/Azure. → vedi [[Cloud computing]] e il **Delta Lake** (lakehouse con ACID su Spark).
+Piattaforma analitica **collaborativa basata su Apache Spark**: rimuove la complessità di creare e gestire un cluster (setup con un click), include tutti i moduli e notebook stile Jupyter (`spark` già globale), ed è la piattaforma **lakehouse** (Delta Lake). → nota dedicata: [[Databricks]].
 
 ## In pratica (PySpark)
 
@@ -144,7 +144,7 @@ spark.sql("SELECT * FROM talks WHERE title IS NOT NULL").dropDuplicates().count(
 
 ## Su AWS — EMR (il lab)
 
-Far girare Spark (e il classificatore [[Machine Learning|ML]]) su cloud: si crea un cluster **EMR**, lo si collega a **EMR Studio**, si lavora da notebook. → infrastruttura in [[Cloud computing]].
+Far girare Spark (e il classificatore [[Machine Learning|ML]]) su cloud: si crea un cluster **EMR**, lo si collega a **EMR Studio**, si lavora da notebook. → i servizi in [[AWS]] (concetti generali in [[Cloud computing]]).
 
 > [!info] Dalle slide del corso (setup EMR)
 > I valori sono quelli del lab; **VPC, subnet e ruoli dipendono dall'account**.
@@ -172,4 +172,4 @@ Far girare Spark (e il classificatore [[Machine Learning|ML]]) su cloud: si crea
 
 - [[Hadoop]] — l'infrastruttura sottostante (HDFS, YARN).
 - [[Machine Learning]] — MLlib: classificazione, NLP, TF-IDF su Spark.
-- [[Python]] · [[Dati]] · [[Cloud computing]] — la pipeline del lab gira come job PySpark su AWS Glue.
+- [[Python]] · [[Dati]] · [[Cloud computing]] · [[AWS]] · [[Databricks]] — la pipeline del lab gira come job PySpark su AWS Glue.

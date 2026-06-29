@@ -106,7 +106,7 @@ glob.glob('**/*.csv', recursive=True)                         # tanti file insie
 > **ETL** Extract-Transform-Load · **OLTP** transaction processing (operativo) · **OLAP** analytical processing (cubo) · **4V+1** Volume, Velocità, Varietà, Veracity → **Value** · **ACID** Atomicity, Consistency, Isolation, Durability · **CAP** Consistency, Availability, Partition tolerance (ne scegli 2) · **IaaS/PaaS/SaaS** infrastruttura / piattaforma / software.
 
 > [!info] AWS — i mattoni (cosa sono)
-> **Bucket** (S3) = contenitore di oggetti (no file system) · **EC2** = macchine virtuali (es. *m5.xlarge*) · **Cluster** (EMR) = gruppo di EC2: **Primary** coordina, **Core** dati+calcolo, **Task** solo calcolo · **IAM** = i permessi (un *ruolo* autorizza, es. il cluster a leggere il bucket) · **VPC/subnet** = la rete (Studio nella stessa per raggiungere il cluster) · ⚠️ **termina il cluster** a fine sessione (costa a tempo). → [[Cloud computing]] · [[Spark#Su AWS — EMR (il lab)|setup EMR]]
+> **Bucket** (S3) = contenitore di oggetti (no file system) · **EC2** = macchine virtuali (es. *m5.xlarge*) · **Cluster** (EMR) = gruppo di EC2: **Primary** coordina, **Core** dati+calcolo, **Task** solo calcolo · **IAM** = i permessi (un *ruolo* autorizza, es. il cluster a leggere il bucket) · **VPC/subnet** = la rete (Studio nella stessa per raggiungere il cluster) · ⚠️ **termina il cluster** a fine sessione (costa a tempo). → [[AWS]] · [[Spark#Su AWS — EMR (il lab)|setup EMR]]
 
 **Regole e formule**
 - `N tabelle → N-1 JOIN`. Molti-a-molti → **tabella ponte**.
@@ -140,5 +140,5 @@ glob.glob('**/*.csv', recursive=True)                         # tanti file insie
 - **Big data** — [[Hadoop]] · [[Spark]]
 - **Data engineering** — [[Data Ingestion]] · [[ETL]] · [[Data Quality]]
 - **Analytics** — [[BI Architecture]] · [[Machine Learning]]
-- **Cloud** — [[Cloud computing]]
-- **Strumenti** — [[Python]]
+- **Cloud** — [[Cloud computing]] · [[AWS]] · [[Databricks]]
+- **Strumenti** — [[Python]] · [[KNIME]]

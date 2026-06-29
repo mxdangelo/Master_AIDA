@@ -64,4 +64,4 @@ Da Hadoop 2, **YARN** (*Yet Another Resource Negotiator*) separa la gestione del
 
 - [[Spark]] — gira sopra Hadoop/YARN, ne usa HDFS; estende MapReduce con calcolo *in-memory* e *lazy*.
 - [[Dati]] — scale-out, le 4V.
-- [[Data Ingestion]] · [[Cloud computing]] — su cloud, EMR/Databricks gestiscono il cluster Hadoop/Spark per te.
+- [[Data Ingestion]] · [[Cloud computing]] — su cloud, [[AWS|EMR]]/[[Databricks]] gestiscono il cluster Hadoop/Spark per te.

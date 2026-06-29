@@ -75,17 +75,7 @@ Domande da porsi: quanto costa 1h di calcolo su un server "pronto" per big data?
 
 ## AWS
 
-Piattaforma cloud: calcolo, storage, database, delivery. Distribuzione geografica in **Region** (collezioni indipendenti di risorse in una geografia), ciascuna con più **Availability Zone** isolate → si collocano risorse e dati in più luoghi per resilienza. Servizi chiave: **S3** (storage scalabile, *no file system*, economico, pay-per-use), **EC2** (calcolo), **EMR** ([[Hadoop]]/[[Spark]] gestito), **Athena**, **Redshift** (DW), **Glue**, **Lambda**, **SageMaker** (ML).
-
-> [!info] I mattoni (cosa significano, e perché li selezioni)
-> - **Bucket** (S3) — un contenitore di **oggetti** (file) con nome **globalmente unico**. Non è un vero file system: le "cartelle" sono solo prefissi nel nome.
-> - **Istanza** (EC2) — una **macchina virtuale** che affitti (es. *m5.xlarge*): la famiglia (`m5` = general-purpose) e la taglia (`xlarge` = 4 vCore / 16 GiB) ne fissano potenza e prezzo.
-> - **Cluster** (EMR) — un **gruppo di istanze EC2** che lavorano insieme con ruoli diversi: **Primary** coordina, **Core** tiene i dati (HDFS) e calcola, **Task** solo calcolo.
-> - **IAM** (*Identity & Access Management*) — il sistema dei **permessi**: *chi può fare cosa*. Un **ruolo** è un insieme di permessi (*policy*) che dai a un servizio. Scegliere `EMR_DefaultRole`/`LabRole` significa, via IAM, autorizzare il cluster a leggere quel bucket S3, avviare istanze, ecc. — senza, EMR non potrebbe toccare i tuoi dati.
-> - **VPC / subnet** — la **rete privata** isolata in cui vivono le istanze; EMR Studio dev'essere nella *stessa* VPC per **raggiungere** il cluster.
-
-### Serverless
-*Functions as a Service*: scrivi **funzioni** che rispondono a **eventi esterni**, senza provisioning né gestione di server. **AWS Lambda** ne è l'esempio — paghi solo l'esecuzione.
+I servizi concreti di AWS — mattoni (S3, EC2, EMR, IAM, VPC), mappa dei servizi, serverless, Glue/Athena e la pipeline del lab — hanno una **nota dedicata**: → [[AWS]].
 
 ## Data architecture moderna
 
@@ -102,23 +92,7 @@ Cos'è il data lake e le sue fonti: [[Dati#Data Lake]]. Schema-on-write vs schem
 ### Delta Lake — il lakehouse
 Tecnologia open-source ([delta.io](https://delta.io)) sopra **[[Spark]]** per data lake robusti: **transazioni ACID** su Spark, *schema enforcement*, **time travel**, upsert/delete, unificazione streaming + batch. È la base del **lakehouse** ([[ETL]]).
 
-### AWS Glue + Athena
-- **Glue** — ETL **serverless** e gestito: *crawl & catalogue* dei dati, mapping → script, scheduling dei job. Paghi solo le risorse consumate, a secondi.
-- **Athena** — query in **SQL standard direttamente su S3**, sul dato grezzo (CSV/JSON/Parquet), **senza ETL né caricamento**. Pay-per-query (~$5/TB scansionato); risparmi con compressione, formati colonnari e partizioni.
-- **Data cleaning automatico** (AWS, dal 2024) — pulizia gestita dei dati ([[Data Quality]]). Trade-off: a seconda del job aggiunge **overhead** a monte (conta dei dati, distribuzione), ma poi rende il **processing più veloce**.
-
-### La pipeline del lab (TEDx)
-Esempio end-to-end *event-driven* su AWS:
-
-```mermaid
-flowchart LR
-    S3[S3 data lake<br/>raw data] -->|nuovo file: trigger| L[Lambda]
-    L -->|avvia| G[Glue<br/>job PySpark]
-    G -->|group by tags, join,<br/>aggregate model| P[S3 Parquet<br/>DWH]
-    P --> A[Athena<br/>query SQL]
-```
-
-Il job PySpark legge il dataset dei talk, raggruppa i tag per talk, fa il **join** e produce l'**aggregate model** ([[Aggregate Oriented Model]]) salvato in Parquet, interrogabile da Athena. Caricare un nuovo file in S3 scatena (via Lambda) l'intera pipeline.
+*Le parti AWS-specifiche — Glue, Athena e la pipeline event-driven del lab (TEDx) — sono nella nota [[AWS]].*
 
 ## Implicazioni organizzative e di rete
 
@@ -133,7 +107,7 @@ Le slide contrappongono l'**IT centrale** (un'unica funzione che fa da gatekeepe
 
 ### Rete: il dato ha gravità
 - **Data gravity** *(inquadramento)* — è più economico portare il **calcolo dove sta il dato** che il contrario. È lo stesso principio di [[Hadoop|Hadoop]] ("move computation to data"), qui a scala cloud: collochi compute e storage nella stessa **Region** per non pagare latenza e transfer.
-- **Costi di egress** — far *entrare* i dati nel cloud è gratis o quasi; **farli uscire** (egress) o spostarli tra region/provider è la voce che pesa. Progetta per **minimizzare i movimenti** cross-region/cross-cloud — è anche ciò che rende [[#AWS Glue + Athena|Athena su S3]] conveniente (il dato non si sposta, la query va al dato).
+- **Costi di egress** — far *entrare* i dati nel cloud è gratis o quasi; **farli uscire** (egress) o spostarli tra region/provider è la voce che pesa. Progetta per **minimizzare i movimenti** cross-region/cross-cloud — è anche ciò che rende [[AWS#Glue + Athena|Athena su S3]] conveniente (il dato non si sposta, la query va al dato).
 - **Perimetro di sicurezza** — VPC, ruoli, isolamento: ogni servizio esposto è una superficie in più. Parallelo con la "nuova superficie privacy" di un LLM che manda dati a un'API terza ([[BI Architecture#Dalla BI all'analitica AI-augmented|MCP]], [[Data Ingestion#Etica e legalità|scraping]]).
 - **Identità di rete** — dietro CGNAT si condivide l'IP (e i throttle) con altri; in cloud è l'opposto e il punto di forza: **IP, region e zone si scelgono**, e con esse latenza, resilienza e conformità (dove risiede il dato).
 
@@ -141,4 +115,4 @@ Le slide contrappongono l'**IT centrale** (un'unica funzione che fa da gatekeepe
 
 ## Vedi anche
 
-[[BI Architecture]] · [[Dati]] · [[Spark]] · [[Hadoop]] · [[ETL]] · [[Aggregate Oriented Model]] · [[Data Ingestion]]
+[[AWS]] · [[Databricks]] · [[BI Architecture]] · [[Dati]] · [[Spark]] · [[Hadoop]] · [[ETL]] · [[Aggregate Oriented Model]] · [[Data Ingestion]]
