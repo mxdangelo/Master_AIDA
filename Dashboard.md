@@ -12,7 +12,7 @@ Vista **auto-generata** di tutte le note di studio, raggruppate per area. Si agg
 ```base
 filters:
   and:
-    - area != ""
+    - '!file.hasTag("meta")'
 views:
   - type: table
     name: Note per area
@@ -33,9 +33,9 @@ views:
 ```
 
 > [!tip] Varianti
-> - Per **raggrupparle** visivamente invece di ordinarle, aggiungi al view `group_by: area`.
+> - Il filtro `!file.hasTag("meta")` tiene fuori le pagine dell'ossatura (Prontuario, Principi, README…); le note di studio hanno tutte una `area`.
 > - Per una vista a **schede** invece che tabella, cambia `type: table` → `type: cards`.
-> - Per filtrare solo i lavori in corso: aggiungi a `filters.and` la riga `- 'status == "active"'`.
+> - Per i soli lavori in corso, aggiungi a `filters.and`: `- 'status == "active"'`.
 
 ## Principi
 
