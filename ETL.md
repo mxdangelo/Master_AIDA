@@ -93,13 +93,13 @@ flowchart LR
 | Utenti | BI, reporting, decisione | data science, ML, esplorazione |
 | Trade-off | affidabile e veloce; rigido, costoso da scalare | economico e flessibile; qualità e governance deboli |
 
-Il **lakehouse** integra i due: aggiunge uno **strato di tabelle transazionali** sopra il lake, così *una sola copia* serve sia BI sia ML. Lo abilita un **formato di tabella aperto** — **Delta Lake** / Apache Iceberg — che porta sui file aperti (Parquet su S3/ADLS/GCS) le garanzie da warehouse: **transazioni ACID**, *schema enforcement* ed *evolution*, **time travel**, indici. Una copia sola = niente duplicazione, governance e *lineage* unificati. È il terreno di **Databricks**: Delta Lake (storage), Spark + Photon (motore), Delta Live Tables (pipeline ELT declarative che costruiscono i layer medallion), Unity Catalog (governance), Databricks SQL (BI), MLflow (ML) — tutto sugli stessi dati governati.
+Il **lakehouse** integra i due: aggiunge uno **strato di tabelle transazionali** sopra il lake, così *una sola copia* serve sia BI sia ML. Lo abilita un **formato di tabella aperto** — **Delta Lake** / Apache Iceberg — che porta sui file aperti (Parquet su S3/ADLS/GCS) le garanzie da warehouse: **transazioni ACID**, *schema enforcement* ed *evolution*, **time travel**, indici. Una copia sola = niente duplicazione, governance e *lineage* unificati. È il terreno di [[Databricks]] (Delta Lake, Spark + Photon, Delta Live Tables per i layer medallion, Unity Catalog, MLflow) — tutto sugli stessi dati governati.
 
 ## Strumenti
 
-- **KNIME** — ETL *visuale* a paradigma grafico: i **nodi** fanno operazioni (accesso DB/file/S3/Kafka/REST, preprocessing, blending join/concat, aggregazione, feature creation, persino data mining e ML) e si concatenano in **workflow**, ognuno consuma l'output del precedente. È lo strumento del lab (es. CSV → dedup → *Table to JSON* → *MongoDB Connector* → scrittura su [[MongoDB|MongoDB Atlas]]).
+- **[[KNIME]]** — ETL *visuale* a nodi/workflow, alternativa no-code agli script; lo strumento del lab (CSV → dedup → JSON → [[MongoDB|MongoDB Atlas]]).
 - **Snowflake** — cloud, ottimo per la *presentation*.
-- **Databricks** — buono per tutto (è la piattaforma lakehouse).
+- **[[Databricks]]** — buono per tutto (è la piattaforma lakehouse).
 - **Orchestrazione** — Apache Airflow (DAG, scheduling, retry).
 - **Transform nel warehouse** — dbt.
 - **Pulizia interattiva** — [[Data Ingestion|OpenRefine]].
