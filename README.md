@@ -8,6 +8,10 @@ Appunti di studio del **Master in AI & Digital Analytics** (Università di Milan
 
 Coprono: database relazionali e SQL, NoSQL (MongoDB, Neo4j), big data (Hadoop, Spark), data engineering (web scraping, ETL, data quality), business intelligence, cloud (AWS) e machine learning.
 
+![Graph view del vault in Obsidian: le note colorate per area e collegate dai wiki-link](assets/graph-view.png)
+
+<sub>🟡 Fondamentali · 🔵 Relazionali · 🟢 NoSQL · 🩵 Cloud · 🟣 Big data · 🟠 Data engineering · 🩷 Analytics · ⚪ Strumenti</sub>
+
 ## Come usarli
 
 Note in Markdown pensate per **[Obsidian](https://obsidian.md)**: wiki-link `[[...]]`, diagrammi **Mermaid**, callout colorati. Apri la cartella come vault Obsidian per navigarle con la *graph view*.

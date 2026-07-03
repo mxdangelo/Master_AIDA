@@ -1,0 +1,79 @@
+{
+  "collapse-filter": false,
+  "search": "-tag:#meta",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": true,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:Fondamentali",
+      "color": {
+        "a": 1,
+        "rgb": 15777856
+      }
+    },
+    {
+      "query": "path:Relazionali",
+      "color": {
+        "a": 1,
+        "rgb": 4099831
+      }
+    },
+    {
+      "query": "path:NoSQL",
+      "color": {
+        "a": 1,
+        "rgb": 7061306
+      }
+    },
+    {
+      "query": "path:Cloud",
+      "color": {
+        "a": 1,
+        "rgb": 1556155
+      }
+    },
+    {
+      "query": "path:\"Big data\"",
+      "color": {
+        "a": 1,
+        "rgb": 10182117
+      }
+    },
+    {
+      "query": "path:\"Data engineering\"",
+      "color": {
+        "a": 1,
+        "rgb": 15890749
+      }
+    },
+    {
+      "query": "path:Analytics",
+      "color": {
+        "a": 1,
+        "rgb": 15485081
+      }
+    },
+    {
+      "query": "path:Strumenti",
+      "color": {
+        "a": 1,
+        "rgb": 8951462
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": true,
+  "textFadeMultiplier": 1,
+  "nodeSizeMultiplier": 1.1,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": false,
+  "centerStrength": 0.28,
+  "repelStrength": 12,
+  "linkStrength": 0.7,
+  "linkDistance": 90,
+  "scale": 0.49969376655943293,
+  "close": false
+}
