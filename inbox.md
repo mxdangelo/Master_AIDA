@@ -9,7 +9,3 @@ Porta d'ingresso: butta qui quello che vuoi ricordare — un pensiero, un URL, u
 ## Da processare
 
 <!-- una riga per cattura, sotto questa riga -->
-powerbi:
-ogni elemento deve avere un senso
-no colori o etichette che non danno informazioni univoche
-per trasformare dati->apri modello semantico. lo stesso per creare formule da ritrovarsi fra i dati
