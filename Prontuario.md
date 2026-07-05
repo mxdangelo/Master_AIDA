@@ -152,3 +152,4 @@ glob.glob('**/*.csv', recursive=True)                         # tanti file insie
 - **Analytics** — [[BI Architecture]] · [[Machine Learning]] · [[Data Visualization]]
 - **Cloud** — [[Cloud computing]] · [[AWS]] · [[Databricks]]
 - **Strumenti** — [[Python]] · [[KNIME]] · [[Power BI]]
+- **Case study** — [[Superstore — profittabilità]]

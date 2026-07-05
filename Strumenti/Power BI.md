@@ -7,7 +7,7 @@ area: strumenti
 
 # Power BI
 
-Tool di **business intelligence self-service** di Microsoft: colleghi una sorgente, modelli i dati e costruisci **report e dashboard** interattivi senza scrivere codice. Al lab si usa **Power BI Online** (browser, `app.powerbi.com`) sul dataset **Sample - Superstore** (da Kaggle). È lo strato *Application* dell'[[BI Architecture#I livelli dell'architettura|architettura BI]] — l'alternativa low-code al disegnare grafici in [[Data Visualization|matplotlib]].
+Tool di **business intelligence self-service** di Microsoft: colleghi una sorgente, modelli i dati e costruisci **report e dashboard** interattivi senza scrivere codice. Al lab si usa **Power BI Online** (browser, `app.powerbi.com`) sul dataset **Sample - Superstore** (da Kaggle). È lo strato *Application* dell'[[BI Architecture#I livelli dell'architettura|architettura BI]] — l'alternativa low-code al disegnare grafici in [[Data Visualization|matplotlib]]. Lo stesso dataset è analizzato via **codice** nel [[Superstore — profittabilità|case study Superstore]]: due strade sugli stessi dati.
 
 ## Il flusso — dalla sorgente al report
 
@@ -57,4 +57,4 @@ I [[Data Visualization#Principi del buon grafico|principi del buon grafico]] val
 
 ## Vedi anche
 
-[[Data Visualization]] · [[BI Architecture]] · [[KNIME]] · [[Data Quality]]
+[[Data Visualization]] · [[Superstore — profittabilità]] · [[BI Architecture]] · [[KNIME]] · [[Data Quality]]

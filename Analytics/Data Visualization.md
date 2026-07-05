@@ -111,4 +111,4 @@ plt.show()
 
 ## Vedi anche
 
-[[Python]] · [[Power BI]] · [[BI Architecture]] · [[Machine Learning]]
+[[Python]] · [[Superstore — profittabilità]] · [[Power BI]] · [[BI Architecture]] · [[Machine Learning]]
