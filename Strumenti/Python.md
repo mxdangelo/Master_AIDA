@@ -96,4 +96,4 @@ df["cat"].value_counts(normalize=True)                  # frequenze relative (%)
 
 ## Vedi anche
 
-[[Spark]] · [[Data Quality]] · [[Data Ingestion]]
+[[Spark]] · [[Data Quality]] · [[Data Ingestion]] · [[Data Visualization]]
