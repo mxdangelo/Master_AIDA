@@ -46,6 +46,16 @@ Quick-reference operativo: **se devi fare X, cosa usi e dove approfondisci.** No
 
 → [[ETL]] · [[Cloud computing]]
 
+### Quale tool per visualizzare?
+
+| Approccio | Forza | Quando |
+|---|---|---|
+| **Codice** ([[Data Visualization|matplotlib]]/seaborn) | flessibilità e controllo totali, riproducibile | grafici su misura, pubblicazione, dentro una pipeline |
+| **Tool BI** ([[Power BI]], Tableau) | velocità, condivisione, interattività no-code | dashboard per stakeholder, report ricorrenti |
+
+> [!tip] Il criterio vero
+> Dipende dall'**ambiente aziendale** (e quindi dagli **stakeholder**: cosa già usano e sanno leggere), dalla **flessibilità** richiesta e dalla **velocità** di realizzazione. Nessuno è "migliore" in assoluto.
+
 ### Scraping: API, selettori o LLM?
 
 | Approccio | Quando | Costo |
@@ -139,6 +149,6 @@ glob.glob('**/*.csv', recursive=True)                         # tanti file insie
 - **NoSQL** — [[NoSQL]] · [[Aggregate Oriented Model]] · [[MongoDB]] · [[Graph databases]] · [[Neo4j]]
 - **Big data** — [[Hadoop]] · [[Spark]]
 - **Data engineering** — [[Data Ingestion]] · [[ETL]] · [[Data Quality]]
-- **Analytics** — [[BI Architecture]] · [[Machine Learning]]
+- **Analytics** — [[BI Architecture]] · [[Machine Learning]] · [[Data Visualization]]
 - **Cloud** — [[Cloud computing]] · [[AWS]] · [[Databricks]]
-- **Strumenti** — [[Python]] · [[KNIME]]
+- **Strumenti** — [[Python]] · [[KNIME]] · [[Power BI]]

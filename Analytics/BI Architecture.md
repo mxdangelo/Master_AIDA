@@ -99,4 +99,4 @@ Lo stack classico *warehouse-centrico* (sorgenti → ETL → data warehouse → 
 
 ## Vedi anche
 
-[[Dati]] · [[ETL]] · [[NoSQL]] · [[Cloud computing]]
+[[Dati]] · [[ETL]] · [[NoSQL]] · [[Cloud computing]] · [[Power BI]] · [[Data Visualization]]
