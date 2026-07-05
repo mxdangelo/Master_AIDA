@@ -43,9 +43,23 @@ Tre oggetti annidati — saperli distinguere è il 90% del debugging di un grafi
 | **Box plot** | distribuzione + outlier per gruppo | confronto tra gruppi |
 | **Pie** | quote di un totale | (usa con parsimonia: l'occhio confronte male gli angoli) |
 
-## In pratica (matplotlib)
+## In pratica — lo scatter del case study
 
-Esempio dal *case study* bike-sharing — scatter umidità vs temperatura, con colori/dimensioni **condizionali** e annotazioni. Costruito con NumPy per evitare i `for`:
+Il *case study* bike-sharing (scatter umidità vs temperatura, colori condizionali) propone **di proposito** una versione complessa e inefficiente, per poi mostrare come si fa bene. Le due a confronto valgono più di mille spiegazioni.
+
+> [!fail] Come **non** farlo — uno `scatter` dentro il `for`
+> ```python
+> for i in range(len(df)):
+>     if df.holiday[i] == 0:                       # non festivo
+>         alpha, size = 0.3, 28
+>         c = 'g' if (df.hum[i] < np.mean(df.hum) and df.atemp[i] > np.mean(df.atemp)) else 'b'
+>     else:                                        # festivo
+>         c, alpha, size = 'r', 0.8, 40
+>     plt.scatter(df.hum[i], df.atemp[i], c=c, alpha=alpha, s=size, edgecolors='k')
+> ```
+> Funziona, ma chiama `scatter` **una volta per riga**: migliaia di chiamate (lento), verboso, illeggibile. E `np.mean(df.hum)` ricalcolato a ogni giro.
+
+**✅ Come farlo** — le condizioni diventano array con `np.where`, e `scatter` si chiama **una volta sola**:
 
 ```python
 import numpy as np
