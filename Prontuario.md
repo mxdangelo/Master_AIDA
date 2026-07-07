@@ -107,6 +107,18 @@ BeautifulSoup(requests.get(url).text, "html.parser").select("h2.title")  # scrap
 glob.glob('**/*.csv', recursive=True)                         # tanti file insieme
 ```
 
+### Git — il giro completo
+
+```bash
+git switch -c nome-ramo        # 1. ramo dedicato
+git add <file>                 # 2. stage mirato (non -A alla cieca)
+git commit -m "Aggiunge X"     # 3. commit atomico, imperativo
+git push -u origin nome-ramo   # 4. pubblica il ramo
+# 5. su GitHub: "Compare & pull request" → review → merge
+```
+> [!warning] Mai segreti nel repo
+> Una chiave committata è esposta anche se la cancelli al commit dopo: **revoca e rigenera**. → [[Git e GitHub#Segreti: mai nel repository|Git e GitHub]]
+
 ### Dati mancanti
 `case deletion` (pochi casi / campo chiave) · `imputation` (regressione, tree) · `special value` · `do nothing` (algoritmi robusti). → prima **interpreta** il mancante (omesso? non esiste? non raccolto? errore?). → [[Data Quality]]
 
@@ -144,12 +156,12 @@ glob.glob('**/*.csv', recursive=True)                         # tanti file insie
 
 *In Obsidian (1.9+) c'è anche la [[Dashboard]]: la stessa mappa, auto-generata e filtrabile.*
 
-- **Fondamentali** — [[Dati]] · [[Logica booleana]]
+- **Fondamentali** — [[Dati]] · [[Logica booleana]] · [[Processi]]
 - **Relazionali** — [[Database relazionali]] · [[Modello ER]] · [[Normalizzazione]] · [[SQL]]
 - **NoSQL** — [[NoSQL]] · [[Aggregate Oriented Model]] · [[MongoDB]] · [[Graph databases]] · [[Neo4j]]
 - **Big data** — [[Hadoop]] · [[Spark]]
 - **Data engineering** — [[Data Ingestion]] · [[ETL]] · [[Data Quality]]
 - **Analytics** — [[BI Architecture]] · [[Machine Learning]] · [[Data Visualization]]
 - **Cloud** — [[Cloud computing]] · [[AWS]] · [[Databricks]]
-- **Strumenti** — [[Python]] · [[KNIME]] · [[Power BI]]
+- **Strumenti** — [[Python]] · [[KNIME]] · [[Power BI]] · [[Git e GitHub]] · [[MCP]]
 - **Case study** — [[Superstore — profittabilità]]
