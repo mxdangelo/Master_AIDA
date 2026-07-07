@@ -2,6 +2,7 @@
 date: 2026-06-26
 tags: [database]
 status: active
+image: "[[assets/covers/relazionali.svg]]"
 area: relazionali
 ---
 

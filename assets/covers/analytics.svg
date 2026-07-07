@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#BE185D"/><stop offset="1" stop-color="#9D174D"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <g opacity="0.22">
+    <polyline points="430,280 520,210 590,250 680,120 750,160" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="430" cy="280" r="10" fill="#ffffff"/>
+    <circle cx="520" cy="210" r="10" fill="#ffffff"/>
+    <circle cx="590" cy="250" r="10" fill="#ffffff"/>
+    <circle cx="680" cy="120" r="10" fill="#ffffff"/>
+    <circle cx="750" cy="160" r="10" fill="#ffffff"/>
+  </g>
+  <g opacity="0.12" stroke="#ffffff" stroke-width="4">
+    <line x1="420" y1="310" x2="770" y2="310"/>
+    <line x1="420" y1="310" x2="420" y2="90"/>
+  </g>
+  <text x="48" y="392" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="600" fill="#ffffff">Analytics</text>
+</svg>

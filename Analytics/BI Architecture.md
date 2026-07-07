@@ -2,6 +2,7 @@
 date: 2026-06-06
 tags: [analytics]
 status: active
+image: "[[assets/covers/analytics.svg]]"
 area: analytics
 ---
 

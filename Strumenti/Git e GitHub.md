@@ -2,6 +2,7 @@
 date: 2026-07-07
 tags: [strumenti]
 status: active
+image: "[[assets/covers/strumenti.svg]]"
 area: strumenti
 ---
 

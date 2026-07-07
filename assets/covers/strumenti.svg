@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#475569"/><stop offset="1" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <g stroke="#ffffff" stroke-width="7" fill="none" opacity="0.18">
+    <polygon points="560,80 610,108 610,164 560,192 510,164 510,108"/>
+    <polygon points="680,170 730,198 730,254 680,282 630,254 630,198"/>
+    <polygon points="560,260 610,288 610,344 560,372 510,344 510,288"/>
+  </g>
+  <g fill="#ffffff" opacity="0.14">
+    <circle cx="560" cy="136" r="16"/>
+    <circle cx="680" cy="226" r="16"/>
+    <circle cx="560" cy="316" r="16"/>
+  </g>
+  <text x="48" y="392" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="600" fill="#ffffff">Strumenti</text>
+</svg>

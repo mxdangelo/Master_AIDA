@@ -49,7 +49,7 @@ views:
 
 > [!tip] Varianti
 > - Il filtro `file.hasProperty("area")` mostra **solo le note di studio** (tutte hanno una `area` nel frontmatter). Restano fuori le pagine dell'ossatura (Prontuario, Principi, README…) *e* qualunque file senza property — immagini e allegati inclusi.
-> - La vista **Cards** mostra le note a schede. Per dare la copertina a una scheda, aggiungi alla nota la property `image` con il link a un'immagine del vault, es. `image: "[[assets/graph-view.png]]"`.
+> - La vista **Cards** mostra le note a schede con una **copertina per area** (gli SVG in `assets/covers/`, referenziati dalla property `image` di ogni nota). Per dare a una singola nota una copertina tutta sua, basta cambiare la sua `image` con un'altra immagine del vault.
 > - Per i soli lavori in corso, aggiungi a `filters.and`: `- 'status == "active"'`.
 
 ## Principi

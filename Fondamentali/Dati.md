@@ -2,6 +2,7 @@
 date: 2026-05-11
 tags: [fondamentali]
 status: active
+image: "[[assets/covers/fondamentali.svg]]"
 area: fondamentali
 ---
 

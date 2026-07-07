@@ -2,6 +2,7 @@
 date: 2026-06-26
 tags: [cloud]
 status: active
+image: "[[assets/covers/cloud.svg]]"
 area: cloud
 ---
 

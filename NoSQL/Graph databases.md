@@ -2,6 +2,7 @@
 date: 2026-05-15
 tags: [database, nosql]
 status: active
+image: "[[assets/covers/nosql.svg]]"
 area: nosql
 ---
 
