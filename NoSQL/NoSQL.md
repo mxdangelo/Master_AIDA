@@ -56,7 +56,7 @@ Ottimizzato per dati **indicizzati nel tempo** (metriche, eventi, misure). Appen
 Esempi: **InfluxDB**.
 
 ### Vector
-Memorizza dati come **vettori di feature** (rappresentazioni numeriche in spazio multidimensionale). Ottimizzato per **similarity search** (k-NN: trova i vettori più vicini), alta dimensionalità, scala a miliardi di vettori. Cuore delle app AI/LLM: embedding, RAG, raccomandazione, anomaly detection.
+Memorizza ogni elemento (testo, immagine…) come **vettore di feature**: una lista di numeri che ne rappresenta il significato in uno spazio multidimensionale — l'**embedding** prodotto da un modello. Elementi simili finiscono *vicini* nello spazio, e il DB è ottimizzato per la **similarity search**: il **k-NN** (*k nearest neighbours*) trova i k vettori più vicini a quello dato. Regge alta dimensionalità e scala a miliardi di vettori. È il cuore delle app AI/LLM: il **RAG** (*retrieval-augmented generation*) recupera così i documenti pertinenti da passare al modello prima che risponda; stesso meccanismo per raccomandazione e anomaly detection.
 Esempi: **Pinecone**, **Chroma**.
 
 ## ACID — le garanzie transazionali
