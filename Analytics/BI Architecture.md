@@ -18,12 +18,12 @@ Perché vediamo proliferare così tanti tool? Perché **i tool cambiano, l'appro
 
 ## Concetti di base
 
-- **Database** — raccolta di dati organizzata per facile accesso, gestione e aggiornamento.
-- **Data warehouse** — repository centrale e integrato dei dati aziendali, ottimizzato per l'analisi.
-- **Data mart** — porzione del data warehouse rilevante per uno scopo o un reparto specifico.
-- **ETL** — *Extract, Transform, Load*.
-- **OLTP** — *Online Transaction Processing*: i sistemi operazionali, transazioni correnti.
-- **OLAP** — *Online Analytical Processing*: analisi in tempi accettabili. → i due scenari a confronto: [[Database relazionali#OLTP vs OLAP — i due scenari]].
+- **Database** — raccolta di dati organizzata per facile accesso, gestione e aggiornamento. Es.: il DB del gestionale, con clienti e ordini.
+- **Data warehouse** — il repository **centrale e integrato** dei dati aziendali, ottimizzato per l'analisi: raccoglie e uniforma dati che nascono sparsi nei sistemi operazionali.
+- **Data mart** — la **porzione** del warehouse che serve a uno scopo o reparto: il mart "vendite" per i commerciali, il mart "logistica" per il magazzino.
+- **ETL** — *Extract, Transform, Load*: il processo che porta i dati dalle sorgenti al warehouse → [[ETL]].
+- **OLTP** — *Online Transaction Processing*: i sistemi operazionali, dove le transazioni accadono (la cassa che batte lo scontrino).
+- **OLAP** — *Online Analytical Processing*: l'analisi su grandi volumi in tempi accettabili ("quanto abbiamo venduto per regione negli ultimi 5 anni?"). → i due scenari a confronto: [[Database relazionali#OLTP vs OLAP — i due scenari]].
 
 ## Il processo BI — il dato in 4 fasi
 
@@ -34,11 +34,18 @@ Perché vediamo proliferare così tanti tool? Perché **i tool cambiano, l'appro
 
 ## Architettura di un sistema BI
 
-Tre use case su come i dati attraversano il sistema:
+I dati possono attraversare il sistema in tre modi (tre *use case*):
 
-1. **Use case 1** — ogni dato passa attraverso le stesse fasi.
-2. **Use case 2** — i sistemi sorgente vanno diretti all'applicativo, passando attraverso *collecting & transforming*.
-3. **Use case 3** — ibrido tra i due.
+1. **Percorso completo** — ogni dato fa tutte le fasi: sorgenti → ETL → warehouse → data mart → applicativo. È il caso classico: massima qualità e coerenza, ma latenza più alta. Es.: il report mensile delle vendite.
+2. **Percorso diretto** — i sistemi sorgente alimentano **direttamente l'applicativo**, passando solo da *collecting & transforming*, senza fermarsi nel warehouse. Serve quando conta la freschezza del dato. Es.: un monitor operativo con gli ordini di oggi.
+3. **Ibrido** — i due percorsi convivono: lo storico consolidato arriva dal warehouse, il dato caldo arriva diretto. Es.: una dashboard con lo storico mensile *e* il venduto di giornata.
+
+```mermaid
+flowchart LR
+    S[Sorgenti] --> CT[Collecting &<br/>Transforming]
+    CT --> DW[Warehouse<br/>→ Data Mart] --> AP[Applicativo]
+    CT -->|percorso diretto| AP
+```
 
 Le **4V + 1** dei big data ([[Dati|Volume, Velocità, Varietà, Veracity]]) culminano nella quinta, il **Value** → ed è il valore che alimenta il *decision support system*.
 
@@ -86,7 +93,7 @@ Lo stack classico *warehouse-centrico* (sorgenti → ETL → data warehouse → 
 | Output | dashboard descrittive | descrittivo **+ predittivo + conversazionale/agentico** |
 
 - **AI-ready data** — un dato è "pronto per l'AI" solo *rispetto a un caso d'uso*: deve essere **rappresentativo** (copre pattern reali, edge case, eccezioni), **qualificato** (semanticamente ricco e validato) e **governato** (policy, sensibilità e *lineage* viaggiano col dato). Non si rende pronto "in generale" o in anticipo. *(Gartner: ~60% dei progetti AI senza dati AI-ready verrà abbandonato entro il 2026.)*
-- **MCP** (Model Context Protocol) — standard aperto (Anthropic, nov 2024), "USB-C per l'AI": un solo protocollo bidirezionale al posto di N×M integrazioni custom tra app AI e dati/strumenti aziendali. Un MCP server espone tre primitive: **Tools** (azioni invocabili), **Resources** (dati/contesto leggibili), **Prompts** (template riusabili). Per la BI: gli agenti interrogano direttamente warehouse e semantic layer e rispondono in linguaggio naturale.
+- **[[MCP]]** (Model Context Protocol) — standard aperto (Anthropic, nov 2024), "USB-C per l'AI": un solo protocollo bidirezionale al posto di N×M integrazioni custom tra app AI e dati/strumenti aziendali. Un MCP server espone tre primitive: **Tools** (azioni invocabili), **Resources** (dati/contesto leggibili), **Prompts** (template riusabili). Per la BI: gli agenti interrogano direttamente warehouse e semantic layer e rispondono in linguaggio naturale.
 
 → Infrastruttura dati di questo mondo (vector store, RAG, lakehouse): [[NoSQL]], [[Cloud computing]].
 
