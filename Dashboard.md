@@ -12,14 +12,13 @@ Vista **auto-generata** di tutte le note di studio, raggruppate per area. Si agg
 ```base
 filters:
   and:
-    - 'file.hasProperty("area")'
+    - file.hasProperty("area")
 views:
   - type: cards
     name: Cards
     groupBy:
       property: area
       direction: ASC
-    image: note.image
     order:
       - file.name
       - status
@@ -29,6 +28,8 @@ views:
         direction: ASC
       - property: file.name
         direction: ASC
+    image: note.image
+    imageFit: contain
   - type: table
     name: Note per area
     groupBy:
