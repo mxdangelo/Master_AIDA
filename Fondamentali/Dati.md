@@ -28,9 +28,9 @@ flowchart LR
 Le caratteristiche che definiscono — e rendono difficili — i big data:
 
 - **Volume** — la mole generata ogni secondo (Meta processa >4 PB/giorno). Richiede storage e calcolo speciali.
-- **Velocità** — il ritmo di generazione e movimento; spinge verso lo streaming *real-time*.
-- **Varietà** — la diversità di formato (vedi sotto).
-- **Veracity** — qualità e affidabilità; con tante sorgenti, garantire dati accurati è una sfida (*cleaning*).
+- **Velocità** — il ritmo di generazione e movimento (i tick di borsa, i sensori di una linea di produzione); spinge verso lo streaming *real-time*.
+- **Varietà** — la diversità di formato: tabelle, JSON, testo libero, immagini (i tre livelli di struttura, sotto).
+- **Veracity** — qualità e affidabilità; con tante sorgenti diverse, garantire dati accurati è una sfida (*cleaning*, → [[Data Quality]]).
 
 → La **quinta V**, il **Value**, è la sintesi: è il valore estratto che alimenta il *decision support system* ([[BI Architecture]]).
 
@@ -72,9 +72,11 @@ Repository che accoglie grandi quantità di dati eterogenei nel **formato nativo
 
 Pattern per servire insieme dati storici e in tempo reale, con due percorsi paralleli:
 
-- **Batch layer** — ricalcola viste complete e accurate su tutto lo storico (alta latenza).
-- **Speed layer** — elabora in streaming gli ultimi dati (bassa latenza, approssimato).
+- **Batch layer** — ricalcola viste complete e accurate su **tutto lo storico** (alta latenza).
+- **Speed layer** — elabora **in streaming gli ultimi dati** (bassa latenza, risultato approssimato).
 - **Serving layer** — fonde i due e risponde alle query.
+
+Esempio concreto — il contatore di visualizzazioni di un video: il batch layer ricalcola ogni notte il totale esatto su tutto lo storico; lo speed layer somma al volo le visualizzazioni delle ultime ore (una stima); il serving layer presenta le due cose come un'unica cifra sempre aggiornata.
 
 ```mermaid
 flowchart LR
