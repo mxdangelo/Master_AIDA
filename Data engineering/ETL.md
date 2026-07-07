@@ -2,6 +2,7 @@
 date: 2026-06-13
 tags: [data-engineering]
 status: active
+image: "[[assets/covers/data-engineering.svg]]"
 area: data engineering
 ---
 

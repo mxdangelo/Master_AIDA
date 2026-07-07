@@ -2,6 +2,7 @@
 date: 2026-05-26
 tags: [data-engineering]
 status: active
+image: "[[assets/covers/data-engineering.svg]]"
 area: data engineering
 ---
 
@@ -182,7 +183,21 @@ Alcuni siti non gradiscono lo scraping — per **carico** sui server, **privacy*
 - attento ai **dati personali** (GDPR) e alla proprietà del dato;
 - controlla sempre **`robots.txt`**, i *Terms of Service* e i **limiti/rate** delle API.
 
+### Opt-out dal text & data mining: TDMRep
+
+La direttiva **EU 2019/790 (art. 4)** permette il *text and data mining* sui contenuti web **salvo opt-out** del titolare dei diritti — ma l'opt-out conta solo se espresso in forma **machine-readable**. **TDMRep** (W3C Community Group, 2024) è il protocollo per dichiararlo, con due proprietà:
+
+- `tdm-reservation` — `1` = diritti riservati, `0` = nessuna riserva;
+- `tdm-policy` — URL delle condizioni di licenza (JSON-LD/ODRL), per chi vuole comunque trattare.
+
+Tre modi per pubblicarlo, dal più generale al più specifico (**il più specifico prevale**):
+1. file **`/.well-known/tdmrep.json`** — regole per tutto il sito;
+2. **header HTTP** nella risposta;
+3. **`<meta>`** nell'HTML della singola pagina (o metadata XMP in EPUB/PDF).
+
+> [!info] Cosa cambia per lo scraping
+> `robots.txt` parla ai *crawler* (posso visitare?); TDMRep parla a chi vuole **minare i contenuti** — incluso l'addestramento di modelli AI (posso usare?). Uno scraper rispettoso controlla entrambi. → [TDMRep (W3C)](https://www.w3.org/community/reports/tdmrep/CG-FINAL-tdmrep-20240510/)
 
 ## Vedi anche
 
-[[ETL]] · [[Data Quality]] · [[Dati]]
+[[ETL]] · [[Data Quality]] · [[Dati]] · [[MCP]]

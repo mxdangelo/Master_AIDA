@@ -2,6 +2,7 @@
 date: 2026-06-26
 tags: [cloud]
 status: active
+image: "[[assets/covers/cloud.svg]]"
 area: cloud
 ---
 
@@ -43,15 +44,22 @@ Il cloud sposta la spesa da capitale (CapEx) a operativa (OpEx):
 > [!info]
 > *Web-based computing resources, from servers and storage to enterprise-level applications.*
 
-**5 caratteristiche:**
-1. On-demand services
-2. Network access
-3. Resource pooling
-4. Rapid elasticity
-5. Measured service (→ *service-level agreement*, SLA)
+**Le 5 caratteristiche** — cosa deve avere un servizio per dirsi *cloud*:
 
-**Vantaggi:** risorse "infinite", scalabilità, gestione semplificata.
-**Fattori frenanti:** security e compliance; trasparenza; portabilità; comparazione dei costi (con cosa lo confronto?); l'OpEx riduce il valore patrimoniale dell'azienda rispetto al CapEx.
+1. **On-demand self-service** — le risorse te le prendi da solo, quando servono: un pannello web, non una trattativa commerciale. Puoi accendere un server alle 3 di notte senza parlare con nessuno.
+2. **Network access** — tutto è raggiungibile **via rete**, da qualunque dispositivo standard (browser, API): niente accesso fisico alla macchina.
+3. **Resource pooling** — il fornitore mette l'hardware in un unico "serbatoio" **condiviso tra i clienti**: tu non sai (né ti serve sapere) su quale macchina fisica giri.
+4. **Rapid elasticity** — la capacità si espande e si contrae **seguendo il carico**, tanto in fretta che al cliente sembra infinita. Un e-commerce decuplica i server per il Black Friday e li spegne il lunedì.
+5. **Measured service** — ogni consumo è **misurato** e paghi quello che usi. Le garanzie (uptime, prestazioni) le fissa il contratto: il **SLA** (*service-level agreement*).
+
+**Vantaggi:** risorse percepite come "infinite", scalabilità, gestione semplificata (il ferro è un problema del fornitore).
+
+**Fattori frenanti:**
+- **security e compliance** — il dato esce dal perimetro aziendale: chi lo protegge, secondo quali norme?
+- **trasparenza** — non vedi come il fornitore gestisce davvero le tue risorse;
+- **portabilità** — migrare da un provider all'altro costa (*lock-in*);
+- **comparazione dei costi** — con cosa confronti il prezzo? Il "pari servizio" on-premise è difficile da quantificare;
+- il passaggio a OpEx ha un rovescio: noleggiare invece di possedere **riduce il valore patrimoniale** dell'azienda rispetto al CapEx.
 
 ## Modelli di servizio
 
@@ -66,7 +74,13 @@ Quanto dello stack affitti, dal ferro all'applicazione:
 Le grandi aziende scelgono spesso una **soluzione ibrida**, a seconda di cosa è core e cosa no.
 
 ### Modelli di deployment
-**Public** (costi ridotti, niente manutenzione, scalabilità quasi illimitata, alta affidabilità) · **Private** (sicurezza personalizzata, controllo esclusivo — *packaged* o *custom*) · **Hybrid** (mix) · **Community**.
+
+Chi possiede l'infrastruttura, e chi può usarla:
+
+- **Public** — l'infrastruttura è del provider (AWS, Azure, GCP) e la condividi con gli altri clienti. Costi ridotti, niente manutenzione, scalabilità quasi illimitata, alta affidabilità.
+- **Private** — l'infrastruttura serve **una sola organizzazione** (in casa propria o ospitata): sicurezza personalizzata e controllo esclusivo, al prezzo di costi e gestione. Due varianti: *packaged* (preconfezionata) o *custom* (su misura).
+- **Hybrid** — un mix dei due: il core sensibile resta nel private, i picchi di carico e il non-critico vanno sul public.
+- **Community** — un private **condiviso tra più organizzazioni con gli stessi requisiti** (es. enti sanitari o PA con gli stessi vincoli normativi), che dividono costi e governance.
 
 ### Prezzo
 Domande da porsi: quanto costa 1h di calcolo su un server "pronto" per big data? 1 GB trasferito? 1 GB di storage al mese? E manutenzione, recovery, aggiornamenti, licenze?

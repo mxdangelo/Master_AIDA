@@ -2,6 +2,7 @@
 date: 2026-05-15
 tags: [database, nosql]
 status: active
+image: "[[assets/covers/nosql.svg]]"
 area: nosql
 ---
 
@@ -9,9 +10,11 @@ area: nosql
 
 ## Definizione formale
 
-Un grafo è una coppia **G = (V, E)** dove:
-- **V** è l'insieme dei **nodi** (vertices) — `|V| = n`
-- **E ⊆ V × V** è l'insieme degli **archi** (edges) — `|E| = m`
+L'idea prima della formula: un grafo è **un insieme di punti collegati da linee**. I punti sono i **nodi** (persone, luoghi, prodotti…), le linee sono gli **archi** (le relazioni tra loro: "conosce", "ha comprato", "porta a").
+
+In simboli, un grafo è una coppia **G = (V, E)** dove:
+- **V** è l'insieme dei **nodi** (*vertices*); il loro numero si indica con `|V| = n`;
+- **E ⊆ V × V** è l'insieme degli **archi** (*edges*), cioè coppie di nodi; il loro numero è `|E| = m`.
 
 | | **Non orientato** (undirected) | **Orientato** (directed) |
 |---|---|---|
@@ -26,10 +29,10 @@ In un grafo **l'unica cosa che conta è la relazione**. La query stessa è un **
 
 ## Tipi di struttura
 
-- **Grafo sparso** — pochi archi rispetto ai nodi.
-- **Grafo denso** — molti archi.
-- **Grafo completo** — ogni nodo connesso a tutti gli altri.
-- **Aciclico (DAG)** vs **ciclico** — un grafo orientato senza cicli (DAG) ammette un ordinamento dei nodi e algoritmi efficienti (scheduling, gestione di dipendenze); con un **ciclo** un percorso può ripetersi all'infinito, e problemi come il cammino *più lungo* diventano mal posti.
+- **Grafo sparso** — ha **pochi archi rispetto ai nodi**. Quasi tutti i grafi reali sono così: un social network ha miliardi di utenti, ma ognuno ne segue qualche centinaio.
+- **Grafo denso** — ha **molti archi**: buona parte delle coppie di nodi è collegata. Es.: la rete dei voli tra i grandi hub aeroportuali, dove quasi ogni hub collega ogni altro.
+- **Grafo completo** — il caso limite del denso: **ogni** nodo è connesso a tutti gli altri.
+- **Aciclico (DAG)** vs **ciclico** — un **DAG** (*directed acyclic graph*) è un grafo orientato in cui nessun percorso torna al punto di partenza. Questo permette di mettere i nodi "in fila" (prima A, poi B, poi C) e abilita algoritmi efficienti: scheduling, gestione di dipendenze. Se invece c'è un **ciclo**, un percorso può ripetersi all'infinito, e problemi come il cammino *più lungo* diventano mal posti.
 
 ## Perché un graph database
 
@@ -50,11 +53,11 @@ In un grafo **l'unica cosa che conta è la relazione**. La query stessa è un **
 
 ## Usa un grafo quando…
 
-- il dominio è **altamente connesso** (molte relazioni);
-- i dati sono **dinamici** (le relazioni cambiano spesso nel tempo);
-- hai **tante operazioni di join**;
-- lo **schema** può cambiare o è ignoto;
-- puoi correre il rischio di una tecnologia nuova.
+- il dominio è **altamente connesso**: le relazioni sono tante e sono il cuore della domanda ("chi conosce chi?", "cosa porta a cosa?");
+- le relazioni sono **dinamiche**: nascono e muoiono di continuo, e nel grafo le aggiungi o togli senza ristrutturare nulla;
+- in un relazionale servirebbero **catene di JOIN** (amici degli amici degli amici…): il traversal le sostituisce a costo costante per passo;
+- lo **schema** può cambiare o non lo conosci in anticipo: il grafo è schema-less;
+- il team può **permettersi il rischio di una tecnologia meno matura**: tooling, competenze e supporto sono più di nicchia rispetto al mondo relazionale (la "debolezza" nella tabella sopra).
 
 ## Riferimenti teorici
 

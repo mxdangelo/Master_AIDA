@@ -2,6 +2,7 @@
 date: 2026-05-16
 tags: [database, nosql]
 status: active
+image: "[[assets/covers/nosql.svg]]"
 area: nosql
 ---
 
@@ -11,7 +12,9 @@ Il principale **graph database nativo** ([[Graph databases]]): core open-source 
 
 ## Index-free adjacency — perché è veloce
 
-Storage a grafo nativo: **ogni nodo conosce i suoi vicini direttamente, via puntatori**. Niente lookup `O(log n)` per ogni salto: il traversal costa **O(grado) per passo**, *indipendente dalla dimensione del dataset*. È il motivo per cui i **join si fanno per attraversamento di percorso, non per prodotto cartesiano**: in un RDBMS il costo di un singolo join dipende dalla dimensione della tabella ponte `Person_has_skill`; in Neo4j no.
+Storage a grafo nativo: **ogni nodo conosce i suoi vicini direttamente, via puntatori** — per passare da un nodo all'altro non si consulta nessun indice.
+
+La conseguenza sul costo: in un RDBMS ogni salto richiede un lookup su indice, `O(log n)`, che cresce col dataset; qui un passo di traversal costa **O(grado)** — proporzionale a *quanti vicini ha quel nodo*, non a quanto è grande il database. È il motivo per cui i **join si fanno per attraversamento di percorso, non per prodotto cartesiano**: in un RDBMS il costo di un singolo join dipende dalla dimensione della tabella ponte `Person_has_skill`; in Neo4j no.
 
 ## I 4 elementi fondamentali (metamodello)
 
@@ -26,7 +29,12 @@ Storage a grafo nativo: **ogni nodo conosce i suoi vicini direttamente, via punt
 > Capacità di visualizzare insieme **semantica e dato**.
 
 ### Le regole delle relazioni
-Ogni relazione **deve** avere: un **nome** e una **direzione** (danno struttura e significato), e un **nodo di start e uno di end** — *niente relazioni penzolanti* (garantisce un riferimento FK per costruzione). **Può** contenere proprietà. Inoltre:
+
+Ogni relazione **deve** avere:
+- un **nome** e una **direzione** — sono loro a dare struttura e significato al legame;
+- un **nodo di start e uno di end** — *niente relazioni penzolanti*: per costruzione ogni relazione punta sempre a nodi esistenti (l'analogo di una FK che non può puntare nel vuoto).
+
+**Può** inoltre contenere proprietà. Altre regole:
 - una relazione è definita rispetto a una **istanza** di nodo, non a una **classe** (al contrario delle FK relazionali, che valgono per tutte le istanze) → la struttura del dominio è **variabile**;
 - due nodi possono essere connessi da **più relazioni**, e sono ammesse le **auto-relazioni**;
 - relazioni **simmetriche** (`PARENT_OF` / `CHILD_OF`): si sostituiscono con **una sola** relazione diretta.

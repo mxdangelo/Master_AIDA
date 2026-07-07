@@ -2,6 +2,7 @@
 date: 2026-05-11
 tags: [database, sql]
 status: active
+image: "[[assets/covers/relazionali.svg]]"
 area: relazionali
 ---
 
@@ -26,8 +27,8 @@ Il punto di partenza del corso (caso moda *wholesale → retail*): **la gestione
 
 - **Gestione centralizzata** — un'unica versione dei fatti (l'opposto del file `.xlsx` girato via email che dopo una settimana esiste in 100 versioni divergenti).
 - **Viste diverse dallo stesso dato** — schemi esterni personalizzati per utente/programma sopra un unico schema logico/fisico.
-- **Forte strutturazione del dato**.
-- **Supporto transazionale**.
+- **Forte strutturazione del dato** — lo schema è definito prima e vale per tutti: ogni riga rispetta le stesse colonne e gli stessi tipi → [[#Strutturazione del dato|sezione dedicata]].
+- **Supporto transazionale** — le operazioni composte o riescono per intero o non lasciano traccia: il bonifico non si ferma a metà. Sono le garanzie **ACID** → [[NoSQL#ACID — le garanzie transazionali|dettaglio]].
 
 Sono garantite dal paradigma **client/server**: i dati stanno sul *database server*, le applicazioni sono client. Il valore aggiunto del DBMS: gestione concorrente di inserimenti/letture, interrogazioni veloci, controllo degli accessi, backup e recovery.
 

@@ -18,6 +18,8 @@ Un buon processo dati è **idempotente** — rilanciarlo non duplica né corromp
 
 Prima di tutto, **farsi dire bene qual è la domanda di business** — da lì prende senso tutto il resto. ^domanda
 
+**Single responsibility** (Robert C. Martin) — ogni modulo deve avere **una sola ragione di cambiare**: tieni insieme ciò che cambia insieme, separa ciò che cambia per motivi diversi. Vale per funzioni, classi, note — e per i [[Git e GitHub#Commit atomici|commit]]. ^srp
+
 ## Vedi anche
 
 [[Prontuario]] · [[Dashboard]]

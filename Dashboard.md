@@ -12,8 +12,24 @@ Vista **auto-generata** di tutte le note di studio, raggruppate per area. Si agg
 ```base
 filters:
   and:
-    - '!file.hasTag("meta")'
+    - file.hasProperty("area")
 views:
+  - type: cards
+    name: Cards
+    groupBy:
+      property: area
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - date
+    sort:
+      - property: area
+        direction: ASC
+      - property: file.name
+        direction: ASC
+    image: note.image
+    imageFit: contain
   - type: table
     name: Note per area
     groupBy:
@@ -33,8 +49,8 @@ views:
 ```
 
 > [!tip] Varianti
-> - Il filtro `!file.hasTag("meta")` tiene fuori le pagine dell'ossatura (Prontuario, Principi, README…); le note di studio hanno tutte una `area`.
-> - Per una vista a **schede** invece che tabella, cambia `type: table` → `type: cards`.
+> - Il filtro `file.hasProperty("area")` mostra **solo le note di studio** (tutte hanno una `area` nel frontmatter). Restano fuori le pagine dell'ossatura (Prontuario, Principi, README…) *e* qualunque file senza property — immagini e allegati inclusi.
+> - La vista **Cards** mostra le note a schede con una **copertina per area** (gli SVG in `assets/covers/`, referenziati dalla property `image` di ogni nota). Per dare a una singola nota una copertina tutta sua, basta cambiare la sua `image` con un'altra immagine del vault.
 > - Per i soli lavori in corso, aggiungi a `filters.and`: `- 'status == "active"'`.
 
 ## Principi
@@ -47,3 +63,4 @@ Transclusi da [[Principi]] — una sola fonte, citata qui con `![[Principi#^id]]
 ![[Principi#^move-compute]]
 ![[Principi#^idempotenza]]
 ![[Principi#^domanda]]
+![[Principi#^srp]]

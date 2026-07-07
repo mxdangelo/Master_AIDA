@@ -2,6 +2,7 @@
 date: 2026-07-05
 tags: [analytics, case-study]
 status: active
+image: "[[assets/covers/analytics.svg]]"
 area: analytics
 ---
 

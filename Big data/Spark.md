@@ -2,6 +2,7 @@
 date: 2026-06-20
 tags: [big-data]
 status: active
+image: "[[assets/covers/big-data.svg]]"
 area: big data
 ---
 

@@ -2,6 +2,7 @@
 date: 2026-07-05
 tags: [strumenti, analytics]
 status: active
+image: "[[assets/covers/strumenti.svg]]"
 area: strumenti
 ---
 
