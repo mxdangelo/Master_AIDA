@@ -25,12 +25,12 @@ flowchart TD
 
 ## I costrutti
 
-- **Entità** — classe di oggetti con proprietà comuni ed esistenza autonoma (es. `STUDENTE`). Una singola occorrenza è un'*istanza*. I nomi sono al singolare.
-- **Attributo** — proprietà elementare di un'entità o di una relazione. Associa a ogni istanza un valore preso da un **dominio** (l'insieme dei valori ammissibili).
-- **Identificatore** — uno o più attributi che identificano univocamente ogni istanza. Può essere **interno** (attributi propri dell'entità) o **esterno** (parte della chiave viene da un'altra entità → *entità debole*). Si preferiscono identificatori **semplici** (un solo attributo).
-- **Relazione** (associazione) — legame logico significativo tra due o più entità. Può avere attributi propri.
-- **Cardinalità** — `(minima, massima)`: con quante istanze dell'altra entità una istanza partecipa alla relazione.
-- **Generalizzazione** — gerarchia padre/figlie con ereditarietà.
+- **Entità** — una **classe di oggetti** con proprietà comuni ed esistenza autonoma: `STUDENTE`, `CORSO`. La singola occorrenza (lo studente Rossi) è un'*istanza*. I nomi si scrivono al singolare.
+- **Attributo** — una proprietà elementare di un'entità o di una relazione: `matricola`, `cognome`. Ogni attributo pesca i valori da un **dominio**, cioè l'insieme dei valori ammissibili (per `voto`: gli interi da 18 a 30).
+- **Identificatore** — l'attributo, o il gruppo di attributi, che **distingue univocamente** ogni istanza: due studenti non possono avere la stessa `matricola`. Si preferiscono identificatori **semplici** (un solo attributo). Di norma è **interno**, fatto di attributi propri dell'entità; il caso in cui parte della chiave arriva da *un'altra* entità è l'identificatore **esterno** → [[#Entità deboli|entità deboli]], più sotto.
+- **Relazione** (associazione) — un legame logico significativo tra due o più entità: `STUDENTE` *frequenta* `CORSO`. Può avere attributi propri (es. `data_iscrizione`).
+- **Cardinalità** — la coppia `(minima, massima)`: dice **con quante** istanze dell'altra entità partecipa una istanza → [[#Cardinalità|sezione dedicata]].
+- **Generalizzazione** — una gerarchia padre/figlie con ereditarietà: `DIPENDENTE` con figlie `OPERAIO` e `IMPIEGATO` → [[#Generalizzazione|sezione dedicata]].
 
 > [!important]
 > Nello schema ER **non** si indicano le chiavi esterne: l'ER dice *che esiste* una relazione, è la progettazione logica a decidere *come* implementarla.

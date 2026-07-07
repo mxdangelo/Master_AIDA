@@ -60,6 +60,11 @@ flowchart LR
 | **BCNF** *(qui detta 4NF)* | è in 2NF **e** per ogni dipendenza non triviale `X → Y`, `X` è una **superkey** (rimuove le dipendenze transitive) | nessuna dipendenza da non-chiavi |
 | **3NF** | è in 2NF **e** per ogni `X → Y` non triviale: `X` è superkey **oppure** ogni attributo di `Y` fa parte di una candidate key | versione *rilassata* della BCNF |
 
+Le prime due sono meccaniche; le condizioni di **BCNF** e **3NF**, compresse in tabella, vanno sciolte:
+
+- **BCNF**, in parole: **solo la chiave può determinare qualcosa**. Per ogni dipendenza non triviale `X → Y`, `X` dev'essere una superkey. Se a determinare un attributo è qualcosa che chiave non è — come `Worker → Salary` nella tabella unica dell'esempio — quella dipendenza va spostata in una tabella sua (`WORKER(Worker, Salary)`).
+- **3NF**: come la BCNF, ma con una via d'uscita in più. La dipendenza `X → Y` è tollerata anche se `X` non è superkey, **purché** ogni attributo di `Y` faccia parte di una candidate key. Esiste proprio per i casi in cui la BCNF non è raggiungibile senza perdere informazione (l'esempio qui sotto).
+
 > [!info]
 > **Nota sulla numerazione (mia precisazione).** Le slide presentano la **Boyce-Codd** prima della 3NF e la chiamano "4NF": è la forma *forte* (X dev'essere superkey sempre), mentre la 3NF la rilassa per i casi in cui la BCNF non è raggiungibile senza perdere informazione. Nella terminologia standard questa forma forte si chiama **BCNF**; la "vera" 4NF riguarda invece le *dipendenze multivalore* — qui non trattata. Tieni la sostanza: **chiave minima → ogni attributo dipende dall'intera chiave → niente dipendenze transitive.**
 
