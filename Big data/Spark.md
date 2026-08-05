@@ -8,7 +8,7 @@ area: big data
 
 # Spark
 
-Motore di **elaborazione dati distribuita** su grandi volumi, con velocità e semplicità. Sviluppato a UC Berkeley (2010), scritto in **Scala**, compatibile con [[Hadoop]], con API per Java, Scala, **Python** e R (al Master soprattutto Python + qualche query SQL). Estende il modello [[Hadoop#MapReduce — il modello di calcolo|MapReduce]] supportando query interattive e streaming. È il *de-facto standard* per il processing big data.
+Motore di **elaborazione dati distribuita** su grandi volumi, con velocità e semplicità. Sviluppato a UC Berkeley (2010), scritto in **Scala**, compatibile con [[Hadoop]], con API per Java, Scala, **Python** e R (al Master soprattutto Python + qualche query SQL). Estende il modello [[Hadoop#MapReduce — come si elaborano i dati|MapReduce]] supportando query interattive e streaming. È il *de-facto standard* per il processing big data.
 
 ## Perché Spark e non solo MapReduce
 
@@ -60,7 +60,7 @@ Su un RDD due tipi di operazione:
 
 ### Lazy evaluation — perché, e il legame con l'output
 
-(La domanda che avevo lasciato aperta.) Le trasformazioni non vengono eseguite finché **un'azione** non le richiede. Questo permette a Spark di guardare il piano "dall'alto" e **non fare lavoro inutile**.
+La domanda: se le trasformazioni non calcolano niente, **quando** avviene il calcolo, e chi lo fa partire? Risposta: le trasformazioni non vengono eseguite finché **un'azione** non le richiede. Questo permette a Spark di guardare il piano "dall'alto" e **non fare lavoro inutile**.
 
 ```python
 input      = sc.textFile("myfile.txt")
