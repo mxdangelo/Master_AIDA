@@ -38,6 +38,13 @@ area: statistica
 >
 > L'inferenza non serve a scoprire quel numero. Serve a dire: *"sta molto probabilmente fra 174 e 176 cm"*. Una **fascia**, e quanto sei sicuro che ci sia dentro.
 
+> [!tip] La mossa che rende tutto possibile
+> Sbagliare è inevitabile: stai guardando un pezzetto e parlando del tutto.
+>
+> Allora la statistica rinuncia a non sbagliare e **si accontenta di controllare di quanto sbaglia**. Quel "di quanto" si chiama **margine d'errore**.
+>
+> **Se sai quanto sbagli, sai quante possibilità hai di indovinare.** Tutto il resto di questa nota — errore standard, intervalli di confidenza, dimensione del campione — è un modo di tenere quell'errore sotto controllo.
+
 ### Come si scrivono
 
 Gli statistici usano lettere greche per i numeri veri, e ci mettono un **cappellino** sopra per dire "questa è la mia stima".
