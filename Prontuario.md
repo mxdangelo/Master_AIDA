@@ -138,7 +138,7 @@ drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale 
 | un numero | un numero | **regressione lineare** → [[Modelli lineari]] |
 | un numero | una categoria | **ANOVA** → [[Modelli lineari#ANOVA]] |
 | sì/no | qualsiasi | **regressione logistica** → [[Regressione logistica]] |
-| una classe | qualsiasi | **Naive Bayes** e gli altri classificatori → [[Classificatore di Bayes]] |
+| una classe | qualsiasi | **Naive Bayes** → [[Classificatore di Bayes]], oppure un **albero** → [[Alberi decisionali]] |
 
 > [!question] Prima di leggere qualsiasi p-value
 > *Qual è H0?* — l'ipotesi noiosa, "non succede niente". Sotto **0,05** la rifiuti. E **significativo non vuol dire importante**: guarda sempre quanto è grande l'effetto. → [[Test statistici]]
@@ -186,7 +186,7 @@ drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale 
 - **Big data** — [[Hadoop]] · [[Spark]]
 - **Data engineering** — [[Data Ingestion]] · [[ETL]] · [[Data Quality]]
 - **Analytics** — [[BI Architecture]] · [[Machine Learning]] · [[Data Visualization]]
-- **Statistica** — [[Inferenza]] · [[Test statistici]] · [[Modelli lineari]] · [[Regressione logistica]] · [[Classificatore di Bayes]]
+- **Statistica** — [[Statistica descrittiva]] · [[Valori medi]] · [[Variabilità]] · [[Probabilità e distribuzioni]] · [[Inferenza]] · [[Test statistici]] · [[Modelli lineari]] · [[Regressione logistica]] · [[Classificatore di Bayes]] · [[Alberi decisionali]]
 - **Cloud** — [[Cloud computing]] · [[AWS]] · [[Databricks]]
 - **Strumenti** — [[Python]] · [[R]] · [[SAS]] · [[KNIME]] · [[Power BI]] · [[Git e GitHub]] · [[MCP]]
 - **Case study** — [[Superstore — profittabilità]]

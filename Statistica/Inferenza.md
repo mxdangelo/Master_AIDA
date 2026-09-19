@@ -12,6 +12,9 @@ area: statistica
 
 *Inferire* vuol dire **dedurre**. Parti da un'informazione parziale e arrivi a una conclusione generale.
 
+> [!info] Cosa serve sapere prima
+> Questa nota dà per noti media e varianza ([[Valori medi]], [[Variabilità]]) e la curva a campana ([[Probabilità e distribuzioni]]). Se uno dei tre ti suona nuovo, parti da lì.
+
 > [!example] Il pentolone di minestra
 > Devi capire se la minestra è salata al punto giusto. Non te la mangi tutta: **assaggi un cucchiaio**.
 >
@@ -219,4 +222,4 @@ Quanto è "abbastanza grande"? La regola spannometrica è **n ≥ 30**. Più il 
 
 ## Vedi anche
 
-[[Test statistici]] · [[Modelli lineari]] · [[Regressione logistica]] · [[R]]
+[[Probabilità e distribuzioni]] · [[Valori medi]] · [[Variabilità]] · [[Test statistici]] · [[Modelli lineari]] · [[Regressione logistica]] · [[R]]
