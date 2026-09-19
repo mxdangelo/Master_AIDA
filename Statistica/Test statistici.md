@@ -281,4 +281,4 @@ cor.test(dati$eta, dati$contributi)
 
 ## Vedi anche
 
-[[Inferenza]] · [[Modelli lineari]] · [[Regressione logistica]] · [[R]]
+[[Inferenza]] · [[Probabilità e distribuzioni]] · [[Modelli lineari]] · [[Regressione logistica]] · [[R]]

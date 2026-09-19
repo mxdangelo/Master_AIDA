@@ -66,7 +66,7 @@ In due parole: la retta si sceglie con i **minimi quadrati** e si valuta con l'*
 
 | Famiglia | Algoritmi (esempi) |
 |---|---|
-| **Classificazione** | Logistic regression, **Naive Bayes**, SVM, Random Forest, Decision tree, Gradient-boosted tree, MLP |
+| **Classificazione** | Logistic regression, **Naive Bayes**, SVM, Random Forest, [[Alberi decisionali\|Decision tree]], Gradient-boosted tree, MLP |
 | **Regressione** | Linear, Decision/Random-forest/GBT regression, isotonic |
 | **Clustering** | K-means, bisecting k-means, GMM |
 | **Topic modeling** | LDA |
