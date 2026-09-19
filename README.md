@@ -4,9 +4,9 @@ tags: [meta]
 
 # Master AIDA — Appunti
 
-Appunti di studio del **Master in AI & Digital Analytics** (Università di Milano-Bicocca) — modulo *Big Data Processing & Data Engineering*.
+Appunti di studio del **Master in AI & Digital Analytics** (Università di Milano-Bicocca) — moduli *Big Data Processing & Data Engineering* e *Statistica*.
 
-Coprono: database relazionali e SQL, NoSQL (MongoDB, Neo4j), big data (Hadoop, Spark), data engineering (web scraping, ETL, data quality), business intelligence, cloud (AWS) e machine learning.
+Coprono: database relazionali e SQL, NoSQL (MongoDB, Neo4j), big data (Hadoop, Spark), data engineering (web scraping, ETL, data quality), business intelligence, cloud (AWS), machine learning e statistica (inferenza, test, modelli lineari e logistici, classificatori bayesiani) con R e SAS.
 
 ![Graph view del vault in Obsidian: le note colorate per area e collegate dai wiki-link](assets/graph-view.png)
 
@@ -20,7 +20,7 @@ Note in Markdown pensate per **[Obsidian](https://obsidian.md)**: wiki-link `[[.
 
 ## Aree
 
-Fondamentali · Relazionali/SQL · NoSQL · Big data · Data engineering · Analytics & ML · Cloud.
+Fondamentali · Relazionali/SQL · NoSQL · Big data · Data engineering · Analytics & ML · Statistica · Cloud.
 
 ## Per chi li usa
 

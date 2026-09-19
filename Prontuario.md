@@ -119,6 +119,30 @@ git push -u origin nome-ramo   # 4. pubblica il ramo
 > [!warning] Mai segreti nel repo
 > Una chiave committata è esposta anche se la cancelli al commit dopo: **revoca e rigenera**. → [[Git e GitHub#Segreti: mai nel repository|Git e GitHub]]
 
+### R — modelli e lettura dell'output
+```r
+summary(dati); str(dati)                        # sempre, su un dataset nuovo
+m <- lm(y ~ x1 + x2, data = d)                  # y e' un NUMERO
+m <- glm(y ~ x1 + x2, data = d, family="binomial")  # y e' SI'/NO
+exp(cbind(OR = coef(m), confint(m)))            # odds ratio + IC (logistica)
+predict(m, type = "response")                   # probabilita' stimate
+drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale modello?
+```
+> [!tip] Come si legge, in tre mosse
+> **Stelline** → la variabile conta · **`exp(Estimate)`** → di quanto, in odds ratio · **IC che contiene 1** → non fidarti. → [[Regressione logistica#Leggere il risultato in R|logistica]] · [[R]]
+
+### Quale modello statistico?
+
+| la tua `y` è… | la tua `x` è… | usi |
+|---|---|---|
+| un numero | un numero | **regressione lineare** → [[Modelli lineari]] |
+| un numero | una categoria | **ANOVA** → [[Modelli lineari#ANOVA]] |
+| sì/no | qualsiasi | **regressione logistica** → [[Regressione logistica]] |
+| una classe | qualsiasi | **Naive Bayes** e gli altri classificatori → [[Classificatore di Bayes]] |
+
+> [!question] Prima di leggere qualsiasi p-value
+> *Qual è H0?* — l'ipotesi noiosa, "non succede niente". Sotto **0,05** la rifiuti. E **significativo non vuol dire importante**: guarda sempre quanto è grande l'effetto. → [[Test statistici]]
+
 ### Dati mancanti
 `case deletion` (pochi casi / campo chiave) · `imputation` (regressione, tree) · `special value` · `do nothing` (algoritmi robusti). → prima **interpreta** il mancante (omesso? non esiste? non raccolto? errore?). → [[Data Quality]]
 
@@ -162,6 +186,7 @@ git push -u origin nome-ramo   # 4. pubblica il ramo
 - **Big data** — [[Hadoop]] · [[Spark]]
 - **Data engineering** — [[Data Ingestion]] · [[ETL]] · [[Data Quality]]
 - **Analytics** — [[BI Architecture]] · [[Machine Learning]] · [[Data Visualization]]
+- **Statistica** — [[Inferenza]] · [[Test statistici]] · [[Modelli lineari]] · [[Regressione logistica]] · [[Classificatore di Bayes]]
 - **Cloud** — [[Cloud computing]] · [[AWS]] · [[Databricks]]
-- **Strumenti** — [[Python]] · [[KNIME]] · [[Power BI]] · [[Git e GitHub]] · [[MCP]]
+- **Strumenti** — [[Python]] · [[R]] · [[SAS]] · [[KNIME]] · [[Power BI]] · [[Git e GitHub]] · [[MCP]]
 - **Case study** — [[Superstore — profittabilità]]

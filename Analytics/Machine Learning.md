@@ -40,12 +40,12 @@ flowchart LR
 
 La differenza sta in una domanda sola: **negli esempi che dai in pasto, la risposta giusta c'è già?**
 
-| | **Supervised** | **Unsupervised** |
-|---|---|---|
-| Conosci la classe a priori? | **sì** — ogni esempio ha la sua etichetta | **no** — hai solo i dati |
-| Domanda | a quale classe appartiene una nuova osservazione? | quali pattern nascosti ci sono? |
-| Problemi | **classificazione** (esito discreto: spam / non spam), **regressione** (valore continuo: un prezzo) | **clustering**, topic modeling, riduzione dimensionale |
-| Esempio | prezzo di una casa ([[#Regressione lineare|regressione]]); occupazione dal titolo dell'annuncio (classificazione) | raggruppare le case in fasce simili senza aver deciso prima quali siano (K-means) |
+|                             | **Supervised**                                                                                        | **Unsupervised**                                                                  |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Conosci la classe a priori? | **sì** — ogni esempio ha la sua etichetta                                                             | **no** — hai solo i dati                                                          |
+| Domanda                     | a quale classe appartiene una nuova osservazione?                                                     | quali pattern nascosti ci sono?                                                   |
+| Problemi                    | **classificazione** (esito discreto: spam / non spam), **regressione** (valore continuo: un prezzo)   | **clustering**, topic modeling, riduzione dimensionale                            |
+| Esempio                     | prezzo di una casa ([[#Regressione lineare]]); occupazione dal titolo dell'annuncio (classificazione) | raggruppare le case in fasce simili senza aver deciso prima quali siano (K-means) |
 
 La differenza pratica è il **costo**: il supervised richiede esempi etichettati, e etichettarli di solito vuol dire lavoro umano. L'unsupervised parte dai dati così come sono, ma non puoi dirgli cosa cercare.
 
@@ -55,9 +55,12 @@ Il modello supervisionato per prevedere un **valore continuo**. Descrive il lega
 
 Esempio: prevedere il prezzo di una casa dai metri quadri. Ogni casa è un punto sul grafico; la regressione cerca la retta che passa "in mezzo" ai punti nel modo migliore.
 
-- **Stima** — "nel modo migliore" ha una definizione precisa. Si chiama **metodo dei minimi quadrati**: si sceglie la retta che rende minima la somma dei quadrati dei **residui**, dove il residuo è la distanza verticale tra il valore vero e quello previsto dalla retta. Si elevano al quadrato per due motivi: gli errori sopra e sotto non si annullano tra loro, e gli errori grandi pesano molto più dei piccoli.
-- **Valutazione** — l'**R²** dice quanta parte della variabilità di `y` il modello riesce a spiegare. Va da 0 a 1: 0 significa che il modello non spiega niente più della semplice media, 1 che passa esattamente per tutti i punti. L'analisi dei **residui** serve a verificare le assunzioni: se gli errori mostrano una regolarità (crescono col prezzo, disegnano una curva), la retta non era la forma giusta.
-- In MLlib: famiglia *Regression*, classe `LinearRegression`.
+In due parole: la retta si sceglie con i **minimi quadrati** e si valuta con l'**R²**, guardando poi i **residui** per verificare che la retta fosse la forma giusta. In MLlib: famiglia *Regression*, classe `LinearRegression`.
+
+> [!info] La trattazione completa sta in [[Modelli lineari]]
+> Minimi quadrati, R² e R² aggiustato, lettura dei residui, regressione multipla e ANOVA — insieme al resto della statistica del corso. Qui resta il punto di vista di MLlib.
+>
+> Per una `y` binaria (sì/no) invece della retta serve la [[Regressione logistica]].
 
 ## MLlib — la libreria
 
@@ -72,7 +75,7 @@ Esempio: prevedere il prezzo di una casa dai metri quadri. Ogni casa è un punto
 Più tutta la parte di preparazione: trasformazione delle feature, standardizzazione, valutazione, StopWords, Hashing/TF-IDF/Word2Vec.
 
 > [!info] Naive Bayes, il classificatore del lab
-> Calcola, per ogni classe, quanto è probabile che un testo appartenga a quella classe viste le parole che contiene. "Naive" (ingenuo) perché **assume che le parole siano indipendenti** tra loro — che la presenza di "software" non dica niente sulla probabilità di trovare "engineer". È palesemente falso, e ciononostante funziona molto bene sul testo, oltre a essere velocissimo da addestrare. È il classico caso di modello sbagliato ma utile.
+> Calcola, per ogni classe, quanto è probabile che un testo appartenga a quella classe viste le parole che contiene. "Naive" (ingenuo) perché **assume che le parole siano indipendenti** tra loro — che la presenza di "software" non dica niente sulla probabilità di trovare "engineer". È palesemente falso, e ciononostante funziona molto bene sul testo, oltre a essere velocissimo da addestrare. È il classico caso di modello sbagliato ma utile. Il teorema che ci sta sotto, con prior e posterior, è in [[Classificatore di Bayes]].
 
 > [!info] Transformer vs Estimator (il cuore di MLlib)
 > Tutta MLlib è costruita su due soli concetti:
