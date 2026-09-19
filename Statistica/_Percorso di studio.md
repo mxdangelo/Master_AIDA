@@ -1,5 +1,6 @@
 ---
 date: 2026-09-19
+aliases: [Percorso di studio]
 tags: [statistica]
 status: active
 image: "[[assets/covers/statistica.svg]]"
