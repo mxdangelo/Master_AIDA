@@ -246,21 +246,21 @@ Qui c'è la parola che spaventa: **massima verosimiglianza**. È molto più semp
 >
 > Il computer ripete questa mossa migliaia di volte e tiene **la posizione con la L più alta**. Quella è la **massima verosimiglianza**, e quei due valori finali sono i tuoi `a` e `b`.
 
-Due dettagli per non restare spiazzato a lezione:
+Due dettagli per non restare spiazzato:
 
 > [!info] Perché "se non fuma conta 1 − p"
 > Nella tabella, per Bruno che **non** fuma, ho scritto 0,90 mentre il modello diceva 10%. Non è un errore.
 >
 > Il modello dice "10% che fumi", quindi sta dicendo anche "**90% che non fumi**". E siccome Bruno davvero non fuma, la parte che conta è quel 90%.
 >
-> Sulle slide questo si scrive `p^y · (1−p)^(1−y)`, che sembra terribile ed è solo un **interruttore**: se `y = 1` tiene `p`, se `y = 0` tiene `1 − p`. Una formula sola invece di scrivere "se… allora…".
+> In formula questo si scrive `p^y · (1−p)^(1−y)`, che sembra terribile ed è solo un **interruttore**: se `y = 1` tiene `p`, se `y = 0` tiene `1 − p`. Una formula sola invece di scrivere "se… allora…".
 
 > [!info] Perché si parla di **log**-verosimiglianza
 > Con 500 studenti moltiplichi 500 numeri più piccoli di 1. Il risultato diventa ridicolmente piccolo — tipo `0,000…001` con centocinquanta zeri — e il computer lo arrotonda a zero, perdendo tutto.
 >
 > Il logaritmo trasforma le **moltiplicazioni in somme**, e i numeri restano maneggevoli. Il punto di massimo non si sposta di un millimetro.
 >
-> Per questo sulle slide vedi `ln L` invece di `L`. È lo stesso gioco, scritto in modo che il computer regga.
+> Per questo trovi scritto `ln L` invece di `L`. È lo stesso gioco, scritto in modo che il computer regga.
 
 > [!info] Perché "iterativa, non analitica"
 > Nella regressione lineare esiste una **formula** che ti dà la risposta subito, in un colpo solo.

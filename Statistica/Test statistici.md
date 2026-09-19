@@ -50,7 +50,7 @@ E poi c'è **H1**, l'ipotesi alternativa: il contrario di H0, cioè quello che d
 >
 > Un test funziona identico: **si rifiuta H0, oppure non la si rifiuta**. Non si "accetta" mai.
 >
-> Lo dice anche il manuale, in una nota a margine: *"nell'uso comune si dice che si accetta l'ipotesi nulla, ma sarebbe più corretto dire che non si rifiuta"*. All'esame usa la formula corretta.
+> Nell'uso comune si sente dire "accetto l'ipotesi nulla". È impreciso: la formula corretta è **"non la rifiuto"**, e all'esame conviene usare quella.
 
 ---
 
@@ -93,7 +93,7 @@ Per convenzione il confine è **0,05**, cioè il 5%. Si chiama **alfa** (`α`) o
 > **"significativo quindi importante"** — no. Con un milione di osservazioni diventa significativa anche una differenza di stipendio di **3 euro l'anno**: reale, e del tutto irrilevante. *Significativo* in statistica vuol dire solo **"non è un caso"**, non **"conta molto"**.
 
 > [!info] La seconda definizione di p-value
-> Sul manuale la troverai detta anche così: il p-value è **il più piccolo alfa per cui rifiuteresti H0**.
+> La troverai detta anche così: il p-value è **il più piccolo alfa per cui rifiuteresti H0**.
 >
 > Sembra un'altra cosa e non lo è. Se il tuo p-value è 0,03, allora con `α = 0,05` rifiuti, con `α = 0,04` rifiuti, con `α = 0,02` non rifiuti più. Il punto esatto in cui cambia idea **è** 0,03.
 >
@@ -118,7 +118,7 @@ statistica test = ────────────────────�
 Il risultato si legge come **"quante deviazioni standard sono lontano"**. Nei vari test cambia il nome — `z`, `t`, `F`, `chi quadro` — ma l'idea è sempre quella.
 
 > [!example] Statura media in un paese
-> Il manuale la conosceva a 175 cm. Su 20 giovani si misura una media di **177,5 cm**, con errore standard 3,87.
+> La statura media nota in quel paese è 175 cm. Su 20 giovani si misura una media di **177,5 cm**, con errore standard 3,87.
 >
 > ```
 > z = (177,5 − 175) / 3,87 = 0,645
@@ -186,7 +186,7 @@ La **potenza** del test è la capacità di accorgersi di un effetto quando c'è 
 
 ---
 
-## I test del corso
+## I test principali
 
 Sono tutti la stessa macchina con ingressi diversi. Cambia cosa confronti.
 

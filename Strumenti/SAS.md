@@ -70,7 +70,7 @@ run;
 
 ---
 
-## Le PROC del corso
+## Le PROC principali
 
 | PROC | cosa fa | l'equivalente in R |
 |---|---|---|

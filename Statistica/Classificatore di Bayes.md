@@ -70,7 +70,7 @@ Quella barra verticale `|` si legge sempre **"dato che"** o **"sapendo che"**. �
 
 ### Un conto vero, tutto intero
 
-L'esempio è quello del libro del corso (Tan-Steinbach, §5.3).
+Un esempio classico, con due squadre di calcio.
 
 Due squadre di calcio. Dalle partite passate sai che:
 
@@ -108,7 +108,7 @@ posterior   57%   →  scommetti su Team 1
 
 ---
 
-## I quattro pezzi, con i nomi che senti a lezione
+## I quattro pezzi e i loro nomi
 
 | pezzo | come lo chiamano | dove lo prendi |
 |---|---|---|
@@ -205,11 +205,11 @@ Non è una scelta di gusto: dipende da **quanto costa ciascuno dei due errori**.
 >
 > Il secondo errore costa **cinque volte** il primo. Quindi conviene essere più diffidenti di quanto suggerisca lo 0,5, e la soglia si sposta di conseguenza.
 >
-> Nei codici SAS del corso questo diventa `if p_GOOD > 0.83333 then decision='Accept'` — una soglia all'83%, non al 50%, ricavata proprio dal rapporto fra i costi.
+> In [[SAS]] si traduce in una riga come `if p_GOOD > 0.83333 then decision='Accept'` — una soglia all'83%, non al 50%, ricavata proprio dal rapporto fra i costi.
 
 ### Problema 2 — i dati di training sono bilanciati, la realtà no
 
-Questa è una trappola che sta negli appunti SAS del corso e va conosciuta.
+Questa è una trappola classica, e va conosciuta.
 
 Per addestrare meglio il modello, spesso si costruisce un dataset **bilanciato**: si tengono tutti gli insolventi e solo una parte dei clienti buoni, arrivando a un 30% di insolventi.
 
