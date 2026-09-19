@@ -212,7 +212,7 @@ Prima di costruire un modello si guarda se le variabili **si muovono insieme**. 
 
 Anche su `r` si fa un test. H0: nella popolazione `r` è zero, cioè non c'è nessun legame.
 
-> [!example] Dall'esempio del corso
+> [!example] Un caso reale
 > `r = −0,392` fra età di ingresso nel mondo del lavoro e anni di contributi, con p < 0,0001.
 >
 > Si legge in due tempi:
