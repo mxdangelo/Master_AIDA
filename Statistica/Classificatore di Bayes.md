@@ -70,8 +70,6 @@ Quella barra verticale `|` si legge sempre **"dato che"** o **"sapendo che"**. �
 
 ### Un conto vero, tutto intero
 
-Un esempio classico, con due squadre di calcio.
-
 Due squadre di calcio. Dalle partite passate sai che:
 
 ```
@@ -165,6 +163,75 @@ P(affitto E sposato E under30 | insolvente)
 > Il bello è che **funziona lo stesso**. Per decidere chi vince non serve che le probabilità siano giuste in valore assoluto: basta che l'ordine fra le classi sia giusto. E l'ordine, di solito, regge.
 >
 > È il classico modello sbagliato ma utile. Velocissimo da addestrare, ottimo sul testo (→ [[Machine Learning#MLlib — la libreria]]).
+
+> [!tip] L'alternativa all'assunzione ingenua
+> Se le variabili sono tutte numeriche, esiste un altro modo di descrivere una classe: non con tante tabelle separate, ma con **una nuvola sola** che tiene già dentro il modo in cui le variabili si muovono insieme. È l'[[Analisi discriminante|analisi discriminante]], e non ha bisogno di fingere l'indipendenza.
+
+### Un Naive Bayes svolto per intero
+
+Cento clienti di un'assicurazione. **Venti hanno fatto un sinistro**, ottanta no. Di ciascuno sai tre cose: dove abita, se aveva già avuto sinistri, che tipo di casa ha.
+
+**Passo 1 — il prior.** Si conta e basta.
+
+```
+P(sinistro) = 20/100 = 0,20          P(niente) = 80/100 = 0,80
+```
+
+**Passo 2 — le tabelle, una variabile alla volta.** Dentro ciascuna classe si contano le quote. Sono queste le tabelle che il metodo costruisce, e sono tutto il suo "addestramento".
+
+| | fra i **20 con sinistro** | fra gli **80 senza** |
+|---|---|---|
+| zona = città | 14 → **0,70** | 32 → **0,40** |
+| zona = provincia | 6 → 0,30 | 48 → 0,60 |
+| precedenti = sì | 12 → **0,60** | 8 → **0,10** |
+| precedenti = no | 8 → 0,40 | 72 → 0,90 |
+| casa = villetta | 8 → 0,40 | 40 → 0,50 |
+| casa = appartamento | 12 → **0,60** | 40 → **0,50** |
+
+**Passo 3 — arriva un cliente nuovo:** città, precedenti sì, appartamento.
+
+Si moltiplica il prior per le tre quote corrispondenti, una classe alla volta:
+
+```
+sinistro:   0,20 × 0,70 × 0,60 × 0,60  =  0,0504
+niente:     0,80 × 0,40 × 0,10 × 0,50  =  0,0160
+```
+
+**Passo 4 — si normalizza**, cioè si divide ciascuno per la somma dei due, così tornano a fare 100%:
+
+```
+somma = 0,0504 + 0,0160 = 0,0664
+
+P(sinistro | questo cliente) = 0,0504 / 0,0664 = 0,76
+P(niente   | questo cliente) = 0,0160 / 0,0664 = 0,24
+```
+
+> [!important] Cosa è appena successo
+> ```
+> prior       20%   →   posterior   76%
+> ```
+>
+> Il cliente medio ha il 20% di probabilità di fare un sinistro. **Questo** cliente ha il 76%.
+>
+> A muovere il numero è soprattutto "precedenti sì": **0,60 contro 0,10**, sei volte più frequente fra chi poi ha avuto un sinistro. Le altre due variabili spingono appena.
+>
+> E la decisione segue dalla regola solita: 0,76 batte 0,24, quindi la classe prevista è **sinistro**.
+
+> [!warning] Il problema della frequenza zero
+> Se una categoria **non compare mai** dentro una classe, la sua quota è 0. E quello zero, moltiplicato, **azzera tutto il prodotto**: qualunque cosa dicano le altre variabili, il verdetto è deciso.
+>
+> Un solo caso mai osservato nel training può così cancellare tutte le altre informazioni.
+>
+> Il rimedio si chiama **correzione di Laplace**: si aggiunge 1 a ogni conteggio, così nessuna quota è mai esattamente zero. In [[R]] è l'argomento `laplace = 1`.
+
+### E se una variabile è un numero?
+
+Le tabelle funzionano sulle categorie. Con l'età o il reddito i valori sono tutti diversi e non c'è niente da contare. Due strade:
+
+- **fare le classi** — trasformare l'età in fasce (18-30, 31-45, …) e tornare al caso di sopra. Semplice, ma butti via informazione
+- **assumere una campana** — dentro ciascuna classe si calcolano media e deviazione standard della variabile, e si usa la [[Probabilità e distribuzioni#La distribuzione Normale|Normale]] per ottenere il valore da moltiplicare
+
+La seconda versione si chiama **Naive Bayes gaussiano** ed è quella che i software usano di default sui numeri. Il costo è un'assunzione in più: che dentro ogni classe quella variabile sia distribuita a campana.
 
 ---
 
@@ -263,4 +330,4 @@ Arrivano a un numero dello stesso tipo, e da lì in poi fanno esattamente le ste
 
 ## Vedi anche
 
-[[Regressione logistica]] · [[Inferenza]] · [[Machine Learning]] · [[R]] · [[SAS]]
+[[Analisi discriminante]] · [[Regressione logistica]] · [[Inferenza]] · [[Probabilità e distribuzioni]] · [[Machine Learning]] · [[R]] · [[SAS]]
