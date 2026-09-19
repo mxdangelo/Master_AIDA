@@ -231,6 +231,82 @@ AIC(m1, m2, m3)            # confronta piu' modelli: vince il piu' basso
 
 ---
 
+## dplyr — manipolare le tabelle
+
+Il modo moderno di lavorare sui dati in R. Sostituisce le parentesi quadre con **verbi che si leggono**.
+
+```r
+library(dplyr)
+
+dati |>
+  filter(eta > 30) |>              # tieni solo certe RIGHE
+  select(eta, reddito, zona) |>    # tieni solo certe COLONNE
+  mutate(reddito_k = reddito / 1000) |>   # crea una colonna nuova
+  arrange(desc(reddito)) |>        # ordina
+  group_by(zona) |>                # raggruppa
+  summarise(media = mean(reddito), n = n())   # e riassumi
+```
+
+> [!tip] La pipe `|>` si legge "e poi"
+> Prende quello che sta a sinistra e lo passa alla funzione a destra. Si legge dall'alto verso il basso come una ricetta: *"prendi i dati, **e poi** filtra, **e poi** seleziona, **e poi** raggruppa…"*.
+>
+> È lo stesso risultato delle parentesi quadre, scritto in un ordine che si segue leggendo. In [[Python]] la stessa cosa si fa con pandas.
+
+I sei verbi coprono quasi tutto: `filter` righe · `select` colonne · `mutate` colonne nuove · `arrange` ordina · `group_by` + `summarise` aggrega.
+
+---
+
+## caret — il banco di lavoro del data mining
+
+Un pacchetto solo che tiene insieme divisione dei dati, preprocessing, addestramento e confronto. Nel corso si usa continuamente.
+
+```r
+library(caret)
+
+# 1. dividere, mantenendo le proporzioni delle classi
+set.seed(1)
+i <- createDataPartition(dati$target, p = 0.7, list = FALSE)
+train <- dati[i, ]; test <- dati[-i, ]
+
+# 2. come validare
+ctrl <- trainControl(method = "cv", number = 5, classProbs = TRUE)
+
+# 3. addestrare: preprocessing e cross-validation insieme
+m <- train(target ~ ., data = train,
+           method = "glm",                          # o "rpart", "rf", "knn", "nnet"...
+           preProcess = c("center", "scale"),
+           trControl = ctrl)
+
+# 4. valutare, una volta sola
+confusionMatrix(predict(m, test), test$target, positive = "si")
+```
+
+> [!important] Il motivo per cui conviene usarlo
+> Cambiando `method` cambi **algoritmo** senza toccare altro: stessa sintassi per regressione, alberi, foreste, reti neurali.
+>
+> E soprattutto `caret` applica il preprocessing **dentro ogni fetta** di cross-validation, cioè nel modo giusto. Farlo a mano è l'errore più comune e più invisibile → [[Preprocessing#La regola d'oro]].
+
+| funzione | a cosa serve |
+|---|---|
+| `createDataPartition` | dividere train/test in modo stratificato |
+| `preProcess` | imparare il preprocessing sul training |
+| `trainControl` | impostare la validazione |
+| `train` | addestrare e regolare le manopole |
+| `varImp` | importanza delle variabili |
+| `confusionMatrix` | matrice di confusione e metriche |
+| `resamples` | confrontare più modelli sulle stesse fette |
+
+> [!warning] `caret` vuole il target come `factor`
+> Per la classificazione, il target deve essere un `factor` — e con **livelli che siano nomi validi**: `"si"`/`"no"`, non `0`/`1`.
+>
+> Con `0` e `1` alcuni metodi si lamentano o costruiscono un modello di regressione al posto di un classificatore.
+>
+> ```r
+> dati$target <- factor(ifelse(dati$target == 1, "si", "no"), levels = c("no", "si"))
+> ```
+
+---
+
 ## Grafici in due righe
 
 ```r
@@ -283,4 +359,4 @@ help(rep)      # la documentazione di una funzione
 
 ## Vedi anche
 
-[[Regressione logistica]] · [[Modelli lineari]] · [[Inferenza]] · [[SAS]] · [[Python]]
+[[Percorso di studio]] · [[Regressione logistica]] · [[Modelli lineari]] · [[Preprocessing]] · [[Validazione]] · [[SAS]] · [[Python]]

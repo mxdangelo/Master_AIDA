@@ -406,4 +406,4 @@ Una volta decise le previsioni, si controlla quante ne hai azzeccate con la **ma
 
 ## Vedi anche
 
-[[Inferenza]] · [[Test statistici]] · [[Modelli lineari]] · [[Classificatore di Bayes]] · [[Analisi discriminante]] · [[R]] · [[Machine Learning]]
+[[Modelli lineari]] · [[Classificatore di Bayes]] · [[Analisi discriminante]] · [[Scegliere la soglia]] · [[Validazione]] · [[R]]

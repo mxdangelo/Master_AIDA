@@ -133,13 +133,10 @@ drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale 
 
 ### Quale modello statistico?
 
-| la tua `y` è… | la tua `x` è… | usi |
-|---|---|---|
-| un numero | un numero | **regressione lineare** → [[Modelli lineari]] |
-| un numero | una categoria | **ANOVA** → [[Modelli lineari#ANOVA]] |
-| sì/no | qualsiasi | **regressione logistica** → [[Regressione logistica]] |
-| una classe | qualsiasi | **Naive Bayes** → [[Classificatore di Bayes]], un **albero** → [[Alberi decisionali]] |
-| una classe | tutte numeriche | **LDA** → [[Analisi discriminante]] |
+> [!question] La domanda è sempre una
+> **Che forma ha la cosa che vuoi prevedere?** Un numero → regressione · sì/no → logistica · una classe → classificatori · niente da prevedere → clustering.
+>
+> La tabella completa, con i predittori e i casi misti, sta in [[Percorso di studio#Quale metodo per quale problema|Percorso di studio]].
 
 > [!question] Prima di leggere qualsiasi p-value
 > *Qual è H0?* — l'ipotesi noiosa, "non succede niente". Sotto **0,05** la rifiuti. E **significativo non vuol dire importante**: guarda sempre quanto è grande l'effetto. → [[Test statistici]]
@@ -187,7 +184,8 @@ drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale 
 - **Big data** — [[Hadoop]] · [[Spark]]
 - **Data engineering** — [[Data Ingestion]] · [[ETL]] · [[Data Quality]]
 - **Analytics** — [[BI Architecture]] · [[Machine Learning]] · [[Data Visualization]]
-- **Statistica** — [[Statistica descrittiva]] · [[Valori medi]] · [[Variabilità]] · [[Probabilità e distribuzioni]] · [[Inferenza]] · [[Test statistici]] · [[Modelli lineari]] · [[Regressione logistica]] · [[Classificatore di Bayes]] · [[Analisi discriminante]] · [[Alberi decisionali]]
+- **Statistica** — [[Percorso di studio]] apre l'area e mette le note in ordine di lettura · [[Leggere le formule]] per i simboli
+- **Data mining** — [[Preprocessing]] · [[Validazione]] · [[Scegliere la soglia]] · [[PCA]] · [[Regolarizzazione]] · [[Clustering]] · [[Reti neurali]] · [[Spiegare i modelli]]
 - **Cloud** — [[Cloud computing]] · [[AWS]] · [[Databricks]]
 - **Strumenti** — [[Python]] · [[R]] · [[SAS]] · [[KNIME]] · [[Power BI]] · [[Git e GitHub]] · [[MCP]]
 - **Case study** — [[Superstore — profittabilità]]

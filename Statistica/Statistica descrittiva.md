@@ -215,4 +215,4 @@ dati$studio <- as.factor(dati$studio)   # dichiara le categorie come tali
 
 ## Vedi anche
 
-[[Valori medi]] · [[Variabilità]] · [[Probabilità e distribuzioni]] · [[Inferenza]] · [[Data Visualization]] · [[R]]
+[[Percorso di studio]] · [[Valori medi]] · [[Variabilità]] · [[Probabilità e distribuzioni]] · [[Inferenza]] · [[Data Visualization]]
