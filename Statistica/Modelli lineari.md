@@ -122,7 +122,86 @@ Geometricamente non è più una retta ma un **piano** — e con tante variabili 
 > [!warning] Variabili che dicono la stessa cosa
 > Se metti insieme metri quadri e numero di stanze, il modello non sa a chi dare il merito e divide il credito a caso. I coefficienti diventano instabili.
 >
-> Si chiama **multicollinearità**, si misura con il **VIF** (sopra 5 sospetto, sopra 10 conclamato) e si cura togliendo una delle due.
+> Si chiama **multicollinearità**, si misura con il **VIF** (sopra 5 sospetto, sopra 10 conclamato) e si cura togliendo una delle due → [[Preprocessing#2. Variabili collineari]].
+
+### Le variabili categoriali: le dummy
+
+Il modello fa conti su numeri. Una variabile come `zona`, che vale *nord*, *centro* o *sud*, va tradotta — e non assegnandole 1, 2, 3, che direbbe che il sud vale il triplo del nord.
+
+Si creano **colonne 0/1**, una per categoria meno una:
+
+| zona | `zona_centro` | `zona_sud` |
+|---|---|---|
+| nord | 0 | 0 | ← il **riferimento** |
+| centro | 1 | 0 |
+| sud | 0 | 1 |
+
+Con `k` categorie se ne creano `k − 1`. Quella mancante — qui il nord — si riconosce dal fatto che tutte le altre valgono zero, e si chiama **categoria di riferimento**.
+
+> [!important] Le dummy si leggono sempre rispetto al riferimento
+> Se `zona_sud = −18.000`, significa: *"a parità di tutto il resto, una casa al sud costa 18.000 € in meno di una **al nord**"*.
+>
+> Cambiando il riferimento cambiano tutti i numeri, pur descrivendo la stessa realtà. Per questo va **scelto** — di solito la categoria più numerosa, o il termine di paragone naturale:
+>
+> ```r
+> dati$zona <- relevel(dati$zona, ref = "nord")
+> ```
+
+> [!warning] Mai mettere tutte e `k` le colonne
+> Se aggiungi anche `zona_nord`, le tre sommano sempre a 1 e una è ricostruibile dalle altre: **collinearità perfetta**. Il modello non gira, o restituisce `NA` su un coefficiente.
+>
+> In [[R]] il problema non si pone: dichiarando la variabile come `factor`, le dummy le costruisce `lm()` da solo nel modo giusto.
+
+### Quali variabili tenere
+
+Con venti predittori disponibili, quali metti nel modello?
+
+| criterio | cosa guarda |
+|---|---|
+| **R² aggiustato** | come l'R², ma penalizza le variabili inutili |
+| **AIC** | bilancia adattamento e complessità. Vince il **più basso** |
+| **BIC** | come l'AIC, ma **punisce di più** → modelli più corti |
+| stelline di `summary()` | i test sui singoli coefficienti |
+
+> [!warning] L'R² normale non serve a scegliere
+> **Sale sempre** quando aggiungi una variabile, anche se è il numero di scarpe. Non potrà mai suggerirti di toglierne una.
+>
+> L'**R² aggiustato** invece può scendere: sale solo se la variabile nuova porta più di quanto costa. Con più di un predittore, guarda quello.
+
+La selezione automatica esiste ed è comoda:
+
+```r
+step(lm(prezzo ~ ., data = case))     # aggiunge e toglie, minimizzando l'AIC
+```
+
+> [!warning] Ma non è una scorciatoia innocente
+> Provando decine di combinazioni, qualcosa di "significativo" salta fuori **per forza**, anche in dati casuali. È lo stesso problema dei confronti multipli.
+>
+> I p-value del modello finale sono **troppo ottimistici**: non tengono conto di tutte le combinazioni scartate lungo la strada.
+>
+> Alternative più solide: scegliere con la conoscenza del dominio, oppure il [[Regolarizzazione#Ridge e lasso|lasso]], che fa selezione in modo controllato.
+
+### Le interazioni
+
+A volte l'effetto di una variabile **dipende da un'altra**.
+
+> [!example] Il balcone
+> Un balcone aggiunge parecchio valore a un appartamento in città, e quasi niente a una villetta in campagna.
+>
+> L'effetto del balcone **cambia** a seconda del tipo di casa. Un modello che gli dà un solo coefficiente valido ovunque non può coglierlo.
+
+Si aggiunge un termine di **interazione**:
+
+```r
+lm(prezzo ~ balcone * tipo_casa, data = case)
+```
+
+L'asterisco mette nel modello le due variabili **e** il loro effetto combinato. Il coefficiente dell'interazione dice di quanto cambia l'effetto della prima al variare della seconda.
+
+> [!tip] Gli [[Alberi decisionali|alberi]] le trovano da soli
+> Un albero che spacca prima su `tipo_casa` e poi, dentro un solo ramo, su `balcone`, sta già modellando quell'interazione senza che nessuno gliel'abbia chiesta.
+>
+> È il loro vantaggio principale sulla regressione: in un modello lineare le interazioni vanno **previste e scritte a mano**, una per una.
 
 ---
 
@@ -279,4 +358,4 @@ Nell'output di `summary(m)` guardi le stesse cose della [[Regressione logistica#
 
 ## Vedi anche
 
-[[Inferenza]] · [[Test statistici]] · [[Regressione logistica]] · [[R]] · [[Machine Learning]]
+[[Inferenza]] · [[Test statistici]] · [[Confronto fra gruppi]] · [[Regressione logistica]] · [[Preprocessing]] · [[R]]

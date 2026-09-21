@@ -229,4 +229,4 @@ Quanto è "abbastanza grande"? La regola spannometrica è **n ≥ 30**. Più il 
 
 ## Vedi anche
 
-[[Probabilità e distribuzioni]] · [[Valori medi]] · [[Variabilità]] · [[Test statistici]] · [[Modelli lineari]] · [[Regressione logistica]] · [[R]]
+[[Percorso di studio]] · [[Probabilità e distribuzioni]] · [[Valori medi]] · [[Variabilità]] · [[Test statistici]] · [[Modelli lineari]] · [[R]]

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6D28D9"/><stop offset="1" stop-color="#5B21B6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <g opacity="0.22" stroke="#ffffff" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M600,110 L600,150"/>
+    <path d="M520,190 L600,150 L680,190"/>
+    <path d="M520,190 L520,230"/>
+    <path d="M680,190 L680,230"/>
+    <path d="M470,270 L520,230 L570,270"/>
+    <path d="M630,270 L680,230 L730,270"/>
+  </g>
+  <g opacity="0.3" fill="#ffffff">
+    <circle cx="600" cy="104" r="11"/>
+    <circle cx="470" cy="276" r="11"/>
+    <circle cx="570" cy="276" r="11"/>
+    <circle cx="630" cy="276" r="11"/>
+    <circle cx="730" cy="276" r="11"/>
+  </g>
+  <g opacity="0.12" stroke="#ffffff" stroke-width="4">
+    <line x1="430" y1="330" x2="770" y2="330"/>
+  </g>
+  <text x="48" y="392" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="600" fill="#ffffff">Data mining</text>
+</svg>

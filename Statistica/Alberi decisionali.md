@@ -325,4 +325,4 @@ importance(rf)            # la classifica delle variabili
 
 ## Vedi anche
 
-[[Regressione logistica]] · [[Classificatore di Bayes]] · [[Machine Learning]] · [[R]] · [[Test statistici]]
+[[Regressione logistica]] · [[Classificatore di Bayes]] · [[Validazione]] · [[Spiegare i modelli]] · [[Machine Learning]] · [[R]]
