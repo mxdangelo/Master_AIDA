@@ -18,7 +18,7 @@ Note in Markdown pensate per **[Obsidian](https://obsidian.md)**: wiki-link `[[.
 
 **Punto di partenza:** [`Prontuario`](Prontuario.md) — quick-reference operativo (cosa usi quando, snippet pronti, lookup rapidi).
 
-**Per statistica e data mining** le note sono pensate per essere lette in sequenza: parti da [`Percorso di studio`](Statistica/_Percorso%20di%20studio.md), che le mette in ordine e dice cosa serve prima di cosa.
+**Per statistica e data mining** le note sono pensate per essere lette in sequenza: parti da [`Percorso di studio`](Statistica/%2B%F0%9F%A7%AD%20Percorso%20di%20studio.md), che le mette in ordine e dice cosa serve prima di cosa.
 
 ## Aree
 
