@@ -121,6 +121,9 @@ Da qui le due metriche che contano:
 > [!warning] L'accuracy inganna
 > Su classi **sbilanciate** l'accuratezza è fuorviante. Se le transazioni fraudolente sono l'1%, un modello che risponde sempre "non è frode" ha il **99% di accuratezza** e non serve a niente: non ne trova nemmeno una. Guarda F1, precision e recall — pesate, se le classi sono più di due.
 
+> [!info] La trattazione completa sta in [[Valutare un classificatore]]
+> Specificità, tassi di falsi positivi e negativi, il tasso di errore pesato con i prior, le misure per più di due classi e la matrice di profitto. Per scegliere **fra** più modelli servono invece misure che non dipendono dalla soglia → [[Confrontare i modelli]].
+
 ## In pratica (Spark ML)
 
 > [!info] Dal notebook del corso (*EU Occupation Classifier*)
@@ -154,4 +157,4 @@ Nota come `outputCol` di uno stadio diventa `inputCol` del successivo: è così 
 
 ## Vedi anche
 
-[[Spark]] · [[Data Quality]] · [[Cloud computing]]
+[[Spark]] · [[Valutare un classificatore]] · [[Data Quality]] · [[Cloud computing]]

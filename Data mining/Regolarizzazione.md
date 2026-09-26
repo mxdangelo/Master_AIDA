@@ -100,6 +100,13 @@ Cambia **come si misura** "quanto sono grandi i coefficienti". Due modi, due com
 >
 > `α = 1` è lasso puro, `α = 0` è ridge puro, nel mezzo un misto. Utile quando hai gruppi di variabili correlate: il lasso puro, fra due variabili quasi identiche, ne tiene una a caso e butta l'altra; l'elastic net le tiene entrambe con peso ridotto.
 
+> [!info] Perché restringere conviene sempre un po'
+> C'è un risultato teorico, il **teorema di esistenza**: esiste **sempre** un valore di λ per cui la ridge sbaglia meno, in media, dei minimi quadrati normali.
+>
+> Sembra strano, perché i minimi quadrati sono lo stimatore **corretto**: in media centrano il valore vero. La ridge invece è **distorta**: tira i coefficienti verso zero, quindi in media sbaglia un po'.
+>
+> Ma l'errore totale ha due pezzi: quanto sbagli **in media** e quanto **balli** da un campione all'altro. La ridge accetta un piccolo errore sistematico e in cambio balla molto meno. Con il λ giusto, lo scambio conviene.
+
 ---
 
 ## Due cose da non dimenticare
@@ -149,6 +156,32 @@ coef(cv, s = "lambda.1se")   # i punti "." sono le variabili azzerate
 > `lambda.min` è quello con l'errore più basso. `lambda.1se` è il **più severo fra quelli che restano entro una deviazione standard dal minimo**.
 >
 > Il secondo dà un modello più piccolo che sbaglia quasi uguale — ed è di solito la scelta migliore. È esattamente la stessa logica della [[Alberi decisionali#La regola a una deviazione standard|regola a una deviazione standard]] nella potatura degli alberi: **a parità di risultato vince il più semplice**.
+
+### Con `caret`, sul dataset adult
+
+`caret` chiama `glmnet` per te e prova una griglia di λ in cross-validation. La [[Preprocessing#Con recipes, sul dataset adult|ricetta]] si occupa di mancanti, scaling e dummy.
+
+```r
+library(caret)
+
+# 100 valori di lambda, da 10^-6 a 10^2, su scala logaritmica
+griglia <- expand.grid(alpha = 1,                        # lasso
+                       lambda = 10^seq(-6, 2, length.out = 100))
+
+lasso <- train(ricetta, data = train.df, method = "glmnet",
+               family = "binomial", trControl = ctrl, tuneGrid = griglia)
+
+plot(lasso)                                       # accuratezza CV al variare di lambda
+lasso$bestTune$lambda
+coef(lasso$finalModel, s = lasso$bestTune$lambda) # i "." sono le variabili azzerate
+
+# elastic net: si mette in griglia anche alpha
+griglia_en <- expand.grid(alpha = seq(0, 1, by = 0.25),
+                          lambda = 10^seq(-6, 2, length.out = 100))
+```
+
+> [!tip] Perché λ su scala logaritmica
+> Fra λ = 0,000001 e λ = 0,0001 il modello cambia quanto fra 1 e 100. Una griglia a passi uguali sprecherebbe quasi tutti i tentativi sui valori grandi. `10^seq(...)` distribuisce i tentativi in modo uniforme sugli **ordini di grandezza**.
 
 ---
 

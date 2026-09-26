@@ -312,6 +312,59 @@ Arrivano a un numero dello stesso tipo, e da lì in poi fanno esattamente le ste
 
 ---
 
+## Il confine di decisione
+
+Ogni classificatore, qualunque sia, fa la stessa cosa: **divide lo spazio delle variabili in regioni**, una per classe.
+
+> [!example] Su un foglio
+> Due variabili: età in orizzontale, reddito in verticale. Ogni cliente è un punto.
+>
+> Il classificatore colora il foglio: una zona blu ("paga"), una zona arancione ("non paga"). Un cliente nuovo prende il colore della zona in cui cade.
+>
+> La linea che separa i colori è il **confine di decisione** (*decision boundary*). I punti blu finiti nella zona arancione, e viceversa, sono gli **errori**.
+
+I modelli si distinguono soprattutto per **che forma può avere il confine**:
+
+| modello | forma del confine |
+|---|---|
+| [[Regressione logistica]] · [[Analisi discriminante\|LDA]] | una **retta** |
+| logistica con i quadrati delle variabili · [[Analisi discriminante#QDA — la versione quadratica\|QDA]] | una **curva** |
+| [[Alberi decisionali]] | a **scalini**: rettangoli affiancati |
+| [[kNN]] · [[Reti neurali]] | **qualsiasi** forma |
+
+> [!tip] Quale scegliere, se intuisci la forma
+> - confine **lineare** → LDA o logistica. LDA è migliore se le variabili sono davvero normali, altrimenti la logistica
+> - confine **moderatamente curvo** → QDA o alberi. QDA se regge la normalità, altrimenti alberi
+> - confine **complicato** → kNN, alberi, reti neurali, Naive Bayes
+
+### Dai punteggi alle probabilità: softmax
+
+Non tutti i modelli producono probabilità. Alcuni producono **punteggi**: un numero per ogni classe, e vince il più alto. Si chiamano **punteggi discriminanti**.
+
+La regola è la stessa del max posterior: *"assegna alla classe con il punteggio più alto"*. Ma un punteggio può essere negativo, e i punteggi di una persona non sommano a 1. Succede con LDA e con le reti neurali.
+
+Per trasformarli in qualcosa che si legge come una probabilità si usa la **softmax**:
+
+```
+                 e^(punteggio della classe j)
+p(classe j)  =  ─────────────────────────────────
+                somma di e^(punteggio) su tutte le classi
+```
+
+L'esponenziale rende tutto **positivo**. La divisione per la somma fa sommare tutto a **1**.
+
+> [!example] Tre classi
+> Punteggi: 2, 1, 0.
+>
+> - `e²` = 7,39 · `e¹` = 2,72 · `e⁰` = 1. Somma: 11,11
+> - probabilità: `7,39 / 11,11` = **0,67** · `2,72 / 11,11` = **0,24** · `1 / 11,11` = **0,09**
+>
+> L'ordine resta lo stesso: vince sempre la prima classe. Ma ora i numeri si leggono come probabilità.
+
+Con due classi la softmax diventa la curva della [[Regressione logistica#Il modello|logistica]]: `e^g / (1 + e^g)`.
+
+---
+
 ## Da tenere in tasca
 
 | domanda | risposta rapida |
@@ -327,7 +380,10 @@ Arrivano a un numero dello stesso tipo, e da lì in poi fanno esattamente le ste
 | **Bayes error rate**? | l'errore del modello perfetto. Il **pavimento** |
 | Quando la soglia non è 0,5? | eventi rari, o errori che costano diverso |
 | Dati bilanciati? | correggi i posterior col **prior vero** |
+| **Confine di decisione**? | la linea che separa le zone delle classi |
+| Che forma ha? | retta (logistica, LDA) · curva (QDA) · scalini (alberi) · qualsiasi (kNN, reti) |
+| **Softmax**? | trasforma punteggi qualsiasi in numeri **positivi che sommano a 1** |
 
 ## Vedi anche
 
-[[Analisi discriminante]] · [[Regressione logistica]] · [[Inferenza]] · [[Probabilità e distribuzioni]] · [[Machine Learning]] · [[R]] · [[SAS]]
+[[Analisi discriminante]] · [[Regressione logistica]] · [[kNN]] · [[Valutare un classificatore]] · [[Inferenza]] · [[Probabilità e distribuzioni]] · [[Machine Learning]] · [[R]] · [[SAS]]

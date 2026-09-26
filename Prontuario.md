@@ -138,6 +138,9 @@ drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale 
 >
 > La tabella completa, con i predittori e i casi misti, sta in [[Percorso di studio#Quale metodo per quale problema|Percorso di studio]].
 
+> [!question] Confrontare modelli o valutarne uno?
+> **Confrontare** più modelli → misure che **non usano la soglia**: ROC/AUC, lift, ASE, profitto calcolato. **Valutare** il vincente → la matrice di confusione con la **sua** soglia: sensibilità, precisione, F, oppure la matrice di profitto. Mai l'error rate per scegliere fra modelli. → [[Confrontare i modelli]] · [[Valutare un classificatore]]
+
 > [!question] Prima di leggere qualsiasi p-value
 > *Qual è H0?* — l'ipotesi noiosa, "non succede niente". Sotto **0,05** la rifiuti. E **significativo non vuol dire importante**: guarda sempre quanto è grande l'effetto. → [[Test statistici]]
 
@@ -161,6 +164,8 @@ drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale 
 - **Accuracy** = corretti / osservati (sintattica = nel dominio; semantica = è il valore vero).
 - **PageRank**: importanza = somma di chi ti punta, pesata dalla loro (damping 0.85).
 - CSS selector: spazio = annidamento, `>` = diretto, `.` = classe, `#` = id.
+- **Soglia ottimale** dai valori della matrice di profitto: `1 / (1 + (VP − FN) / (VN − FP))`. Solo costi: `costo FP / (costo FP + costo FN)`. → [[Scegliere la soglia]]
+- **Lift** di un decile = % di eventi nel decile / % di eventi globale. **1 = come a caso.** → [[Confrontare i modelli]]
 
 ## 🎯 Principi (da tenere in tasca)
 
@@ -170,6 +175,7 @@ drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale 
 > *Garbage in, garbage out* — l'analisi vale quanto i dati. · *All models are wrong, but some are useful.* · Il dato giusto all'**attante** giusto, nella forma giusta per l'interlocutore (KPI).
 
 - Prima di tutto: **farsi dire bene qual è la domanda di business** — da lì prende senso il resto.
+- **Ogni scelta porta un'ipotesi**, anche quella di non fare niente: niente matrice di profitto = errori di pari costo. Il business decide *cosa* ottimizzare, la statistica *come* arrivarci. → [[Il metodo]]
 - Un buon processo dati è **idempotente**: rilanciarlo non duplica né corrompe (upsert, non append ciechi).
 - Se c'è un'**API**, è meglio dello scraping.
 - **Move computation to data**, non i dati al programma (Hadoop). Spark è più veloce perché lavora *in-memory* e *lazy*.
@@ -184,8 +190,8 @@ drop1(m, test = "LRT"); AIC(m1, m2)             # serve questa variabile? quale 
 - **Big data** — [[Hadoop]] · [[Spark]]
 - **Data engineering** — [[Data Ingestion]] · [[ETL]] · [[Data Quality]]
 - **Analytics** — [[BI Architecture]] · [[Machine Learning]] · [[Data Visualization]]
-- **Statistica** — [[Percorso di studio]] apre l'area e mette le note in ordine di lettura · [[Leggere le formule]] per i simboli
-- **Data mining** — [[Preprocessing]] · [[Validazione]] · [[Scegliere la soglia]] · [[PCA]] · [[Regolarizzazione]] · [[Clustering]] · [[Reti neurali]] · [[Spiegare i modelli]]
+- **Statistica** — [[Percorso di studio]] apre l'area e mette le note in ordine di lettura · [[Il metodo]] per giustificare le scelte · [[Leggere le formule]] per i simboli
+- **Data mining** — [[Preprocessing]] · [[Validazione]] · [[Confrontare i modelli]] · [[Scegliere la soglia]] · [[Valutare un classificatore]] · [[kNN]] · [[PCA]] · [[Regolarizzazione]] · [[Clustering]] · [[Reti neurali]] · [[Spiegare i modelli]]
 - **Cloud** — [[Cloud computing]] · [[AWS]] · [[Databricks]]
 - **Strumenti** — [[Python]] · [[R]] · [[SAS]] · [[KNIME]] · [[Power BI]] · [[Git e GitHub]] · [[MCP]]
 - **Case study** — [[Superstore — profittabilità]]
