@@ -24,13 +24,19 @@ flowchart TD
     P --> I["3 · SCOMMETTERE<br/>Inferenza<br/>Test statistici · Confronto fra gruppi"]
     I --> M["4 · MODELLI<br/>Modelli lineari<br/>Regressione logistica"]
     M --> C["5 · CLASSIFICARE<br/>Classificatore di Bayes<br/>Analisi discriminante<br/>Alberi decisionali"]
-    C --> A["6 · LA PIPELINE<br/>Preprocessing · Validazione<br/>Scegliere la soglia"]
-    A --> X["7 · IL RESTO<br/>PCA · Regolarizzazione<br/>Clustering · Reti neurali<br/>Spiegare i modelli"]
+    C --> A["6 · LA PIPELINE<br/>Preprocessing · Validazione<br/>Confrontare i modelli<br/>Scegliere la soglia<br/>Valutare un classificatore"]
+    A --> X["7 · IL RESTO<br/>PCA · Regolarizzazione · kNN<br/>Clustering · Reti neurali<br/>Spiegare i modelli"]
 ```
 
 ---
 
 ## Le sette tappe
+
+### Prima di partire · Il metodo
+
+[[Il metodo]] — le cinque domande a cui ogni analisi deve rispondere, e come si difende una scelta.
+
+Non insegna una tecnica: insegna a **giustificarle tutte**. Leggila all'inizio per sapere cosa cercare, e rileggila alla fine. Ogni nota ha un callout **"La scelta da difendere"** che rimanda qui.
 
 ### 0 · Il decodificatore
 
@@ -88,10 +94,14 @@ Tre modi diversi di rispondere alla stessa domanda. Il confronto fra **generativ
 | nota | cosa ti lascia |
 |---|---|
 | [[Preprocessing]] | mancanti, collinearità, varianza zero, scaling |
-| [[Validazione]] | train/validation/test, cross-validation, bootstrap |
-| [[Scegliere la soglia]] | sensibilità e specificità, ROC, AUC, soglia dai costi |
+| [[Validazione]] | i quattro passi del data mining, train/validation/test, cross-validation, bootstrap |
+| [[Confrontare i modelli]] | scegliere fra più modelli senza dipendere dalla soglia: ASE, ROC, lift, profitto |
+| [[Scegliere la soglia]] | sensibilità e specificità, ROC, AUC, soglia dai costi, score dei casi nuovi |
+| [[Valutare un classificatore]] | le misure della matrice di confusione, la matrice di profitto, il profitto atteso |
 
-**È la parte che nei corsi si salta e nel lavoro è il 90% del tempo.** Senza queste tre, gli algoritmi delle altre note danno numeri che sembrano buoni e non lo sono.
+**È la parte che nei corsi si salta e nel lavoro è il 90% del tempo.** Senza queste note, gli algoritmi delle altre danno numeri che sembrano buoni e non lo sono.
+
+Si leggono nell'ordine dei quattro passi: costruire i modelli, **confrontarli**, scegliere la **soglia** per il vincente, **valutarlo**.
 
 ### 7 · Il resto del programma
 
@@ -99,6 +109,7 @@ Tre modi diversi di rispondere alla stessa domanda. Il confronto fra **generativ
 |---|---|
 | [[PCA]] | tante variabili ridondanti |
 | [[Regolarizzazione]] | tante variabili e sospetti che poche contino |
+| [[kNN]] | il confine fra le classi ha una forma qualsiasi, e non serve spiegarlo |
 | [[Clustering]] | nessuna etichetta, cerchi gruppi |
 | [[Reti neurali]] | relazioni molto non lineari |
 | [[Spiegare i modelli]] | devi giustificare le decisioni |
@@ -119,6 +130,7 @@ La domanda da farsi è sempre la stessa: **che forma ha la cosa che vuoi prevede
 | una **classe** | tutti numerici | [[Analisi discriminante\|LDA]] |
 | una **classe** | misti, con interazioni | [[Alberi decisionali]] |
 | una **classe**, e vuoi solo precisione | qualsiasi | [[Alberi decisionali#Random forest\|random forest]] |
+| una **classe**, con un confine irregolare | numerici, pochi | [[kNN]] |
 | **niente** — cerchi gruppi | qualsiasi | [[Clustering\|k-means]] |
 
 E i problemi che vengono prima del metodo:
@@ -129,6 +141,9 @@ E i problemi che vengono prima del metodo:
 | due variabili dicono la stessa cosa | [[Preprocessing#2. Variabili collineari]] |
 | troppe variabili | [[PCA]] · [[Regolarizzazione]] |
 | il modello va benissimo sui dati visti | [[Validazione]] |
+| ho più modelli e devo sceglierne uno | [[Confrontare i modelli]] |
+| sbagliare in un verso costa più che nell'altro | [[Valutare un classificatore#Criterio 2: contare i soldi]] |
+| so che forma ha il confine fra le classi | [[Classificatore di Bayes#Il confine di decisione]] |
 | l'evento è raro e il modello non lo trova mai | [[Scegliere la soglia]] |
 | funziona ma non so spiegarlo | [[Spiegare i modelli]] |
 

@@ -96,6 +96,15 @@ Il VIF è più furbo della correlazione: coglie anche il caso in cui una variabi
 > [!warning] Non buttarne tante insieme
 > Eliminare in blocco cinque variabili correlate è pericoloso: magari tre di quelle erano le uniche a portare un'informazione che le altre non hanno. Si tolgono **una alla volta**, ricontrollando il VIF ogni volta.
 
+> [!question] La scelta da difendere
+> **Cosa scegli:** togliere una variabile. Per collinearità, per varianza quasi zero, o perché ha troppi mancanti.
+>
+> **Che problema risolve:** **statistico**: coefficienti instabili, calcoli che si bloccano. Ma **quale** togliere ha anche un lato di business: tieni quella che chi usa il modello capisce e sa misurare.
+>
+> **Cosa ti costa:** assumi che l'informazione della variabile tolta **ci sia già** nelle altre. Se non è così, la perdi.
+>
+> **All'esame:** *"Fatturato e numero di dipendenti hanno un VIF di 12: dicono la stessa cosa. Tolgo i dipendenti e tengo il fatturato, perché ha meno mancanti ed è il numero che l'azienda guarda. Poi ricontrollo il VIF."* → [[Il metodo]]
+
 ---
 
 ## 3. Varianza zero
@@ -107,6 +116,19 @@ Se tutti i clienti hanno `nazione = Italia`, quella colonna non distingue niente
 C'è anche il caso quasi-zero: **999 righe su 1.000 uguali**. Tecnicamente varia, in pratica no — e in più, se finisce dentro una fetta di cross-validation, può capitare che lì dentro sia davvero costante e mandi l'algoritmo in errore.
 
 Si tolgono entrambe.
+
+> [!tip] Prima di buttarla, prova a ricodificarla
+> Nel dataset **adult** la variabile `capgain` (guadagni in conto capitale) vale **0 per quasi tutti**. Come numero è quasi costante.
+>
+> Ma avere o non avere guadagni di capitale può contare per il reddito. Si trasforma in una variabile **0/1**: "ha guadagni sì/no". L'informazione utile resta, la colonna quasi costante sparisce.
+
+### Troppe categorie
+
+Il problema speculare: una variabile categoriale con **tante modalità, alcune rarissime**. `education` in adult ne ha 16, dal "Preschool" al "Doctorate". Una modalità con 50 persone su 32.000 dà stime instabili, e ogni modalità diventa una [[#Le variabili categoriali|dummy]] in più.
+
+Si **raggruppano** le modalità simili: dalla prima elementare alla dodicesima classe diventano tutte `Dropout`, "ha lasciato la scuola". Lo stesso con i paesi di nascita, raccolti per area geografica.
+
+Il raggruppamento lo decide chi conosce il fenomeno. Non c'è una regola automatica.
 
 ---
 
@@ -142,6 +164,23 @@ La standardizzazione è il default: è la stessa trasformazione della [[Probabil
 
 > [!info] Perché agli alberi non serve
 > Un albero chiede *"il reddito è sopra 30.000?"*. Che il reddito sia scritto in euro, in migliaia di euro o standardizzato, **l'ordine delle persone non cambia** — e all'albero interessa solo l'ordine. La soglia si sposta, la spaccatura è identica.
+
+---
+
+## Ogni modello il suo preprocessing
+
+I quattro controlli valgono sempre. Ma ogni modello ha i suoi punti deboli, e quindi le sue priorità.
+
+| modello | cosa gli serve | cosa gli è indifferente |
+|---|---|---|
+| [[Regressione logistica]] | mancanti · collinearità · osservazioni influenti · trasformare gli input · selezionare le variabili · attenzione alla **separazione** | lo scaling (serve solo con la [[Regolarizzazione]]) |
+| [[Reti neurali]] | **centrare e scalare** · togliere le variabili quasi costanti (bloccano la convergenza) · togliere le molto correlate · mancanti · selezione | |
+| [[kNN]] | **centrare e scalare** · imputare i mancanti · selezionare le variabili | le variabili correlate |
+| [[Classificatore di Bayes\|Naive Bayes]] | imputare i mancanti · selezione consigliata | correlazione, centratura, scaling |
+| [[Alberi decisionali]] | niente di specifico | quasi tutto |
+
+> [!info] La separazione, in breve
+> Succede nella logistica quando una variabile divide **perfettamente** le due classi: tutti quelli con `x > 10` sono "sì", tutti gli altri "no". Il coefficiente cresce senza fermarsi e la stima non converge (→ [[Regressione logistica#Cose che vanno storte]]).
 
 ---
 
@@ -219,6 +258,40 @@ La categoria esclusa è il **riferimento**, e tutti i coefficienti si leggono ri
 dati$zona <- relevel(dati$zona, ref = "nord")   # scegli tu il riferimento
 ```
 
+### Con recipes, sul dataset adult
+
+Il pacchetto `recipes` fa la stessa cosa di `preProcess` con una sintassi a passi: ogni `step_` è un'operazione, e si leggono dall'alto in basso.
+
+```r
+library(recipes)
+
+ricetta <- recipe(incometgt ~ ., data = train.df) |>
+  step_impute_mode(all_nominal_predictors()) |>   # categoriali: la modalita' piu' frequente
+  step_impute_bag(all_numeric_predictors()) |>    # numeriche: imputazione con il bagging
+  step_center(all_numeric_predictors()) |>
+  step_scale(all_numeric_predictors()) |>
+  step_dummy(all_nominal_predictors())            # categoriali -> dummy (k - 1 colonne)
+
+# la ricetta si passa direttamente a caret, che la rifa' dentro ogni fetta
+m <- caret::train(ricetta, data = train.df, method = "glm", trControl = ctrl)
+```
+
+> [!tip] I mancanti di adult sono scritti `" ?"`
+> Nel file originale un valore mancante è un **punto di domanda preceduto da uno spazio**. Se non lo dichiari, R lo legge come una categoria vera chiamata "?".
+>
+> ```r
+> adult <- read.csv("adult.data", header = FALSE, na.strings = " ?")
+> ```
+
+Per le variabili quasi costanti, `nearZeroVar` ha una soglia regolabile:
+
+```r
+# freqCut: rapporto massimo fra la modalita' piu' frequente e la seconda.
+# Il default e' 95/5 = 19. Alzarlo a 22 salva le variabili al limite.
+nzv <- nearZeroVar(adult, saveMetrics = TRUE, freqCut = 22)
+adult <- adult[, !nzv$nzv]     # tiene solo le colonne non quasi costanti
+```
+
 ---
 
 ## Da tenere in tasca
@@ -237,7 +310,10 @@ dati$zona <- relevel(dati$zona, ref = "nord")   # scegli tu il riferimento
 | La regola d'oro? | si impara sul **training**, si applica al test |
 | Come si chiama l'errore? | **data leakage** |
 | Comando R? | `preProcess()` impara, `predict()` applica |
+| Variabile quasi sempre zero? | prova a farne una **0/1** prima di buttarla |
+| Troppe modalità rare? | **raggruppale** per significato |
+| A chi serve lo scaling? | kNN, reti neurali, regolarizzazione. **Non** ad alberi e Naive Bayes |
 
 ## Vedi anche
 
-[[Validazione]] · [[PCA]] · [[Modelli lineari]] · [[Alberi decisionali]] · [[Data Quality]] · [[R]]
+[[Validazione]] · [[kNN]] · [[PCA]] · [[Modelli lineari]] · [[Alberi decisionali]] · [[Data Quality]] · [[R]]

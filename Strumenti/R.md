@@ -149,6 +149,15 @@ load("studenti.Rdata")               # un file gia' in formato R
 >
 > Scrivi `C:/Users/...` con la barra normale, oppure `C:\\Users\\...` raddoppiata.
 
+> [!tip] Dichiara come sono scritti i mancanti
+> Non tutti i file scrivono i valori mancanti come `NA`. Nel dataset **adult** sono `" ?"`, con uno spazio davanti. Se non lo dici, R li tratta come una categoria vera.
+>
+> ```r
+> adult <- read.csv("adult.data", header = FALSE,   # il file non ha la riga dei nomi
+>                   na.strings = " ?")              # questo e' un mancante
+> colSums(is.na(adult))                             # ora si contano
+> ```
+
 > [!tip] Il modo che non si rompe mai
 > In RStudio: **Session → Set Working Directory → To Source File Location**. Imposta la cartella dello script che hai aperto, senza scriverla a mano.
 
@@ -177,6 +186,12 @@ Quelli che girano nel corso:
 | `car` | `vif()`: scova le variabili che dicono la stessa cosa |
 | `caret` | la cassetta degli attrezzi del machine learning |
 | `ggplot2` | i grafici belli |
+| `recipes` | il preprocessing a passi: `step_impute_bag`, `step_scale`, `step_dummy` (→ [[Preprocessing#Con recipes, sul dataset adult\|la ricetta]]) |
+| `rpart` · `rpart.plot` | gli [[Alberi decisionali\|alberi]] e il loro disegno |
+| `ipred` · `randomForest` | bagging e random forest |
+| `glmnet` | lasso, ridge, elastic net (→ [[Regolarizzazione]]) |
+| `FNN` | i vicini più prossimi, per scrivere un [[kNN]] a mano |
+| `pROC` | curve ROC e AUC (→ [[Confrontare i modelli]]) |
 
 ---
 
@@ -293,7 +308,7 @@ confusionMatrix(predict(m, test), test$target, positive = "si")
 | `trainControl` | impostare la validazione |
 | `train` | addestrare e regolare le manopole |
 | `varImp` | importanza delle variabili |
-| `confusionMatrix` | matrice di confusione e metriche |
+| `confusionMatrix` | matrice di confusione e metriche. Con `mode = "everything"` aggiunge precision, recall e F1 (→ [[Valutare un classificatore]]) |
 | `resamples` | confrontare più modelli sulle stesse fette |
 
 > [!warning] `caret` vuole il target come `factor`
@@ -359,4 +374,4 @@ help(rep)      # la documentazione di una funzione
 
 ## Vedi anche
 
-[[Percorso di studio]] · [[Regressione logistica]] · [[Modelli lineari]] · [[Preprocessing]] · [[Validazione]] · [[SAS]] · [[Python]]
+[[Percorso di studio]] · [[Regressione logistica]] · [[Modelli lineari]] · [[Preprocessing]] · [[Validazione]] · [[kNN]] · [[Valutare un classificatore]] · [[SAS]] · [[Python]]

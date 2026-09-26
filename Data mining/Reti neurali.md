@@ -104,6 +104,56 @@ Il passo 3 si chiama **backpropagation**, retropropagazione: l'errore misurato a
 
 ---
 
+## La famiglia
+
+### Il percettrone
+
+La rete più semplice: **un solo strato**, quello di uscita. Fa una somma pesata degli input e guarda il **segno**: positivo → una classe, negativo → l'altra.
+
+> [!warning] Funziona solo se le classi si separano con una retta
+> Se esiste una retta che divide perfettamente le due classi, il percettrone la trova in un numero finito di passi. È un teorema.
+>
+> Se non esiste, **non si ferma mai**: ogni correzione dei pesi sistema un punto e ne rovina un altro.
+>
+> E risponde solo "sì" o "no", senza probabilità.
+
+### Il percettrone multistrato (MLP)
+
+Aggiungendo uno **strato nascosto** si ottiene l'MLP, la rete descritta sopra. Cambiando quanti strati e quanti neuroni, cambi quanto è **complesso** il modello.
+
+> [!info] Approssimatori universali
+> Con almeno uno strato nascosto e abbastanza neuroni, un MLP può approssimare **qualsiasi** relazione fra x e y, senza che tu debba dire in anticipo che forma ha.
+>
+> È il motivo della loro potenza. Ed è anche il motivo per cui overfittano: possono adattarsi a qualsiasi cosa, rumore compreso.
+
+> [!tip] Le uscite non sono sempre probabilità
+> In teoria, con infiniti dati, le uscite di un MLP approssimano i posterior `P(classe | x)`. In pratica i dati sono finiti, l'addestramento si ferma in un minimo locale, i neuroni possono non bastare. Le uscite **non sommano per forza a 1**.
+>
+> La cura è la **softmax**, che le trasforma in numeri positivi con somma 1 (→ [[Classificatore di Bayes#Dai punteggi alle probabilità: softmax]]).
+
+### Le reti RBF
+
+**RBF** = *radial basis function*. Un solo strato nascosto, ma ogni neurone nascosto funziona in modo diverso: misura la **distanza** fra l'input e un suo **centro**. Più l'input è lontano dal centro, più il neurone si spegne verso zero.
+
+| | **MLP** | **RBF** |
+|---|---|---|
+| ogni neurone nascosto calcola | una somma pesata degli input | una distanza da un centro |
+| come divide lo spazio | con iperpiani (rette, in 2D) | con ellissoidi (ovali, in 2D) |
+| approssimazione | **globale** | **locale** |
+| strati nascosti | uno o più | uno |
+| fuori dalle zone viste nel training | generalizza meglio | peggio |
+
+Entrambe sono approssimatori universali. La stessa idea delle RBF sta dentro le **SVM** (*support vector machine*), dove il kernel RBF è fra i più usati.
+
+### Senza cicli e con cicli
+
+| tipo | come scorrono i dati | esempi | per cosa |
+|---|---|---|---|
+| **feedforward** | in una sola direzione: input → uscita | percettrone, MLP, RBF | dati tabellari |
+| **ricorrenti** | con cicli: l'uscita rientra come input | | **sequenze**: testo, serie temporali |
+
+---
+
 ## Cosa serve sapere per usarle
 
 > [!warning] Lo scaling è obbligatorio
@@ -189,6 +239,11 @@ m <- train(target ~ ., data = train, method = "nnet",
 | Risultati sempre uguali? | **no**: pesi iniziali casuali |
 | Si interpretano? | **no**. Sono scatole chiuse |
 | Su dati tabellari? | prova prima un **random forest** |
+| Il **percettrone**? | un solo strato. Converge solo se le classi sono **separabili da una retta** |
+| **Approssimatore universale**? | con uno strato nascosto e abbastanza neuroni, approssima qualsiasi relazione |
+| Uscite = probabilità? | non garantito: si applica la **softmax** |
+| **RBF**? | neuroni che misurano la **distanza da un centro**: approssimazione locale |
+| **Ricorrenti**? | con cicli, per le **sequenze** |
 | Comando R? | `nnet(y ~ ., size = 5, decay = 0.01)` |
 
 ## Vedi anche

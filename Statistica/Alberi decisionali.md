@@ -129,6 +129,29 @@ Media pesata: **0,18**. Guadagno: **zero**.
 >
 > Danno quasi sempre lo stesso albero. Gini è il default perché è più veloce da calcolare — niente logaritmi. Non è una scelta su cui perdere tempo.
 
+### Altri due criteri di split
+
+Il Gini è il criterio di **CART**, l'algoritmo di `rpart`. Non è l'unico.
+
+| criterio | come sceglie lo split | lo usa |
+|---|---|---|
+| **decremento di Gini** | quello che abbassa di più l'impurità media dei figli | CART, `rpart` |
+| **test chi-quadrato** | quello con il **p-value più basso** | [[SAS]] Enterprise Miner |
+| **tasso di errore** | quello che sbaglia di meno | |
+
+Il chi-quadrato è lo stesso [[Confronto fra gruppi|test di associazione]] fra due variabili categoriali. Qui le due variabili sono "in che figlio finisci" e "che classe sei". Un p-value basso dice che lo split e la classe sono **fortemente associati**: lo split separa bene.
+
+> [!info] Il logworth
+> Con dataset grandi i p-value diventano minuscoli: 0,0000001 e 0,000000001 sono difficili da confrontare a occhio. Si trasformano:
+>
+> ```
+> logworth = −log₁₀(p-value)
+> ```
+>
+> p = 0,01 → logworth 2. p = 0,000001 → logworth 6. **Più alto = split migliore.**
+>
+> Per fare il primo split, almeno un logworth deve superare una soglia minima. In SAS Enterprise Miner il default corrisponde a p-value 0,20, cioè logworth ≈ 0,7.
+
 ---
 
 ## Il problema: se lo lasci correre, impara a memoria
@@ -165,6 +188,28 @@ flowchart LR
 Così ogni osservazione fa da "dato nuovo" esattamente una volta, e non sprechi niente.
 
 ---
+
+## Fermare l'albero
+
+Lasciato libero, l'albero spacca finché ogni foglia è pura: potenzialmente **una foglia per persona**. Due modi di fermarlo.
+
+| | quando agisce | come |
+|---|---|---|
+| **pre-pruning** | **prima**: regole fissate prima di costruire | numerosità minima di una foglia · numero minimo di osservazioni per tentare uno split · profondità massima |
+| **post-pruning** | **dopo**: fai crescere l'albero, poi tagli | togli i rami che **non migliorano** l'errore sul validation (o in cross-validation) |
+
+Il post-pruning guarda i dati nuovi, quindi è già una forma di validazione.
+
+> [!tip] La strategia consigliata
+> 1. **pre-pruning largo**: lasci crescere un albero con molte foglie
+> 2. studi l'**overfitting**: l'errore sul validation al crescere delle foglie
+> 3. scegli il numero di foglie con **errore di validation minimo**
+>
+> L'albero finale lo guardi **solo dopo**. Interpretare un albero non potato vuol dire interpretare del rumore.
+
+> [!warning] Prior e costi dentro l'albero
+> - **prior**: si possono usare nella ricerca degli split, ma con un prior molto sbilanciato (per esempio 99% di buoni) l'albero **smette di spaccare**. Meglio non usarli lì
+> - **matrice di profitto**: si può usare nella potatura. Si tiene l'albero che massimizza il **profitto atteso medio** nelle foglie (→ [[Valutare un classificatore#Criterio 2: contare i soldi]])
 
 ## La potatura
 
@@ -212,6 +257,15 @@ C'è una variante più prudente, e nei corsi viene chiesta spesso.
 >
 > **Perché:** a parità di prestazioni vince l'albero più semplice. Meno rami significa più leggibile, più stabile e meno appeso al caso di questo campione.
 
+> [!question] La scelta da difendere
+> **Cosa scegli:** quanto grande tenere l'albero. `xerror` minimo, oppure la regola a una deviazione standard.
+>
+> **Che problema risolve:** **statistico**, l'overfitting. Ma anche di **business**: un albero da 8 foglie si spiega a un direttore, uno da 22 no.
+>
+> **Cosa ti costa:** con la regola a una deviazione standard accetti un `xerror` un po' più alto. Assumi che la differenza sia **rumore**, non un vero peggioramento.
+>
+> **All'esame:** *"L'albero migliore ha 21 tagli, ma quello da 7 sta entro una deviazione standard. La differenza è dentro l'incertezza della stima, quindi tengo il più semplice: è più stabile e si legge."* → [[Il metodo]]
+
 ---
 
 ## Pregi e difetti
@@ -223,6 +277,27 @@ C'è una variante più prudente, e nei corsi viene chiesta spesso.
 | gestisce insieme numeri e categorie | i confini sono **a scalini**, quindi una diagonale la approssima male |
 | trova da solo le **interazioni** fra variabili | da solo è spesso meno preciso di altri metodi |
 | regge i valori mancanti | cresciuto senza freni **memorizza** |
+| non gli interessano scala, outlier e asimmetrie | |
+| **seleziona da solo** le variabili utili | |
+
+> [!info] Come regge i mancanti
+> - variabile **categoriale**: il mancante diventa una **categoria in più**, "missing"
+> - variabile **numerica**: usa uno **split surrogato**. Se manca il reddito, l'albero usa la variabile che spacca il gruppo nel modo più simile, per esempio la professione
+>
+> L'albero serve anche a **imputare** i mancanti di altri modelli: si costruisce un albero con la variabile incompleta come target, e si usa la sua previsione (→ [[Preprocessing#Le strade]]).
+
+> [!warning] Instabile, e non è l'unico
+> Cambiare un solo caso nel training può dare un albero **completamente diverso**. Due alberi con la stessa accuratezza possono avere regole opposte.
+>
+> Sono instabili anche [[kNN]] e [[Reti neurali]]. La cura per tutti è mediare tanti modelli: gli **ensemble**.
+
+### L'importanza delle variabili
+
+Per ogni variabile si somma **quanto ha ridotto l'errore** in tutti gli split in cui è entrata. Una variabile mai usata in uno split ha importanza zero.
+
+Di solito si normalizza: la più importante vale **1**, le altre sono una frazione di quella. Se `durata` vale 0,54, spiega poco più della metà di quanto spiega la prima.
+
+Serve anche fuori dall'albero: le variabili con importanza zero si possono escludere da modelli più complessi.
 
 > [!info] Albero o [[Regressione logistica|logistica]]?
 > - La **logistica** dà un numero per ogni variabile, valido ovunque: "ogni chilo in più vale +3% di odds". Assume che l'effetto sia sempre lo stesso
@@ -232,9 +307,34 @@ C'è una variante più prudente, e nei corsi viene chiesta spesso.
 
 ---
 
-## Random forest
+## Gli ensemble
 
 Il difetto grosso dell'albero è l'instabilità. La cura è **non fidarsi di un albero solo**.
+
+Un **ensemble** è una squadra di modelli. Le loro previsioni si combinano in due modi:
+
+- **voto a maggioranza** sulle classi
+- **media delle probabilità** stimate (o voto pesato, se alcuni modelli contano di più)
+
+| metodo | l'idea |
+|---|---|
+| **bagging** | tanti alberi, ognuno su un campione **bootstrap** diverso |
+| **random forest** | bagging, più **variabili estratte a caso** a ogni split |
+| **boosting** | alberi in **sequenza**: ognuno corregge gli errori del precedente |
+
+### Bagging
+
+**Bagging** = *bootstrap aggregating*.
+
+1. estrai almeno **200 campioni bootstrap** dal training (con reimmissione, → [[Validazione#Bootstrap]])
+2. su ognuno costruisci l'albero **più grande possibile**, senza potarlo
+3. combini le previsioni
+
+Le righe non pescate in un campione sono **out of bag**: fanno da validation gratis per quell'albero, e danno una stima dell'errore senza mettere da parte dati.
+
+La media di tanti alberi **riduce la varianza**: le stime diventano più stabili. E un outlier finisce solo in alcuni campioni, quindi pesa meno sul risultato finale.
+
+### Random forest
 
 > [!example] Il pubblico in studio
 > Un singolo esperto può sbagliare di brutto. Cento persone che votano indipendentemente sbagliano di meno, perché gli errori individuali si annullano a vicenda.
@@ -252,9 +352,25 @@ Il **random forest** fa così:
 >
 > Costringendoli a scegliere fra poche variabili estratte a caso, gli alberi diventano **diversi fra loro** — ed è dalla diversità che nasce il guadagno.
 >
-> Quante variabili offrire a ogni nodo si chiama **`mtry`**, ed è la manopola principale da regolare.
+> Quante variabili offrire a ogni nodo si chiama **`mtry`**, ed è la manopola principale da regolare. In `randomForest` il default per la classificazione è la **radice quadrata** del numero di variabili. Le prestazioni cambiano poco al variare di `mtry`.
 
-Il prezzo è che **perdi il disegno**: non c'è più un albero da guardare. Resta l'**importanza delle variabili**, cioè la classifica di quanto ciascuna ha contribuito.
+Il prezzo è che **perdi il disegno**: non c'è più un albero da guardare. Resta l'**importanza delle variabili**, cioè la classifica di quanto ciascuna ha contribuito. Il random forest è uno degli strumenti più usati proprio per **selezionare le variabili**.
+
+### Boosting
+
+Il boosting costruisce gli alberi **in fila**, uno dopo l'altro.
+
+1. costruisci un primo albero semplice
+2. guardi **chi ha sbagliato**, e dai a quelle righe **più peso**
+3. il secondo albero si concentra sui casi difficili
+4. ripeti
+
+L'obiettivo è abbassare il tasso di errore passo dopo passo. Il più noto è **AdaBoost**. Quello di maggior successo è il **gradient boosting**.
+
+| ✓ ensemble | ✗ ensemble |
+|---|---|
+| più **accurati** e più **stabili** di un albero solo | **niente disegno**: non si legge come un albero |
+| generalizzano meglio | l'obiettivo diventa la precisione, e **capire le relazioni** fra variabili diventa difficile (→ [[Spiegare i modelli]]) |
 
 ---
 
@@ -294,6 +410,63 @@ rf <- randomForest(target ~ ., data = train, mtry = 3)
 importance(rf)            # la classifica delle variabili
 ```
 
+### Sul dataset adult
+
+Il target `incometgt` vale `H` (reddito sopra 50.000 $) o `L`.
+
+Il **pre-pruning** si imposta con `rpart.control`:
+
+```r
+library(rpart); library(rpart.plot)
+
+ctrl_pre <- rpart.control(minsplit = 20,  # almeno 20 righe per tentare uno split
+                          maxdepth = 3,   # al massimo 3 piani di domande
+                          cp = 0)         # nessuna tassa: comandano gli altri due
+piccolo <- rpart(incometgt ~ ., data = train.df, method = "class", control = ctrl_pre)
+
+# extra = 101: in ogni nodo il conteggio delle classi e la % di righe
+rpart.plot(piccolo, type = 4, extra = 101)
+```
+
+Il **post-pruning**: prima l'albero più profondo possibile, poi il taglio.
+
+```r
+profondo <- rpart(incometgt ~ ., data = train.df, method = "class",
+                  control = rpart.control(cp = 0, minsplit = 1, xval = 10))
+printcp(profondo)    # xval = 10: xerror viene da 10 fette di cross-validation
+
+# oppure la regola a una deviazione standard, fatta da caret
+library(caret)
+t1se <- train(incometgt ~ ., data = train.df, method = "rpart1SE",
+              trControl = trainControl(method = "cv", number = 10),
+              control = rpart.control(minsplit = 1))
+rpart.plot(t1se$finalModel)
+plot(varImp(t1se))   # importanza delle variabili
+```
+
+**Bagging** e **random forest**:
+
+```r
+library(ipred)
+bag <- bagging(incometgt ~ ., data = train.df,
+               nbagg = 200,    # 200 campioni bootstrap
+               coob = TRUE,    # stima l'errore sulle righe out of bag
+               control = rpart.control(minsplit = 1, cp = 0))   # alberi non potati
+
+library(randomForest)
+rf <- randomForest(incometgt ~ ., data = train.df)
+rf$mtry                               # il default scelto: radice del n. di variabili
+confusionMatrix(rf$predicted, rf$y)   # matrice di confusione out of bag
+varImpPlot(rf)
+
+# come cambia la probabilita' di H al variare dell'eta', a parita' del resto
+library(pdp)
+partial(rf, pred.var = "age", plot = TRUE, prob = TRUE)
+```
+
+> [!tip] `rf$predicted` non è una previsione sul training
+> Per ogni riga, `randomForest` usa solo gli alberi in cui quella riga era **out of bag**. La matrice di confusione che ne esce è quindi già una stima su dati "non visti", simile a una cross-validation.
+
 > [!warning] Il target dev'essere un `factor`
 > Se la colonna è fatta di 0 e 1 **numerici**, `rpart` costruisce un albero di regressione invece che di classificazione, e i risultati non hanno senso.
 >
@@ -319,10 +492,15 @@ importance(rf)            # la classifica delle variabili
 | Cos'è `cp`? | la **tassa su ogni split**. Alto = albero piccolo |
 | Quale colonna guardo? | **`xerror`**, mai `rel error` |
 | Regola a 1 SD? | fra gli alberi dentro `xerror_min + xstd`, prendi **il più piccolo** |
+| Altri criteri di split? | **chi-quadrato** (p-value minimo, logworth massimo) · tasso di errore |
+| Pre o post-pruning? | pre = regole **prima** · post = tagli **dopo**, guardando il validation |
+| E i mancanti? | categoria "missing" o **split surrogato** |
+| Cos'è il **bagging**? | tanti alberi su campioni **bootstrap**, poi voto o media |
 | Cos'è il random forest? | **tanti alberi diversi che votano** |
+| Cos'è il **boosting**? | alberi **in fila**, ognuno pesa di più gli errori del precedente |
 | A cosa serve `mtry`? | quante variabili offrire a ogni nodo. Li tiene **diversi** fra loro |
 | Comando R? | `rpart(y ~ ., data = d, method = "class")` |
 
 ## Vedi anche
 
-[[Regressione logistica]] · [[Classificatore di Bayes]] · [[Validazione]] · [[Spiegare i modelli]] · [[Machine Learning]] · [[R]]
+[[Regressione logistica]] · [[Classificatore di Bayes]] · [[kNN]] · [[Validazione]] · [[Confrontare i modelli]] · [[Spiegare i modelli]] · [[Machine Learning]] · [[R]]

@@ -123,33 +123,11 @@ La seconda è quella che serve quando qualcuno bussa e chiede *"perché avete ri
 
 ## kNN, il modello senza modello
 
-Vale la pena conoscerlo perché è l'estremo opposto ed è nel corso.
+È l'estremo opposto, e vale la pena tenerlo a mente.
 
-**kNN** = *k nearest neighbours*, i `k` vicini più prossimi.
+[[kNN]] classifica un caso nuovo guardando **i k casi più simili** e seguendo la maggioranza. Non stima coefficienti né regole: **il modello sono i dati stessi**.
 
-> [!example] Come funziona
-> Arriva un cliente nuovo. Cerchi **i 5 clienti passati che gli somigliano di più**, guardi cosa hanno fatto, e rispondi con la maggioranza.
->
-> Non c'è nessun addestramento. Non c'è nessuna formula. **Il modello sono i dati stessi.**
-
-| | |
-|---|---|
-| **pro** | semplicissimo, coglie qualsiasi forma di confine |
-| **contro** | lento in previsione (deve confrontare con tutti), **richiede scaling** obbligatorio, peggiora molto con tante variabili |
-
-> [!warning] Perché soffre con tante variabili
-> Con cinquanta variabili, in uno spazio a cinquanta dimensioni, **tutti i punti sono più o meno alla stessa distanza da tutti**. Il concetto di "vicino" perde significato.
->
-> Si chiama **maledizione della dimensionalità**, e colpisce tutti i metodi basati su distanze — [[Clustering|k-means]] compreso. Un motivo in più per ridurre le variabili prima, con la [[PCA]].
-
-```r
-m <- train(target ~ ., data = train, method = "knn",
-           preProcess = c("center", "scale"),     # indispensabile
-           tuneGrid = data.frame(k = c(3, 5, 7, 11, 15)),
-           trControl = ctrl)
-```
-
-`k` piccolo segue ogni increspatura dei dati (overfitting), `k` grande liscia troppo. Si sceglie in [[Validazione#Cross-validation|cross-validation]].
+Quindi non c'è niente da leggere dentro il modello: nessuna tabella di coefficienti che dica quali variabili contano. Per spiegarlo servono gli strumenti di questa nota che trattano il modello come una scatola chiusa, come l'importanza per permutazione. Il resto — scelta di k, scaling, maledizione della dimensionalità — sta nella sua nota.
 
 ---
 
@@ -166,9 +144,8 @@ m <- train(target ~ ., data = train, method = "knn",
 | Va verificato? | **sì**: quanto bene imita |
 | Globale o locale? | come ragiona **in generale** / perché **per questa persona** |
 | Strumenti locali? | **LIME**, **SHAP** |
-| Cos'è **kNN**? | guarda i **k vicini** e vota. Nessun addestramento |
-| Il limite di kNN? | scaling obbligatorio, e **crolla con tante variabili** |
+| Cos'è **kNN**? | guarda i **k vicini** e vota. Nessun coefficiente da leggere → [[kNN]] |
 
 ## Vedi anche
 
-[[Alberi decisionali]] · [[Reti neurali]] · [[Regressione logistica]] · [[PCA]] · [[Validazione]] · [[Machine Learning]]
+[[Alberi decisionali]] · [[Reti neurali]] · [[kNN]] · [[Regressione logistica]] · [[PCA]] · [[Validazione]] · [[Machine Learning]]
